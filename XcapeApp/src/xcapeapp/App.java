@@ -25,7 +25,6 @@ public class App {
         interfaz.InterfazConsola.run();
         System.out.println("Cerrando App...");
 
-        //PRUEBA IV
     }
 
 }
