@@ -4,6 +4,7 @@ Aplicación
 package xcapeapp;
 
 
+import implementacion.Contacto;
 import java.sql.SQLException;
 
 /**
@@ -24,6 +25,7 @@ public class App {
         System.out.println("Cargando App...\n");
         interfaz.InterfazConsola.run();
         System.out.println("Cerrando App...");
+       
 
     }
 

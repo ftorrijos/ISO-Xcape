@@ -43,7 +43,7 @@ public class InterfazConsola {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-                                    //Contacto.listarResponsables();
+                                    Contacto.listarResponsables();
                                     break;
                                 case 3:
                                     Contacto.listarGrupos();
