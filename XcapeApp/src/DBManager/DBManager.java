@@ -26,7 +26,7 @@ public class DBManager {
         //Interfaz Connection
         //System.out.println("Aqui llegamos ?");
         String usuario = "root";
-        String clave = "root";
+        String clave = "179350";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
