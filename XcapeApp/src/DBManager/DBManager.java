@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DBManager;
 
 import java.sql.Connection;
@@ -23,8 +18,7 @@ public class DBManager {
     }
 
     public static Connection getConnection() {
-        //Interfaz Connection
-        //System.out.println("Aqui llegamos ?");
+
         String usuario = "root";
         String clave = "179350";
         String driver = "com.mysql.jdbc.Driver";
@@ -49,19 +43,19 @@ public class DBManager {
             System.out.println("Error: " + e);
         }
     }
-    
-    public void insertarUsuarios(String nombre){
+
+    public void insertarUsuarios(String nombre) {
         Connection c = DBManager.getConnection();
-            try {
+        try {
             String sql = "INSERT INTO usuarios(nombre) VALUES(?)";
             PreparedStatement prep = c.prepareStatement(sql);
             prep.setString(1, nombre);
             prep.executeUpdate();
             prep.close();
-             
+
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-			
+
     }
 }
