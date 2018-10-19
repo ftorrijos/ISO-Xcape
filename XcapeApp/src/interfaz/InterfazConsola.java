@@ -109,4 +109,66 @@ public class InterfazConsola {
         System.out.println("3.Consultar lista de grupos");
         System.out.println("4.Volver al menú principal");
     }
+
+    public static void mostrarMenuGestionPerfil() {
+	System.out.println("\t " + "MÓDULO GESTION PERFIL:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+
+    public static void mostrarMenuChat() {
+	System.out.println("\t " + "MÓDULO CHAT:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+
+    public static void mostrarMenuMapa() {
+	System.out.println("\t " + "MÓDULO MAPA:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+
+public static void mostrarMenuTiempo() {
+	System.out.println("\t " + "MÓDULO TIEMPO:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+
+public static void mostrarMenuSplitwise() {
+	System.out.println("\t " + "MÓDULO SPLITWISE:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+public static void mostrarMenuMedia() {
+	System.out.println("\t " + "MÓDULO MEDIA:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
+
+    public static void mostrarMenuValorar() {
+	System.out.println("\t " + "MÓDULO VALORACION:");
+	System.out.println("1.");
+	System.out.println("2.");
+	System.out.println("3.");
+	System.out.println("4.");
+
+	}
 }
