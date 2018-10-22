@@ -3,18 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/modelo/Grupo.java</file>
-=======
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/modelo/Responsable.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/DBManager/DBManager.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/implementacion/GestionPerfil.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/xcapeapp/App.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/implementacion/Contacto.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/modelo/Incidencia.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/interfaz/InterfazConsola.java</file>
-            <file>file:/C:/Users/SONY%20VAIO/Desktop/APP/ISO-Xcape/XcapeApp/src/modelo/Grupo.java</file>
->>>>>>> f633a8581ba04428b7c69e6635aea90180782504
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/interfaz/InterfazGrafica.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/implementacion/Contacto.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/interfaz/InterfazConsola.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/implementacion/GestionPerfil.java</file>
         </group>
     </open-files>
 </project-private>
