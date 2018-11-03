@@ -3,7 +3,6 @@ Interfaz
  */
 package interfaz;
 
-import implementacion.Menu;
 import implementacion.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,10 +19,14 @@ import java.util.logging.Logger;
  */
 public class InterfazConsola {
     public static void run(){
-        try {
+           try {
             Login log = new Login();
-            log.comprobacion();
-            //Boolean x = log.comprobacion();
+          log.comprobacion();
+          Boolean x = log.comprobacion();
+          
+          if(x.booleanValue()){
+          implementacion.Menu.run();
+          }
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
@@ -31,6 +34,7 @@ public class InterfazConsola {
         } catch (SQLException ex) {
             Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
     
     

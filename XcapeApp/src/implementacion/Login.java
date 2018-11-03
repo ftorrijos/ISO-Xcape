@@ -5,7 +5,7 @@
  */
 package implementacion;
 
-import dBManager.DBManager;
+import dBManager.*;
 import java.io.Console;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -24,7 +24,7 @@ public class Login {
   
    public Boolean comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
       
-      
+      DBManager db = new DBManager();
         Boolean ok = true;
         Boolean nook = false;
         
@@ -35,9 +35,16 @@ public class Login {
         System.out.println("Porfavor introducir el password del usuario:");
         String password = sc.nextLine();
         String passHash = hash(password);
-        String dbPass =   dBManager.DBManager.selectPasswordUsuario(username);
-        System.out.println(dbPass);
-        return null ;
+        String dbPass =   db.selectPasswordUsuario(username);
+       // System.out.println(passHash);
+        //System.out.println(dbPass);
+        if(dbPass.equalsIgnoreCase(passHash)){
+         return ok ;
+        }
+        else{
+        System.out.println("ACCESSS DENIED BITCH*S");     
+        comprobacion();
+        return nook ;}
         
        
     }

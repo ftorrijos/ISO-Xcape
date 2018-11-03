@@ -61,9 +61,9 @@ public class DBManager {
 
     }
     
-       public static String selectPasswordUsuario(String username) throws SQLException{
+       public  String selectPasswordUsuario(String username) throws SQLException{
 
-            String sql = "SELECT password FROM user_login WHERE username=?;";
+            String sql = "SELECT password FROM user_login WHERE username=?";
             PreparedStatement prep = c.prepareStatement(sql);
             prep.setString(1,username);
             ResultSet rs = prep.executeQuery();

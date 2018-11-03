@@ -5,8 +5,7 @@
  */
 package implementacion;
 
-import implementacion.Contacto;
-import implementacion.GestionPerfil;
+import implementacion.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,6 +62,7 @@ public class Menu {
                     case 2:
                         GestionPerfil gp = new GestionPerfil();
                         gp.insertar_usuario();
+                        
                         break;
                     case 3:
                         //modulos.Chat();
