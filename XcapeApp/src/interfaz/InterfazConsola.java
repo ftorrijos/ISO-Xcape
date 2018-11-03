@@ -23,6 +23,7 @@ public class InterfazConsola {
         int opcion = 0;
         int opcionC = 0;
         do {
+            //Aquí estaria login();
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -91,15 +92,16 @@ public class InterfazConsola {
      */
     public static void mostrarMenu() {
         System.out.println("\t" + "MENU");
-        System.out.println("1.CONTACTOS");
+        System.out.println("1.MI VIAJE");
         System.out.println("2.GESTION DE PERFIL");
-        System.out.println("3.CHAT");
-        System.out.println("4.MAPA");
-        System.out.println("5.TIEMPO");
-        System.out.println("6.SPLITWISE");
-        System.out.println("7.MEDIA");
-        System.out.println("8.VALORA TU EXP");
-        System.out.println("9.SALIR");
+        System.out.println("3.EVENTOS");
+        System.out.println("4.CHAT");
+        System.out.println("5.MAPA");
+        System.out.println("6.TIEMPO");
+        System.out.println("7.SPLITWISE");
+        System.out.println("8.MEDIA");
+        System.out.println("9.VALORA TU EXP");
+        System.out.println("10.SALIR");
     }
 
     public static void mostrarMenuContactos() {
