@@ -3,6 +3,8 @@ Objeto Usuario
  */
 package modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
@@ -11,10 +13,15 @@ public class Usuario {
 
     private int id, codigo_postal, movil;
     private String nombre, apellido1, apellido2, fecha_nacimiento, correo, sexo, direccion, provincia, modo_pago;
+    private Date fecha_nacimiento;
 
-    public Usuario(int id, String nombre) {
+    public Usuario(int id, String nombre, String apellido1,String correo, int movil) {
         this.nombre = nombre;
+        this.apellido1 = apellido1;
         this.id = id;
+        this.correo = correo;
+        this.movil = movil;
+        this 
     }
 
     /*
