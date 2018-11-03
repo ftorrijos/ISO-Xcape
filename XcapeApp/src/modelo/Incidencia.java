@@ -5,6 +5,12 @@
  */
 package modelo;
 
+import dBManager.DBManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
@@ -35,7 +41,7 @@ public class Incidencia {
 		int usuario_id = rs.getInt("usuario_id");
 		int grupo_id = rs.getInt("grupo_id");
                 String mensaje = rs.getString("mensaje");
-                Incidencia incidencia = new Incidencia(icidencia_id, usuario_id, grupo_id, mensaje);
+                Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
                 System.out.println(incidencia);
             }
             rs.close();

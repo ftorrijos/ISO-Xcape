@@ -5,7 +5,7 @@
  */
 package implementacion;
 
-import DBManager.DBManager;
+import dBManager.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

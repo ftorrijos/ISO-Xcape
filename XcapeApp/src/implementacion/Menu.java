@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Menu;
+package implementacion;
 
 import implementacion.Contacto;
 import implementacion.GestionPerfil;
@@ -26,6 +26,8 @@ public class Menu {
         int opcionC = 0;
         do {
             //Aquí estaria login();
+          
+           
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));

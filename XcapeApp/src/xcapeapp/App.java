@@ -4,7 +4,12 @@ Aplicación
 package xcapeapp;
 
 
+import implementacion.Login;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,9 +26,10 @@ public class App {
      */
     public static void main(String[] args) throws SQLException {
 
-        System.out.println("Cargando App...\n");
-        interfaz.InterfazConsola.run();
-        System.out.println("Cerrando App...");
+            System.out.println("Cargando App...\n");
+            interfaz.InterfazConsola.run();
+            System.out.println("Cerrando App...");
+      
 
     }
 

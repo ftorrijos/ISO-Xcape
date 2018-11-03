@@ -1,6 +1,6 @@
 package implementacion;
 
-import DBManager.DBManager;
+import dBManager.DBManager;
 import java.util.Scanner;
 
 /**
