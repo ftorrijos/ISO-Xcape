@@ -5,6 +5,7 @@
  */
 package implementacion;
 
+import dBManager.DBManager;
 import implementacion.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,9 +21,11 @@ public class Menu {
      *
      * @throws SQLException
      */
+    
     public static void run() throws SQLException {
         int opcion = 0;
         int opcionC = 0;
+        DBManager db = new DBManager();
         do {
             //Aquí estaria login();
           
@@ -51,6 +54,10 @@ public class Menu {
                                     break;
                                 case 3:
                                     Contacto.listarGrupos();
+                                    System.out.println("\nVolviendo al menu ...");
+                                    break;
+                                case 4:
+                                    db.listarIncidencias();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
@@ -113,7 +120,8 @@ public class Menu {
         System.out.println("1.Consultar lista de usuarios");
         System.out.println("2.Consultar lista de responsables");
         System.out.println("3.Consultar lista de grupos");
-        System.out.println("4.Volver al menú principal");
+        System.out.println("4.Consultar incidencias");
+        System.out.println("5.Volver al menú principal");
     }
 
     public static void mostrarMenuGestionPerfil() {

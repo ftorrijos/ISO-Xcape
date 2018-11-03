@@ -6,8 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Incidencia;
 
 /**
  *
@@ -45,7 +47,34 @@ public class DBManager {
             System.out.println("Error: " + e);
         }
     }
+   //----------------------------------- TODO LO QUE TIENE QUE VER CON INCIDENCIAS ---------------------------------------------
+    // ----------------------------------- LISTAR E INSERTAR INCIDENCIAS -----------------------------------------------------------
+       
+    public static void listarIncidencias() throws SQLException {
 
+        try {
+            Statement stmt3 = c.createStatement();
+            String sql3 = "SELECT * FROM incidencias;";		
+            ResultSet rs = stmt3.executeQuery(sql3);
+            System.out.println("Lista de Incidencias: ");
+            while (rs.next()) {
+                int incidencia_id = rs.getInt("incidencia_id");
+                System.out.println(incidencia_id);
+		int usuario_id = rs.getInt("usuario_id");
+		int grupo_id = rs.getInt("grupo_id");
+                String mensaje = rs.getString("mensaje");
+                Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
+                System.out.println(incidencia.getIncidencia_id());
+            }
+            rs.close();
+            stmt3.close();
+
+        } catch (SQLException e) {
+        }
+
+    }
+    
+ // ---------------------------------------  GESTION DE USUARIOS ----------------------------------------------------------------
     public void insertarUsuarios(String nombre) {
         Connection c = DBManager.getConnection();
         try {
@@ -60,6 +89,26 @@ public class DBManager {
         }
 
     }
+    
+          public String listarUsuariosSoloNombre(int id_usuarios) throws SQLException{
+
+            String sql = "SELECT nombre FROM usuarios WHERE usuario_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, id_usuarios);
+            ResultSet rs = prep.executeQuery();
+            while(rs.next()){
+            String nombre = rs.getString("nombre");
+            return nombre;
+            }
+            
+            rs.close();
+            prep.close();
+
+            return null;
+        
+        }
+    
+    //-------------------------------------- LOGIN ----------------------------------------------------------------------
     
        public  String selectPasswordUsuario(String username) throws SQLException{
 
@@ -76,10 +125,30 @@ public class DBManager {
             prep.close();
 
             return null;
+   }
+       
+       
+ 
+    
+    
+       
+    //----------------------------------------GRUPOS----------------------------------------------------
+      public String listarGruposSoloNombre(int id_grupo) throws SQLException{
+
+            String sql = "SELECT nombre FROM grupo WHERE grupo_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, id_grupo);
+            ResultSet rs = prep.executeQuery();
+            while(rs.next()){
+            String nombre = rs.getString("nombre");
+            return nombre;
+            }
+            
+            rs.close();
+            prep.close();
+
+            return null;
         
-      
+        }
 
-
-
-    }
 }

@@ -1,60 +1,102 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package modelo;
-//
-//import dBManager.DBManager;
-//import java.sql.Connection;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.sql.Statement;
-//
-///**
-// *
-// * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
-// */
-//public class Incidencia {
-//
-//
-//
-//    public Incidencia() {
-//
-//    }
-//    /**
-//     *
-//     * @throws SQLException
-//     */
-//    public static Connection c = DBManager.getConnection();
-//    
-//    public static void listarIncidencias() throws SQLException {
-//
-//        try {
-//            Statement stmt3 = c.createStatement();
-//            String sql3 = "SELECT * FROM incidencias;";		
-//            ResultSet rs = stmt3.executeQuery(sql3);
-//            System.out.println("Lista de Incidencias: ");
-//
-//            while (rs.next()) {
-//                int incidencia_id = rs.getInt("incidencia_id");
-//		int usuario_id = rs.getInt("usuario_id");
-//		int grupo_id = rs.getInt("grupo_id");
-//                String mensaje = rs.getString("mensaje");
-//                Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
-//                System.out.println(incidencia);
-//            }
-//            rs.close();
-//            stmt3.close();
-//
-//        } catch (SQLException e) {
-//        }
-//
-//    }
-//
-//   
-//   
-//    
-//    
-// 
-//}
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modelo;
+
+import dBManager.DBManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
+ */
+public class Incidencia {
+    DBManager db = new DBManager();
+    private int incidencia_id, usuario_id, grupo_id;
+    private String mensaje;
+
+
+    public Incidencia(int incidencia_id, int usuario_id, int grupo_id, String mensaje) {
+        this.grupo_id = incidencia_id;
+        this.usuario_id = usuario_id;
+        this.grupo_id = grupo_id;
+        this.mensaje = mensaje;
+    }
+
+    /**
+     * @return the incidencia_id
+     */
+    public int getIncidencia_id() {
+        return incidencia_id;
+    }
+
+    /**
+     * @param incidencia_id the incidencia_id to set
+     */
+    public void setIncidencia_id(int incidencia_id) {
+        this.incidencia_id = incidencia_id;
+    }
+
+    /**
+     * @return the usuario_id
+     */
+    public int getUsuario_id() {
+        return usuario_id;
+    }
+
+    /**
+     * @param usuario_id the usuario_id to set
+     */
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+
+    /**
+     * @return the grupo_id
+     */
+    public int getGrupo_id() {
+        return grupo_id;
+    }
+
+    /**
+     * @param grupo_id the grupo_id to set
+     */
+    public void setGrupo_id(int grupo_id) {
+        this.grupo_id = grupo_id;
+    }
+
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    /**
+     *
+     * @throws SQLException
+     */
+    
+     @Override
+    public String toString() {
+        try {
+            return "Incidencia{" + "incidencia_id=" + incidencia_id + ", usuario=" + db.listarUsuariosSoloNombre(usuario_id) + " ,grupo="+ db.listarGruposSoloNombre(grupo_id) + " ,mensaje="+mensaje+ '}';
+        } catch (SQLException ex) {
+            Logger.getLogger(Incidencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+}
