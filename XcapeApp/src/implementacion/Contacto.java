@@ -29,7 +29,7 @@ public class Contacto {
      * @throws SQLException
      */
     public static Connection c = DBManager.getConnection();
-    
+    /*
     public static void listarUsuarios() throws SQLException {
 
         try {
@@ -41,7 +41,7 @@ public class Contacto {
             while (rs.next()) {
                 int usuario_id = rs.getInt("usuario_id");
                 String nombre = rs.getString("nombre");
-                Usuario usuario = new Usuario(usuario_id, nombre);
+                //Usuario usuario = new Usuario(usuario_id, nombre);
                 System.out.println(usuario);
             }
             rs.close();
@@ -49,9 +49,9 @@ public class Contacto {
 
         } catch (SQLException e) {
         }
-
+        
     }
-
+    */
     
      public String listarGruposSoloNombre(int id_grupo) throws SQLException{
 

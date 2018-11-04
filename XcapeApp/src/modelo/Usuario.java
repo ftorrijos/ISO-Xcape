@@ -3,7 +3,7 @@ Objeto Usuario
  */
 package modelo;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -11,44 +11,91 @@ import java.sql.Date;
  */
 public class Usuario {
 
-    private int id, codigo_postal, movil;
-    private String nombre, apellido1, apellido2, fecha_nacimiento, correo, sexo, direccion, provincia, modo_pago;
-   // private Date fecha_nacimiento;
+    private int usuario_id, movil;
+    private String nombre, apellido, dni, correo;
+    private Date fecha_nacimiento;
 
-//    public Usuario(int id, String nombre, String apellido1,String correo, int movil) {
-//        this.nombre = nombre;
-//        this.apellido1 = apellido1;
-//        this.id = id;
-//        this.correo = correo;
-//        this.movil = movil;
-//        this 
-//    }
-       public Usuario(int id, String nombre) {
-           this.nombre = nombre;
-           this.id = id;
-    }
-
-    /*
-    public Usuario(String nombre, String apellido1, String apellido2, String fecha_nacimiento, String correo,
-            String sexo, String direccion, String provincia, String modo_pago, int id, int codigo_postal, int movil) {
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.correo = correo;
-        this.sexo = sexo;
-        this.direccion = direccion;
-        this.provincia = provincia;
-        this.modo_pago = modo_pago;
-        this.id = id;
-        this.codigo_postal = codigo_postal;
+    public Usuario(int usuario_id, int movil, String nombre, String apellido, String dni, String correo, Date fecha_nacimiento) {
+        this.usuario_id = usuario_id;
         this.movil = movil;
-
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.correo = correo;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
-     */
+
+    public Usuario(int movil, String nombre, String apellido, String dni, String correo, Date fecha_nacimiento) {
+        this.movil = movil;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.correo = correo;
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public int getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+
+    public int getMovil() {
+        return movil;
+    }
+
+    public void setMovil(int movil) {
+        this.movil = movil;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public Date getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Usuario{" + "usuario_id=" + usuario_id + ", movil=" + movil
+                + ", nombre=" + nombre + ", apellido=" + apellido + ", dni="
+                + dni + ", correo=" + correo + ", fecha_nacimiento="
+                + fecha_nacimiento + '}';
     }
 
 }

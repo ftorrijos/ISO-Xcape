@@ -46,7 +46,7 @@ public class Menu {
 
                             switch (opcionC) {
                                 case 1:
-                                    Contacto.listarUsuarios();
+                                    //Contacto.listarUsuarios();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
