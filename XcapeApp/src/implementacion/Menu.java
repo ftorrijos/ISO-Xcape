@@ -53,7 +53,7 @@ public class Menu {
                                     //Contacto.listarResponsables();
                                     break;
                                 case 3:
-                                    Contacto.listarGrupos();
+                                    db.listarGrupos();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:

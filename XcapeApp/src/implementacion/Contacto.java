@@ -52,27 +52,7 @@ public class Contacto {
 
     }
 
-    public static void listarGrupos() throws SQLException {
-
-        try {
-            Statement stmt4 = c.createStatement();
-            String sql4 = "SELECT * FROM grupo;";		
-            ResultSet rs = stmt4.executeQuery(sql4);
-            System.out.println("Lista de Usuarios: ");
-            
-            while (rs.next()) {
-                int grupo_id = rs.getInt("grupo_id");
-                String nombre = rs.getString("nombre");
-                Grupo grupo = new Grupo(grupo_id, nombre);
-                System.out.println(grupo);
-            }
-            rs.close();
-            stmt4.close();
-
-        } catch (SQLException e) {
-        }
-
-    }
+    
      public String listarGruposSoloNombre(int id_grupo) throws SQLException{
 
             String sql = "SELECT nombre FROM grupo WHERE grupo_id=?;";
@@ -104,8 +84,9 @@ public class Contacto {
             while (rs.next()) {
                 int responsable_id = rs.getInt("responsable_id");
                 String nombre = rs.getString("nombre");
-                int grupo_id = rs.getInt("grupo_id");
-                Responsable respon = new Responsable(responsable_id, nombre, grupo_id);
+                String apellido = rs.getString("apellido");
+                int movil = rs.getInt("movil");
+                Responsable respon = new Responsable(responsable_id, nombre, apellido,movil);
                 System.out.println(respon);
             }
             rs.close();

@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import dBManager.DBManager;
 import implementacion.Contacto;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,18 +17,20 @@ import java.util.logging.Logger;
  */
 public class Responsable {
 
-    private int responsable_id, grupo_id;
-    private String nombre;
-    Contacto contacto = new Contacto();
+    private int responsable_id, movil;
+    private String nombre, apellido;
+    DBManager db = new DBManager();
 
-    public Responsable(int responsable_id, String nombre, int grupo_id) {
+    public Responsable(int responsable_id, String nombre, String apellido, int movil) {
         this.nombre = nombre;
+        this.apellido=apellido;
         this.responsable_id = responsable_id;
-        this.grupo_id = grupo_id;
-
+        this.movil=movil;              
     }
 
-    /**
+
+
+       /**
      * @return the responsable_id
      */
     public int getResponsable_id() {
@@ -42,17 +45,17 @@ public class Responsable {
     }
 
     /**
-     * @return the grupo_id
+     * @return the movil
      */
-    public int getGrupo_id() {
-        return grupo_id;
+    public int getMovil() {
+        return movil;
     }
 
     /**
-     * @param grupo_id the grupo_id to set
+     * @param movil the movil to set
      */
-    public void setGrupo_id(int grupo_id) {
-        this.grupo_id = grupo_id;
+    public void setMovil(int movil) {
+        this.movil = movil;
     }
 
     /**
@@ -69,14 +72,24 @@ public class Responsable {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        try {
-            return "Responsable {" + "id=" + responsable_id + ", nombre=" + nombre + ", responsable del grupo=" + contacto.listarGruposSoloNombre(grupo_id) + '}';
-        } catch (SQLException ex) {
-            Logger.getLogger(Responsable.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    /**
+     * @return the apellido
+     */
+    public String getApellido() {
+        return apellido;
     }
 
+    /**
+     * @param apellido the apellido to set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+     @Override
+    public String toString() {
+     return "Responsable {"+"responsable id="+getResponsable_id()+", nombre="+getNombre()+" "+getApellido()+ " , contacto=" + getMovil() + '}';
+        
+    }
+    
 }
