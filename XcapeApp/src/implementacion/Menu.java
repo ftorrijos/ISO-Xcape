@@ -6,7 +6,6 @@
 package implementacion;
 
 import dBManager.DBManager;
-import implementacion.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,19 +16,15 @@ import java.sql.SQLException;
  * @author usuario
  */
 public class Menu {
-      /**
+
+    /**
      *
      * @throws SQLException
      */
-    
     public static void run() throws SQLException {
         int opcion = 0;
         int opcionC = 0;
-        DBManager db = new DBManager();
         do {
-            //Aquí estaria login();
-          
-           
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -53,11 +48,11 @@ public class Menu {
                                     //Contacto.listarResponsables();
                                     break;
                                 case 3:
-                                    db.listarGrupos();
+                                    //db.listarGrupos();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:
-                                    db.listarIncidencias();
+                                    //db.listarIncidencias();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
@@ -68,8 +63,29 @@ public class Menu {
                         break;
                     case 2:
                         GestionPerfil gp = new GestionPerfil();
-                        gp.insertar_usuario();
-                        
+                        do {
+                            System.out.println("MENU USUARIO");
+                            mostrarMenuGestionPerfil();
+                            System.out.print("\nInserte opción -> ");
+                            opcion = Integer.parseInt(consola.readLine());
+
+                            switch (opcion) {
+                                case 1:
+                                    //VerMiPerfil();
+                                    System.out.println("\nVolviendo al menu ...");
+                                    break;
+                                case 2:
+                                    //ModificarMiPerfil();
+                                    break;
+                                case 3:
+                                    gp.insertar_usuario();
+                                    System.out.println("\nVolviendo al menu ...");
+                                    break;
+                                default:
+                                    System.out.println("\nVolviendo al menu principal...");
+                                    break;
+                            }
+                        } while (opcion < 2);
                         break;
                     case 3:
                         //modulos.Chat();
@@ -125,64 +141,65 @@ public class Menu {
     }
 
     public static void mostrarMenuGestionPerfil() {
-	System.out.println("\t " + "MÓDULO GESTION PERFIL:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+        System.out.println("\t " + "MÓDULO GESTION PERFIL:");
+        System.out.println("1.Ver mi perfil");
+        System.out.println("2.Modificar mi perfil");
+        System.out.println("3.Añadir usuario");
+        System.out.println("4.Volver a menu principal");
 
-	}
+    }
 
     public static void mostrarMenuChat() {
-	System.out.println("\t " + "MÓDULO CHAT:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+        System.out.println("\t " + "MÓDULO CHAT:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
 
-	}
+    }
 
     public static void mostrarMenuMapa() {
-	System.out.println("\t " + "MÓDULO MAPA:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+        System.out.println("\t " + "MÓDULO MAPA:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
 
-	}
+    }
 
-public static void mostrarMenuTiempo() {
-	System.out.println("\t " + "MÓDULO TIEMPO:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+    public static void mostrarMenuTiempo() {
+        System.out.println("\t " + "MÓDULO TIEMPO:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
 
-	}
+    }
 
-public static void mostrarMenuSplitwise() {
-	System.out.println("\t " + "MÓDULO SPLITWISE:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+    public static void mostrarMenuSplitwise() {
+        System.out.println("\t " + "MÓDULO SPLITWISE:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
 
-	}
-public static void mostrarMenuMedia() {
-	System.out.println("\t " + "MÓDULO MEDIA:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+    }
 
-	}
+    public static void mostrarMenuMedia() {
+        System.out.println("\t " + "MÓDULO MEDIA:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
+
+    }
 
     public static void mostrarMenuValorar() {
-	System.out.println("\t " + "MÓDULO VALORACION:");
-	System.out.println("1.");
-	System.out.println("2.");
-	System.out.println("3.");
-	System.out.println("4.");
+        System.out.println("\t " + "MÓDULO VALORACION:");
+        System.out.println("1.");
+        System.out.println("2.");
+        System.out.println("3.");
+        System.out.println("4.");
 
-	}
+    }
 }
