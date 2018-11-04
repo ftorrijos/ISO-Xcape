@@ -64,7 +64,7 @@ public class DBManager {
 		int grupo_id = rs.getInt("grupo_id");
                 String mensaje = rs.getString("mensaje");
                 Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
-                System.out.println(incidencia.getIncidencia_id());
+                System.out.println(incidencia);
             }
             rs.close();
             stmt3.close();
