@@ -130,7 +130,30 @@ public class DBManager {
 
         return null;
 
+    }   public Usuario seleccionar_usuario(String dni) throws SQLException {
+        Connection c = DBManager.getConnection();
+        String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
+        ps.setString(1, dni);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString(2);
+            String apellido = rs.getString(3);
+            Date fecha_nacimiento = rs.getDate(4);
+            String correo = rs.getString(6);
+            int movil = rs.getInt(7);
+
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            System.out.println(usuario);
+
+            rs.close();
+            ps.close();
+            return usuario;
+        }
+        return null;
     }
+
 
     //-------------------------------------- LOGIN ----------------------------------------------------------------------
     public String selectPasswordUsuario(String username) throws SQLException {
@@ -235,30 +258,7 @@ public class DBManager {
 
     }
 
-    public Usuario seleccionar_usuario(String dni) throws SQLException {
-        Connection c = DBManager.getConnection();
-        String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
-        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
-        ps.setString(1, dni);
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()) {
-            String nombre = rs.getString(2);
-            String apellido = rs.getString(3);
-            Date fecha_nacimiento = rs.getDate(4);
-            String correo = rs.getString(6);
-            int movil = rs.getInt(7);
-
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
-            System.out.println(usuario);
-
-            rs.close();
-            ps.close();
-            return usuario;
-        }
-        return null;
-    }
-
+ 
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
 
         String sql = "SELECT * FROM responsables WHERE responsable_id=?;";
