@@ -7,6 +7,7 @@ import implementacion.*;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,15 +17,14 @@ import java.util.logging.Logger;
  */
 public class InterfazConsola {
 
-    public static void run() throws SQLException {
+    public static void run() throws SQLException, ParseException {
         //login();
         Menu.run();
     }
 
-    public static void login() {
+    public static void login() throws ParseException {
         try {
             Login log = new Login();
-            //log.comprobacion();
             Boolean x = log.comprobacion();
 
             if (x) {

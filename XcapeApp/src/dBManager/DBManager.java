@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -244,13 +247,14 @@ public class DBManager {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int usuario_id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
             String correo = rs.getString(6);
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            Usuario usuario = new Usuario(usuario_id,movil, nombre, apellido, dni, correo, fecha_nacimiento);
             System.out.println(usuario);
 
             rs.close();
@@ -291,6 +295,51 @@ public class DBManager {
             ps.setString(1, responsable.getNombre());
             ps.setString(2, responsable.getApellido());
             ps.setInt(3, responsable.getMovil());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void modificarUsuarios(Usuario usuario) throws ParseException {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String replaceSql = "REPLACE INTO usuarios VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(replaceSql);
+
+            int usuario_id = usuario.getUsuario_id();
+            String nombre = usuario.getNombre();
+            String apellido = usuario.getApellido();
+            
+            String oldFormat = "YYYY-MM-dd";
+            String newFormat = "YYYY/MM/dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(oldFormat);
+            Date d = sdf.parse(usuario.getFecha_nacimiento().toString());
+            sdf.applyPattern(newFormat);
+            String newDateString = sdf.format(d);
+            Date d2 = new Date(newDateString);
+                    
+            Instant instant = (d2).toInstant();
+            ZoneId zoneId = ZoneId.of("Europe/Paris");
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+            LocalDate localDate = zdt.toLocalDate();
+
+            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate);
+
+            String dni = usuario.getDni();
+            String correo = usuario.getCorreo();
+            int movil = usuario.getMovil();
+
+            ps.setInt(1, usuario_id);
+            ps.setString(2, nombre);
+            ps.setString(3, apellido);
+            ps.setDate(4, fecha_nacimiento);
+            ps.setString(5, dni);
+            ps.setString(6, correo);
+            ps.setInt(7, movil);
             ps.executeUpdate();
             ps.close();
 
