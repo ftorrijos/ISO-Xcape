@@ -78,6 +78,25 @@ public class DBManager {
 
     }
 
+    public static void listarIncidenciasUserID(int user_id) throws SQLException {
+
+        String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int incidencia_id = rs.getInt("incidencia_id");
+            int grupo_id = rs.getInt("grupo_id");
+            String mensaje = rs.getString("mensaje");
+            Incidencia inci = new Incidencia(incidencia_id, user_id, grupo_id, mensaje);
+            System.out.println(inci);
+        }
+
+        rs.close();
+        prep.close();
+
+    }
+
     public void insertarIncidencia(Incidencia inci) {
 
         try {
@@ -273,6 +292,66 @@ public class DBManager {
         }
     }
 
+    public int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
+
+        try {
+            String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, usuario_id);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                int grupo_id = rs.getInt("grupo_id");
+                return grupo_id;
+            }
+
+            rs.close();
+            prep.close();
+
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+
+    public int IdViajePorIdGrupo(int grupo_id) throws SQLException {
+
+        try {
+            String sql = "SELECT viaje_id FROM grupo WHERE grupo_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, grupo_id);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                int viaje_id = rs.getInt("viaje_id");
+                return viaje_id;
+            }
+
+            rs.close();
+            prep.close();
+
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+
+    public int IdResponsablePorGrupoID(int grupo_id) throws SQLException {
+
+        try {
+            String sql = "SELECT responsable_id FROM grupo WHERE grupo_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, grupo_id);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                int responsable_id = rs.getInt("responsable_id");
+                return grupo_id;
+            }
+
+            rs.close();
+            prep.close();
+
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+
     public void insertarGrupo(Grupo grupo) {
         Connection c = DBManager.getConnection();
 
@@ -372,8 +451,8 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//------------------------------------VIAJES----------------------------------------------
 
+//------------------------------------VIAJES----------------------------------------------
     public void listarViajes() throws SQLException {
 
         try {
@@ -400,8 +479,30 @@ public class DBManager {
         }
 
     }
-    
-        public void insertarViajes(Viaje viaje) {
+
+    public void listarViajePorID(int viaje_id) throws SQLException {
+
+        String sql = "SELECT * FROM info_viaje WHERE viaje_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, viaje_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            String hotel = rs.getString("hotel");
+            String direccion_hotel = rs.getString("direccion_hotel");
+            String regimen = rs.getString("regimen");
+            String estacion_forfait = rs.getString("estacion_forfait");
+            int duracion = rs.getInt("duracion");
+            Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
+            System.out.println(viaj);
+
+        }
+
+        rs.close();
+        prep.close();
+
+    }
+
+    public void insertarViajes(Viaje viaje) {
         Connection c = DBManager.getConnection();
 
         try {
@@ -412,7 +513,7 @@ public class DBManager {
             ps.setString(2, viaje.getDireccion_hotel());
             ps.setString(3, viaje.getRegimen());
             ps.setString(4, viaje.getEstacion_forfait());
-            ps.setInt(5,viaje.getDuracion());
+            ps.setInt(5, viaje.getDuracion());
             ps.executeUpdate();
             ps.close();
 
@@ -420,7 +521,6 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
 //-----------------------------------------------------PAGOS----------------------------------------------------------
     public void listarPagos() throws SQLException {
@@ -449,10 +549,24 @@ public class DBManager {
         }
 
     }
-    
-    
-    
-      public void insertarPagos(Pagos pagos) {
+
+    public void listarPagosPorUserID(int usuario_id) throws SQLException {
+
+        String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, usuario_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Pagos pago = new Pagos(rs.getInt("pago_id"), rs.getString("metodo_pago"), rs.getString("primer_pago"), rs.getString("segundo_pago"), usuario_id, rs.getString("DNI"));
+            System.out.println(pago);
+        }
+
+        rs.close();
+        prep.close();
+
+    }
+
+    public void insertarPagos(Pagos pagos) {
         Connection c = DBManager.getConnection();
 
         try {

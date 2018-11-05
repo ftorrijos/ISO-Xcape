@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import modelo.*;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Menu {
         int opcion = 0;
         int opcionC = 0;
         do {
-            System.out.println("Hola: "+ db.selectNombreUsuario(usuario_id)+" bienvenido.");
+            System.out.println("Hola: " + db.selectNombreUsuario(usuario_id) + " bienvenido.");
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -37,24 +38,43 @@ public class Menu {
                     case 1:
                         do {
                             System.out.println("");
-                            mostrarMenuContactos();
+                            mostrarMenuMiViaje();
                             System.out.print("\nInserte opción -> ");
                             opcionC = Integer.parseInt(consola.readLine());
 
+//  public static void mostrarMenuMiViaje() {
+//        System.out.println("\t " + "MÓDULO MiViaje:");
+//        System.out.println("1.Consultar información sobre mi viaje");
+//        System.out.println("2.Consultar mis pagos");
+//        System.out.println("3.Consultar mi grupos");
+//        System.out.println("4.Consultar mi responsable");
+//        System.out.println("5.Consultar mis incicendias");
+//        System.out.println("6.Volver al menú principal");
+//    }
+//                            
                             switch (opcionC) {
                                 case 1:
-                                    //Contacto.listarUsuarios();
+                                    int id_grupo2 = db.IdGrupoPorIdUsuarios(usuario_id);
+                                    int viaje_id = db.IdViajePorIdGrupo(id_grupo2);
+                                    db.listarViajePorID(viaje_id);
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-                                    db.listarResponsables();
+                                    db.listarPagosPorUserID(usuario_id);
                                     break;
                                 case 3:
-                                    db.listarGrupos();
+                                    System.out.println("Tu grupo es: " + db.listarGruposSoloNombre(db.IdGrupoPorIdUsuarios(usuario_id)));
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:
-                                    db.listarIncidencias();
+                                    int id_grupo = db.IdGrupoPorIdUsuarios(usuario_id);
+                                    int responsable_id = db.IdResponsablePorGrupoID(id_grupo);
+                                    Responsable respon =db.listarResponsableYContacto(responsable_id);
+                                    System.out.println("Tu responsable se llama:"+respon.getNombre()+" "+respon.getApellido() + " y su contacto es: "+ respon.getMovil());
+                                    System.out.println("\nVolviendo al menu ...");
+                                    break;
+                                case 5:
+                                    db.listarIncidenciasUserID(usuario_id);
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
@@ -131,6 +151,16 @@ public class Menu {
         System.out.println("8.MEDIA");
         System.out.println("9.VALORA TU EXP");
         System.out.println("10.SALIR");
+    }
+
+    public static void mostrarMenuMiViaje() {
+        System.out.println("\t " + "MÓDULO MiViaje:");
+        System.out.println("1.Consultar información sobre mi viaje");
+        System.out.println("2.Consultar mis pagos");
+        System.out.println("3.Consultar mi grupos");
+        System.out.println("4.Consultar mi responsable");
+        System.out.println("5.Consultar mis incidencias");
+        System.out.println("6.Volver al menú principal");
     }
 
     public static void mostrarMenuContactos() {
