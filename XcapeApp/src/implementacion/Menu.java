@@ -22,6 +22,7 @@ public class Menu {
      * @throws SQLException
      */
     public static void run() throws SQLException {
+        DBManager db = new DBManager();
         int opcion = 0;
         int opcionC = 0;
         do {
@@ -45,14 +46,14 @@ public class Menu {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-                                    //Contacto.listarResponsables();
+                                    db.listarResponsables();
                                     break;
                                 case 3:
-                                    //db.listarGrupos();
+                                    db.listarGrupos();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:
-                                    //db.listarIncidencias();
+                                    db.listarIncidencias();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
