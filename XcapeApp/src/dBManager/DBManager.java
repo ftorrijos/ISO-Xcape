@@ -175,6 +175,24 @@ public class DBManager {
         }
     }
 
+    public void insertarGrupo(Grupo grupo) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "INSERT INTO grupo(nombre,responsable_id, viaje_id) VALUES(?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setString(1, grupo.getNombre());
+            ps.setInt(2, grupo.getResponsable_id());
+            ps.setInt(3, grupo.getViaje_id());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public String listarGruposSoloNombre(int id_grupo) throws SQLException {
 
         String sql = "SELECT nombre FROM grupo WHERE grupo_id=?;";
@@ -240,6 +258,45 @@ public class DBManager {
             return usuario;
         }
         return null;
+    }
+
+    public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
+
+        String sql = "SELECT * FROM responsables WHERE responsable_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, responsable_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            String nombre = rs.getString("nombre");
+            String apellido = rs.getString("apellido");
+            int movil = rs.getInt("movil");
+            Responsable respon = new Responsable(nombre, apellido, movil);
+            return respon;
+        }
+
+        rs.close();
+        prep.close();
+
+        return null;
+
+    }
+
+    public void insertarResponsable(Responsable responsable) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "INSERT INTO responsables(nombre,apellido,movil) VALUES(?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setString(1, responsable.getNombre());
+            ps.setString(2, responsable.getApellido());
+            ps.setInt(3, responsable.getMovil());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
