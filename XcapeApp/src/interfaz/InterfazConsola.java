@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class InterfazConsola {
 
-    public static void run() {
-        try {
+    public static void run() throws SQLException {
+        /*try {
             Login log = new Login();
             log.comprobacion();
             Boolean x = log.comprobacion();
@@ -28,7 +28,8 @@ public class InterfazConsola {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException ex) {
             Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        */
+        Menu.run();
     }
 
 }

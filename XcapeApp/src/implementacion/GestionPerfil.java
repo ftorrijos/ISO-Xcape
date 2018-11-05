@@ -22,12 +22,13 @@ public class GestionPerfil {
             String nombre = consola.readLine();
             System.out.println("Apellido:");
             String apellido = consola.readLine();
-            System.out.println("Fecha de nacimiento en formato AAAA-MM-DD");
+            System.out.println("Fecha de nacimiento en formato AAAA/MM/DD");
             Date fecha_nacimiento = new Date(consola.readLine());
             System.out.println("DNI:");
             String dni = consola.readLine();
             System.out.println("Correo electrónico:");
             String correo = consola.readLine();
+            System.out.println("Movil: ");
             int movil = Integer.parseInt(consola.readLine());
             Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
             db.insertarUsuarios(usuario);
