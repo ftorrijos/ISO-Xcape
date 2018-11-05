@@ -4,10 +4,10 @@ Interfaz
 package interfaz;
 
 import implementacion.*;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,18 +17,26 @@ import java.util.logging.Logger;
  */
 public class InterfazConsola {
 
-    public static void run() throws SQLException, ParseException {
-        login();
-        //Menu.run();
+    public static void run() throws SQLException {
+        try {
+            login();
+            // Menu.run();
+        } catch (IOException ex) {
+            Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void login() throws ParseException {
+    public static void login() throws IOException {
         try {
             Login log = new Login();
-            Boolean x = log.comprobacion();
+          // log.comprobacion();
+           String x = log.comprobacion();
 
-            if (x) {
+            if (x.equalsIgnoreCase("okadmin")){
                 Menu.run();
+            }else if(x.equalsIgnoreCase("ok")){
+                MenuAdmin ma = new MenuAdmin();
+                ma.Menuadmin();
             }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException ex) {
             Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);

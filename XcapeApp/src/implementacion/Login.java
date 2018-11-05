@@ -19,7 +19,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class Login {
 
-    public Boolean comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
+    public String comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
 
         DBManager db = new DBManager();
         Boolean ok = true;
@@ -35,11 +35,13 @@ public class Login {
         // System.out.println(passHash);
         //System.out.println(dbPass);
         if (dbPass.equalsIgnoreCase(passHash)) {
-            return ok;
-        } else {
+            return "ok";
+        } else if(username=="admin" && dbPass.equals(passHash)){
+            return "okadmin";
+        }else {
             System.out.println("ACCESSS DENIED BITCH*S");
             comprobacion();
-            return nook;
+            return "nook";
         }
     }
 
