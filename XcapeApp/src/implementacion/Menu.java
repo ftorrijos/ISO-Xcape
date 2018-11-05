@@ -47,14 +47,14 @@ public class Menu {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-                                    db.listarResponsables();
+                                    //db.listarResponsables();
                                     break;
                                 case 3:
-                                    db.listarGrupos();
+                                    //db.listarGrupos();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:
-                                    db.listarIncidencias();
+                                    //db.listarIncidencias();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
