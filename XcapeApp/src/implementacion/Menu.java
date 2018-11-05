@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 /**
  *
@@ -22,7 +21,7 @@ public class Menu {
      *
      * @throws SQLException
      */
-    public static void run() throws SQLException, ParseException {
+    public static void run() throws SQLException {
         DBManager db = new DBManager();
         int opcion = 0;
         int opcionC = 0;
@@ -77,8 +76,7 @@ public class Menu {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-                                    gp.modificar_Datos();
-                                    System.out.println("\nVolviendo al menu");
+                                    //ModificarMiPerfil();
                                     break;
                                 case 3:
                                     gp.insertar_usuario();

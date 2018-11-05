@@ -8,7 +8,6 @@ import implementacion.Login;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +24,7 @@ public class App {
      * @param args the command line arguments
      * @throws java.sql.SQLException
      */
-    public static void main(String[] args) throws SQLException, ParseException {
+    public static void main(String[] args) throws SQLException {
 
             System.out.println("Cargando App...\n");
             interfaz.InterfazConsola.run();

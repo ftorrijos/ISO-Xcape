@@ -7,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -66,12 +63,11 @@ public class DBManager {
             ResultSet rs = stmt3.executeQuery(sql3);
             System.out.println("Lista de Incidencias: ");
             while (rs.next()) {
-                int incidencia_id = rs.getInt("incidencia_id");
-                System.out.println(incidencia_id);
+                int id = rs.getInt("incidencia_id");
                 int usuario_id = rs.getInt("usuario_id");
                 int grupo_id = rs.getInt("grupo_id");
                 String mensaje = rs.getString("mensaje");
-                Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
+                Incidencia incidencia = new Incidencia(id, usuario_id, grupo_id, mensaje);
                 System.out.println(incidencia);
             }
             rs.close();
@@ -215,7 +211,7 @@ public class DBManager {
     }
 //-------------------------------------------RESPONSABLES-----------------------------------------------
 
-    public static void listarResponsables() throws SQLException {
+    public void listarResponsables() throws SQLException {
 
         try {
             Statement stmt5 = c.createStatement();
@@ -247,14 +243,13 @@ public class DBManager {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            int usuario_id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
             String correo = rs.getString(6);
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(usuario_id,movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
             System.out.println(usuario);
 
             rs.close();
@@ -302,50 +297,37 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void modificarUsuarios(Usuario usuario) throws ParseException {
-        Connection c = DBManager.getConnection();
+//------------------------------------VIAJES----------------------------------------------
+    
+     public void listarViajes() throws SQLException {
 
         try {
-            String replaceSql = "REPLACE INTO usuarios VALUES(?,?,?,?,?,?,?)";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(replaceSql);
-
-            int usuario_id = usuario.getUsuario_id();
-            String nombre = usuario.getNombre();
-            String apellido = usuario.getApellido();
+            Statement stmt5 = c.createStatement();
+            String sql5 = "SELECT * FROM info_viaje;";
+            ResultSet rs = stmt5.executeQuery(sql5);
+            System.out.println("Lista de Viajes: ");
             
-            String oldFormat = "YYYY-MM-dd";
-            String newFormat = "YYYY/MM/dd";
-            SimpleDateFormat sdf = new SimpleDateFormat(oldFormat);
-            Date d = sdf.parse(usuario.getFecha_nacimiento().toString());
-            sdf.applyPattern(newFormat);
-            String newDateString = sdf.format(d);
-            Date d2 = new Date(newDateString);
-                    
-            Instant instant = (d2).toInstant();
-            ZoneId zoneId = ZoneId.of("Europe/Paris");
-            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
-            LocalDate localDate = zdt.toLocalDate();
+            while (rs.next()) {
+                int viaje_id = rs.getInt("viaje_id");
+                String hotel = rs.getString("hotel");
+                String direccion_hotel = rs.getString("direccion_hotel");
+                String regimen = rs.getString("regimen");
+                String estacion_forfait = rs.getString("estacion_forfait");
+                int duracion = rs.getInt("duracion");
+                Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel,regimen, estacion_forfait,duracion);
+                System.out.println(viaj);
+            }
+            
+            rs.close();
+            stmt5.close();
 
-            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate);
-
-            String dni = usuario.getDni();
-            String correo = usuario.getCorreo();
-            int movil = usuario.getMovil();
-
-            ps.setInt(1, usuario_id);
-            ps.setString(2, nombre);
-            ps.setString(3, apellido);
-            ps.setDate(4, fecha_nacimiento);
-            ps.setString(5, dni);
-            ps.setString(6, correo);
-            ps.setInt(7, movil);
-            ps.executeUpdate();
-            ps.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
         }
-    }
 
+        
+        
+        
+        
+        
+    }
 }
