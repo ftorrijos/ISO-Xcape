@@ -79,6 +79,58 @@ public class DBManager {
     }
 
     // ---------------------------------------  GESTION DE USUARIOS ----------------------------------------------------------------
+     public static void listarUsuarios() throws SQLException {
+
+        try {
+            Statement stmt3 = c.createStatement();
+            String sql3 = "SELECT * FROM usuarios;";
+            ResultSet rs = stmt3.executeQuery(sql3);
+            System.out.println("Lista de Usuarios: ");
+            while (rs.next()) {
+                int id = rs.getInt("usuario_id");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("nombre");
+                String dni = rs.getString("nombre");
+                String correo = rs.getString("nombre");
+                int movil = rs.getInt("movil");
+               Usuario usuario = new Usuario(id, movil, nombre,apellido,dni,correo,null);
+                System.out.println(usuario);
+            }
+            rs.close();
+            stmt3.close();
+
+        } catch (SQLException e) {
+        }
+
+    }
+
+    
+    
+    
+    public Usuario seleccionar_usuario(String dni) throws SQLException {
+        Connection c = DBManager.getConnection();
+        String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
+        ps.setString(1, dni);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString(2);
+            String apellido = rs.getString(3);
+            Date fecha_nacimiento = rs.getDate(4);
+            String correo = rs.getString(6);
+            int movil = rs.getInt(7);
+
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            System.out.println(usuario);
+
+            rs.close();
+            ps.close();
+            return usuario;
+        }
+        return null;
+    }
+    
     public void insertarUsuarios(Usuario usuario) {
         Connection c = DBManager.getConnection();
 
@@ -130,30 +182,7 @@ public class DBManager {
 
         return null;
 
-    }   public Usuario seleccionar_usuario(String dni) throws SQLException {
-        Connection c = DBManager.getConnection();
-        String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
-        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
-        ps.setString(1, dni);
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()) {
-            String nombre = rs.getString(2);
-            String apellido = rs.getString(3);
-            Date fecha_nacimiento = rs.getDate(4);
-            String correo = rs.getString(6);
-            int movil = rs.getInt(7);
-
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
-            System.out.println(usuario);
-
-            rs.close();
-            ps.close();
-            return usuario;
-        }
-        return null;
     }
-
 
     //-------------------------------------- LOGIN ----------------------------------------------------------------------
     public String selectPasswordUsuario(String username) throws SQLException {
@@ -258,7 +287,8 @@ public class DBManager {
 
     }
 
- 
+   
+
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
 
         String sql = "SELECT * FROM responsables WHERE responsable_id=?;";

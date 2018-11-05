@@ -62,7 +62,7 @@ public class MenuAdmin {
                 Menuadmin();
                 break;
             case 9:
-                //db.listarUsuarios();
+                db.listarUsuarios();
                 Menuadmin();
                 break;
             case 10:
