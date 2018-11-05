@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.*;
@@ -89,13 +90,12 @@ public class DBManager {
             String nombre = usuario.getNombre();
             String apellido = usuario.getApellido();
 
-            
             Instant instant = (usuario.getFecha_nacimiento()).toInstant();
             ZoneId zoneId = ZoneId.of("Europe/Paris");
             ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
             LocalDate localDate = zdt.toLocalDate();
-            
-            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate); 
+
+            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate);
 
             String dni = usuario.getDni();
             String correo = usuario.getCorreo();
@@ -216,6 +216,30 @@ public class DBManager {
         } catch (SQLException e) {
         }
 
+    }
+
+    public Usuario seleccionar_usuario(String dni) throws SQLException {
+        Connection c = DBManager.getConnection();
+        String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
+        ps.setString(1, dni);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString(2);
+            String apellido = rs.getString(3);
+            Date fecha_nacimiento = rs.getDate(4);
+            String correo = rs.getString(6);
+            int movil = rs.getInt(7);
+
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            System.out.println(usuario);
+
+            rs.close();
+            ps.close();
+            return usuario;
+        }
+        return null;
     }
 
 }

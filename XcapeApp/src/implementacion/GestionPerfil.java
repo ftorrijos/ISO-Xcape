@@ -2,6 +2,7 @@ package implementacion;
 
 import dBManager.DBManager;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 import modelo.Usuario;
 
@@ -36,8 +37,19 @@ public class GestionPerfil {
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
-        
-        
+    }
+
+    public void ver_Datos() throws SQLException {
+        System.out.println("Mi perfil: ");
+        try {
+            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Introduzca DNI: ");
+            String dni = consola.readLine();
+            Usuario usuario = db.seleccionar_usuario(dni);
+            //db.mostrarDatos(usuario);
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error:" + e);
+        }
 
     }
 }

@@ -71,7 +71,7 @@ public class Menu {
 
                             switch (opcion) {
                                 case 1:
-                                    //VerMiPerfil();
+                                    gp.ver_Datos();
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:

@@ -17,9 +17,10 @@ import java.util.logging.Logger;
 public class InterfazConsola {
 
     public static void run() throws SQLException {
-        /*try {
+        /*
+        try {
             Login log = new Login();
-            log.comprobacion();
+            //log.comprobacion();
             Boolean x = log.comprobacion();
 
             if (x) {

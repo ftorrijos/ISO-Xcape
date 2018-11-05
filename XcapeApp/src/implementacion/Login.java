@@ -25,10 +25,10 @@ public class Login {
         Boolean ok = true;
         Boolean nook = false;
 
-        System.out.println("Porfavor introducir el nombre del usuario:");
+        System.out.println("Por favor introducir el nombre del usuario:");
         Scanner sc = new Scanner(System.in);
         String username = sc.nextLine();
-        System.out.println("Porfavor introducir el password del usuario:");
+        System.out.println("Por favor introducir el password del usuario:");
         String password = sc.nextLine();
         String passHash = hash(password);
         String dbPass = db.selectPasswordUsuario(username);
