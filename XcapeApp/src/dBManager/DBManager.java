@@ -400,6 +400,27 @@ public class DBManager {
         }
 
     }
+    
+        public void insertarViajes(Viaje viaje) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "INSERT INTO info_viaje(hotel,direccion_hotel,regimen,estacion_forfait,duracion) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setString(1, viaje.getHotel());
+            ps.setString(2, viaje.getDireccion_hotel());
+            ps.setString(3, viaje.getRegimen());
+            ps.setString(4, viaje.getEstacion_forfait());
+            ps.setInt(5,viaje.getDuracion());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 //-----------------------------------------------------PAGOS----------------------------------------------------------
     public void listarPagos() throws SQLException {

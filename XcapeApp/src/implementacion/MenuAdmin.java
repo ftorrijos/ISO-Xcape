@@ -65,6 +65,8 @@ public class MenuAdmin {
                 Menuadmin(usuario_id);
                 break;
             case 8:
+                Responsable respon = insertarResponsableLectura();
+                db.insertarResponsable(respon);
                 Menuadmin(usuario_id);
                 break;
             case 9:
@@ -79,7 +81,8 @@ public class MenuAdmin {
                 Menuadmin(usuario_id);
                 break;
             case 12:
-
+                Viaje viaje = insertarViajeLectura();
+                db.insertarViajes(viaje);
                 Menuadmin(usuario_id);
                 break;
             default:
@@ -100,7 +103,7 @@ public class MenuAdmin {
         System.out.println("7.Mostrar responsables");
         System.out.println("8.Insertar responsables");
         System.out.println("9.Mostar Usuarios");
-        System.out.println("10.Insertar usuarios");
+        System.out.println("10.Insertar usuarios(CURRENTLY UNAVAILABLE)");
         System.out.println("11.Mostrar viajes");
         System.out.println("12.Insertar viajes");
         System.out.println("13.SALIR");
@@ -181,5 +184,35 @@ public class MenuAdmin {
         // el admin no tiene que realizar pagos, lo hace en caso de erroor por eso debe asignarle un ID al usuario
         Pagos pago = new Pagos(metodo_pago, primer_pago, segundo_pago, user_id, dni);
         return pago;
+    }
+
+    private Responsable insertarResponsableLectura() throws SQLException {
+
+        Scanner scInci = new Scanner(System.in);
+        System.out.println("Por favor introducir el nombre:");
+        String nombre = scInci.nextLine();
+        System.out.println("Por favor introducir el apellido:");
+        String apellido = scInci.nextLine();
+        System.out.println("Por favor introducir el movil del responsable:");
+        int movil = scInci.nextInt();
+        Responsable respon = new Responsable(nombre, apellido, movil);
+        return respon;
+    }
+
+    private Viaje insertarViajeLectura() throws SQLException {
+
+        Scanner scViaje = new Scanner(System.in);
+        System.out.println("Por favor introducir el hotel:");
+        String hotel = scViaje.nextLine();
+        System.out.println("Por favor introducir la direccion del hotel:");
+        String direccion_hotel = scViaje.nextLine();
+        System.out.println("Por favor introducir el regimen:");
+        String regimen = scViaje.nextLine();
+        System.out.println("Por favor introducir la estacion:");
+        String estacion_forfait = scViaje.nextLine();
+        System.out.println("Por favor introducir la duración:");
+        int duracion = scViaje.nextInt();
+        Viaje viaje = new Viaje(hotel,direccion_hotel,regimen,estacion_forfait,duracion);
+        return viaje;
     }
 }
