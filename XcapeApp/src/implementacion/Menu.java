@@ -21,11 +21,12 @@ public class Menu {
      *
      * @throws SQLException
      */
-    public static void run() throws SQLException {
+    public static void run(int usuario_id) throws SQLException {
         DBManager db = new DBManager();
         int opcion = 0;
         int opcionC = 0;
         do {
+            System.out.println("Hola: "+ db.selectNombreUsuario(usuario_id)+" bienvenido.");
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));

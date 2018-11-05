@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.LoginObjeto;
 
 /**
  *
@@ -29,14 +30,14 @@ public class InterfazConsola {
     public static void login() throws IOException {
         try {
             Login log = new Login();
-          // log.comprobacion();
-           String x = log.comprobacion();
-
-            if (x.equalsIgnoreCase("okadmin")){
-                Menu.run();
-            }else if(x.equalsIgnoreCase("ok")){
+            // log.comprobacion();
+            LoginObjeto x = log.comprobacion();
+            if (x.getPass() == "okadmin") {
                 MenuAdmin ma = new MenuAdmin();
-                ma.Menuadmin();
+                ma.Menuadmin(x.getUsuario_id());
+
+            } else if (x.getPass() == "ok") {
+                Menu.run(x.getUsuario_id());
             }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException ex) {
             Logger.getLogger(InterfazConsola.class.getName()).log(Level.SEVERE, null, ex);

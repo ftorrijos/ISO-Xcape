@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Scanner;
-import modelo.Grupo;
+import modelo.*;
 
 /**
  *
@@ -21,9 +21,11 @@ public class MenuAdmin {
 
     DBManager db = new DBManager();
 
-    public void Menuadmin() throws IOException, SQLException {
-
-        System.out.println("Menu administración:");
+    public void Menuadmin(int usuario_id) throws IOException, SQLException {
+        System.out.println("\b");
+        System.out.println("\b");
+        //dejar un espacio
+        System.out.println("Hola: " + db.selectNombreUsuario(usuario_id) + ", bienvenido al menu administración:");
         int opcion = 0;
         MenuAdmin.mostrartMenuAdmin();
         BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -33,48 +35,50 @@ public class MenuAdmin {
         switch (opcion) {
             case 1:
                 db.listarGrupos();
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 2:
                 Grupo grupo = insertarGrupoLectura();
                 db.insertarGrupo(grupo);
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 3:
                 db.listarIncidencias();
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 4:
-                Menuadmin();
+                Incidencia inci = insertarIncidenciaLectura(usuario_id);
+                db.insertarIncidencia(inci);
+                Menuadmin(usuario_id);
                 break;
             case 5:
                 //pagos
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 6:
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 7:
                 db.listarResponsables();
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 8:
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 9:
                 db.listarUsuarios();
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 10:
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 11:
                 db.listarViajes();
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             case 12:
 
-                Menuadmin();
+                Menuadmin(usuario_id);
                 break;
             default:
                 System.out.println("\nVolviendo al menu principal...");
@@ -87,7 +91,7 @@ public class MenuAdmin {
         System.out.println("\t" + "MENU");
         System.out.println("1.Mostrar grupos");
         System.out.println("2.Insertar grupos");
-        System.out.println("3.Mostart incidencias");
+        System.out.println("3.Mostar incidencias");
         System.out.println("4.Insertar incidencias");
         System.out.println("5.Mostrar pagos");
         System.out.println("6.InsertarPago");
@@ -114,5 +118,18 @@ public class MenuAdmin {
         int viaje_id = scGrupo.nextInt();
         Grupo group = new Grupo(responsable_id, viaje_id, nombre);
         return group;
+    }
+
+    private Incidencia insertarIncidenciaLectura(int usuario_id) throws SQLException {
+
+        Scanner scInci = new Scanner(System.in);
+        System.out.println("Por favor introducir la incidencia:");
+        String mensaje = scInci.nextLine();
+        System.out.println("Por favor introducir el id del grupo:");
+        int grupo_id = scInci.nextInt();
+
+        System.out.println("Gracias lo tendremos en cuenta!");
+        Incidencia incidencia = new Incidencia(usuario_id, grupo_id, mensaje);
+        return incidencia;
     }
 }

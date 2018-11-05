@@ -77,6 +77,26 @@ public class DBManager {
         }
 
     }
+    
+    
+    
+    public void insertarIncidencia(Incidencia inci) {
+       
+
+        try {
+            String insertSql = "INSERT INTO incidencias(usuario_id,grupo_id, mensaje) VALUES(?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setInt(1, inci.getUsuario_id());
+            ps.setInt(2, inci.getGrupo_id());
+            ps.setString(3, inci.getMensaje());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // ---------------------------------------  GESTION DE USUARIOS ----------------------------------------------------------------
      public static void listarUsuarios() throws SQLException {
@@ -108,7 +128,7 @@ public class DBManager {
     
     
     public Usuario seleccionar_usuario(String dni) throws SQLException {
-        Connection c = DBManager.getConnection();
+        
         String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
         ps.setString(1, dni);
@@ -132,7 +152,7 @@ public class DBManager {
     }
     
     public void insertarUsuarios(Usuario usuario) {
-        Connection c = DBManager.getConnection();
+        
 
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";
@@ -201,6 +221,40 @@ public class DBManager {
 
         return null;
     }
+     public String selectNombreUsuario(int user_id) throws SQLException {
+
+        String sql = "SELECT username FROM user_login WHERE user_id=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            String username = rs.getString("username");
+            return username;
+        }
+
+        rs.close();
+        prep.close();
+
+        return null;
+    }
+    
+    public int selectIDUsuario(String username) throws SQLException {
+
+        String sql = "SELECT user_id FROM user_login WHERE username=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, username);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int user_id = rs.getInt("user_id");
+            return user_id;
+        }
+
+        rs.close();
+        prep.close();
+
+        return 0;
+    }
+    
 
     //----------------------------------------GRUPOS----------------------------------------------------
     public static void listarGrupos() throws SQLException {
