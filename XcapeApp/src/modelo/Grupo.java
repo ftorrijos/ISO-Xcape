@@ -21,7 +21,13 @@ public class Grupo {
         this.nombre = nombre;
     }
 
-     /**
+    public Grupo(int responsable_id, int viaje_id, String nombre) {
+        this.responsable_id = responsable_id;
+        this.viaje_id = viaje_id;
+        this.nombre = nombre;
+    }
+
+    /**
      * @return the grupo_id
      */
     public int getGrupo_id() {
@@ -76,11 +82,10 @@ public class Grupo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-       @Override
+
+    @Override
     public String toString() {
-        return "Grupo{" + "grupo_id=" + getGrupo_id() + ", nombre=" + getNombre() + ", responsable="+ getResponsable_id() + " ,viaje="+ getViaje_id()+'}';
+        return "Grupo{" + "grupo_id=" + getGrupo_id() + ", nombre=" + getNombre() + ", responsable=" + getResponsable_id() + " ,viaje=" + getViaje_id() + '}';
     }
 
-    
 }

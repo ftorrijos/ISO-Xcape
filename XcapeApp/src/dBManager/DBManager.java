@@ -63,12 +63,11 @@ public class DBManager {
             ResultSet rs = stmt3.executeQuery(sql3);
             System.out.println("Lista de Incidencias: ");
             while (rs.next()) {
-                int incidencia_id = rs.getInt("incidencia_id");
-                System.out.println(incidencia_id);
+                int id = rs.getInt("incidencia_id");
                 int usuario_id = rs.getInt("usuario_id");
                 int grupo_id = rs.getInt("grupo_id");
                 String mensaje = rs.getString("mensaje");
-                Incidencia incidencia = new Incidencia(incidencia_id, usuario_id, grupo_id, mensaje);
+                Incidencia incidencia = new Incidencia(id, usuario_id, grupo_id, mensaje);
                 System.out.println(incidencia);
             }
             rs.close();
@@ -212,7 +211,7 @@ public class DBManager {
     }
 //-------------------------------------------RESPONSABLES-----------------------------------------------
 
-    public static void listarResponsables() throws SQLException {
+    public void listarResponsables() throws SQLException {
 
         try {
             Statement stmt5 = c.createStatement();
@@ -298,5 +297,37 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//------------------------------------VIAJES----------------------------------------------
+    
+     public void listarViajes() throws SQLException {
 
+        try {
+            Statement stmt5 = c.createStatement();
+            String sql5 = "SELECT * FROM info_viaje;";
+            ResultSet rs = stmt5.executeQuery(sql5);
+            System.out.println("Lista de Viajes: ");
+            
+            while (rs.next()) {
+                int viaje_id = rs.getInt("viaje_id");
+                String hotel = rs.getString("hotel");
+                String direccion_hotel = rs.getString("direccion_hotel");
+                String regimen = rs.getString("regimen");
+                String estacion_forfait = rs.getString("estacion_forfait");
+                int duracion = rs.getInt("duracion");
+                Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel,regimen, estacion_forfait,duracion);
+                System.out.println(viaj);
+            }
+            
+            rs.close();
+            stmt5.close();
+
+        } catch (SQLException e) {
+        }
+
+        
+        
+        
+        
+        
+    }
 }
