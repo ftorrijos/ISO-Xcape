@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class InterfazConsola {
 
     public static void run() throws SQLException, ParseException {
-        //login();
-        Menu.run();
+        login();
+        //Menu.run();
     }
 
     public static void login() throws ParseException {

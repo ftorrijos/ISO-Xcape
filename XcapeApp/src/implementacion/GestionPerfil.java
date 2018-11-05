@@ -104,7 +104,7 @@ public class GestionPerfil {
                         String nuevoDni = consola.readLine();
                         Usuario usuarioNew3 = new Usuario(usuario.getUsuario_id(),
                                 usuario.getMovil(), usuario.getNombre(),
-                                usuario.getApellido(),nuevoDni,
+                                usuario.getApellido(), nuevoDni,
                                 usuario.getCorreo(),
                                 usuario.getFecha_nacimiento());
                         System.out.println(usuarioNew3);
