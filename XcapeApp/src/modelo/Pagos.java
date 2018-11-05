@@ -5,6 +5,11 @@
  */
 package modelo;
 
+import dBManager.DBManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author usuario
@@ -12,17 +17,26 @@ package modelo;
 public class Pagos {
     private int pago_id, usuario_id;
     private String metodo_pago,primer_pago, segundo_pago, dni;
+    DBManager db = new DBManager();
     
-    public Pagos(){
+    public Pagos(int pago_id, String metodo_pago, String primer_pago, String segundo_pago,int usuario_id,String DNI){
         this.pago_id = pago_id;
         this.metodo_pago=metodo_pago;
         this.primer_pago=primer_pago;
         this.segundo_pago=segundo_pago;
-        this.dni=dni;
+        this.dni=DNI;
         this.usuario_id= usuario_id;
                 
     }
 
+    public Pagos(String metodo_pago, String primer_pago, String segundo_pago,int usuario_id,String DNI){
+        this.metodo_pago=metodo_pago;
+        this.primer_pago=primer_pago;
+        this.segundo_pago=segundo_pago;
+        this.dni=DNI;
+        this.usuario_id= usuario_id;
+                
+    }
     /**
      * @return the pago_id
      */
@@ -111,7 +125,12 @@ public class Pagos {
     
        @Override
     public String toString() {
-        return "Pago{" + "pago_id=" + getPago_id() + ", metodo de pago =" + getMetodo_pago()+ ", primer pago ="+ getPrimer_pago()
-                + " ,segundo pago="+getSegundo_pago()+ " ,DNI="+getDni()+ " , usuario="+getUsuario_id()+'}';
+        try {
+            return "Pago{" + "pago_id=" + getPago_id() + ", metodo de pago =" + getMetodo_pago()+ ", primer pago ="+ getPrimer_pago()
+                    + " ,segundo pago="+getSegundo_pago()+ " ,DNI="+getDni()+ " , usuario="+ db.selectNombreUsuario(getUsuario_id())+'}';
+        } catch (SQLException ex) {
+            Logger.getLogger(Pagos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

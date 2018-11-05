@@ -52,10 +52,12 @@ public class MenuAdmin {
                 Menuadmin(usuario_id);
                 break;
             case 5:
-                //pagos
+                db.listarPagos();
                 Menuadmin(usuario_id);
                 break;
             case 6:
+                Pagos pago = insertarPagosLectura(usuario_id);
+                db.insertarPagos(pago);
                 Menuadmin(usuario_id);
                 break;
             case 7:
@@ -131,5 +133,53 @@ public class MenuAdmin {
         System.out.println("Gracias lo tendremos en cuenta!");
         Incidencia incidencia = new Incidencia(usuario_id, grupo_id, mensaje);
         return incidencia;
+    }
+
+    private Pagos insertarPagosLectura(int usuario_id) throws SQLException {
+
+        Scanner scPago = new Scanner(System.in);
+        System.out.println("Por favor introducir el metodo de pago:");
+        String metodo_pago = scPago.nextLine();
+        System.out.println("Por favor introducir el DNI:");
+        String dni = scPago.nextLine();
+        System.out.println("Ha realizado el primer pago?");
+        System.out.println("1.Pago realizado");
+        System.out.println("2.Pago NO realizado");
+        int c = 0;
+        c = scPago.nextInt();
+
+        String primer_pago = null;
+        switch (c) {
+            case 1:
+                primer_pago = "ok";
+                break;
+            case 2:
+                primer_pago = null;
+                break;
+            default:
+                break;
+        }
+        System.out.println("Ha realizado el segundo pago?");
+        System.out.println("1.Pago realizado");
+        System.out.println("2.Pago NO realizado");
+        int x = 0;
+        x = scPago.nextInt();
+        String segundo_pago = null;
+        switch (x) {
+            case 1:
+                segundo_pago = "ok";
+                break;
+            case 2:
+                segundo_pago = null;
+                break;
+            default:
+                break;
+        }
+        System.out.println("Por favor introducir el id del usuario:");
+        int user_id = scPago.nextInt();
+
+        // el admin no tiene que realizar pagos, lo hace en caso de erroor por eso debe asignarle un ID al usuario
+        Pagos pago = new Pagos(metodo_pago, primer_pago, segundo_pago, user_id, dni);
+        return pago;
     }
 }

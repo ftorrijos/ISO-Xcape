@@ -77,11 +77,8 @@ public class DBManager {
         }
 
     }
-    
-    
-    
+
     public void insertarIncidencia(Incidencia inci) {
-       
 
         try {
             String insertSql = "INSERT INTO incidencias(usuario_id,grupo_id, mensaje) VALUES(?,?,?)";
@@ -99,7 +96,7 @@ public class DBManager {
     }
 
     // ---------------------------------------  GESTION DE USUARIOS ----------------------------------------------------------------
-     public static void listarUsuarios() throws SQLException {
+    public static void listarUsuarios() throws SQLException {
 
         try {
             Statement stmt3 = c.createStatement();
@@ -113,7 +110,7 @@ public class DBManager {
                 String dni = rs.getString("nombre");
                 String correo = rs.getString("nombre");
                 int movil = rs.getInt("movil");
-               Usuario usuario = new Usuario(id, movil, nombre,apellido,dni,correo,null);
+                Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, null);
                 System.out.println(usuario);
             }
             rs.close();
@@ -124,11 +121,8 @@ public class DBManager {
 
     }
 
-    
-    
-    
     public Usuario seleccionar_usuario(String dni) throws SQLException {
-        
+
         String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
         ps.setString(1, dni);
@@ -150,9 +144,8 @@ public class DBManager {
         }
         return null;
     }
-    
+
     public void insertarUsuarios(Usuario usuario) {
-        
 
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";
@@ -221,7 +214,8 @@ public class DBManager {
 
         return null;
     }
-     public String selectNombreUsuario(int user_id) throws SQLException {
+
+    public String selectNombreUsuario(int user_id) throws SQLException {
 
         String sql = "SELECT username FROM user_login WHERE user_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
@@ -237,7 +231,7 @@ public class DBManager {
 
         return null;
     }
-    
+
     public int selectIDUsuario(String username) throws SQLException {
 
         String sql = "SELECT user_id FROM user_login WHERE username=?";
@@ -254,7 +248,6 @@ public class DBManager {
 
         return 0;
     }
-    
 
     //----------------------------------------GRUPOS----------------------------------------------------
     public static void listarGrupos() throws SQLException {
@@ -341,8 +334,6 @@ public class DBManager {
 
     }
 
-   
-
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
 
         String sql = "SELECT * FROM responsables WHERE responsable_id=?;";
@@ -382,15 +373,15 @@ public class DBManager {
         }
     }
 //------------------------------------VIAJES----------------------------------------------
-    
-     public void listarViajes() throws SQLException {
+
+    public void listarViajes() throws SQLException {
 
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM info_viaje;";
             ResultSet rs = stmt5.executeQuery(sql5);
             System.out.println("Lista de Viajes: ");
-            
+
             while (rs.next()) {
                 int viaje_id = rs.getInt("viaje_id");
                 String hotel = rs.getString("hotel");
@@ -398,20 +389,66 @@ public class DBManager {
                 String regimen = rs.getString("regimen");
                 String estacion_forfait = rs.getString("estacion_forfait");
                 int duracion = rs.getInt("duracion");
-                Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel,regimen, estacion_forfait,duracion);
+                Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
                 System.out.println(viaj);
             }
-            
+
             rs.close();
             stmt5.close();
 
         } catch (SQLException e) {
         }
 
-        
-        
-        
-        
-        
     }
+
+//-----------------------------------------------------PAGOS----------------------------------------------------------
+    public void listarPagos() throws SQLException {
+
+        try {
+            Statement stmt5 = c.createStatement();
+            String sql5 = "SELECT * FROM pagos;";
+            ResultSet rs = stmt5.executeQuery(sql5);
+            System.out.println("Lista de Pagos: ");
+
+            while (rs.next()) {
+                int pago_id = rs.getInt("pago_id");
+                String metodo_pago = rs.getString("metodo_pago");
+                String primer_pago = rs.getString("primer_pago");
+                String segundo_pago = rs.getString("segundo_pago");
+                int usuario_id = rs.getInt("usuario_id");
+                String dni = rs.getString("DNI");
+                Pagos pago = new Pagos(pago_id, metodo_pago, primer_pago, segundo_pago, usuario_id, dni);
+                System.out.println(pago);
+            }
+
+            rs.close();
+            stmt5.close();
+
+        } catch (SQLException e) {
+        }
+
+    }
+    
+    
+    
+      public void insertarPagos(Pagos pagos) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "INSERT INTO pagos(metodo_pago,primer_pago,segundo_pago,usuario_id,DNI) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setString(1, pagos.getMetodo_pago());
+            ps.setString(2, pagos.getPrimer_pago());
+            ps.setString(3, pagos.getSegundo_pago());
+            ps.setInt(4, pagos.getUsuario_id());
+            ps.setString(5, pagos.getDni());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
