@@ -7,6 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.*;
@@ -84,7 +88,15 @@ public class DBManager {
 
             String nombre = usuario.getNombre();
             String apellido = usuario.getApellido();
-            java.sql.Date fecha_nacimiento = (java.sql.Date) usuario.getFecha_nacimiento();
+
+            
+            Instant instant = (usuario.getFecha_nacimiento()).toInstant();
+            ZoneId zoneId = ZoneId.of("Europe/Paris");
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+            LocalDate localDate = zdt.toLocalDate();
+            
+            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate); 
+
             String dni = usuario.getDni();
             String correo = usuario.getCorreo();
             int movil = usuario.getMovil();
