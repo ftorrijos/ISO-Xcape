@@ -28,7 +28,11 @@ public class Responsable {
         this.movil=movil;              
     }
 
-
+     public Responsable(String nombre, String apellido, int movil) {
+        this.nombre = nombre;
+        this.apellido=apellido;
+        this.movil=movil;              
+    }
 
        /**
      * @return the responsable_id
