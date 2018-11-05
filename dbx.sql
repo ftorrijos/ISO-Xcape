@@ -223,8 +223,13 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) DEFAULT NULL,
+  `apellido` varchar(30) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `dni` varchar(10) DEFAULT NULL,
+  `correo` varchar(40) DEFAULT NULL,
+  `movil` int(9) DEFAULT NULL,
   PRIMARY KEY (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +238,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez'),(2,'Javier Sancerni'),(3,'Fernando Torrijos'),(4,'Eduardo Benzo'),(5,'Javier'),(7,'Carlos');
+INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez',NULL,NULL,'05467810C',NULL,NULL),(2,'Javier Sancerni',NULL,NULL,NULL,NULL,NULL),(3,'Fernando Torrijos',NULL,NULL,NULL,NULL,NULL),(4,'Eduardo Benzo',NULL,NULL,NULL,NULL,NULL),(5,'Javier',NULL,NULL,NULL,NULL,NULL),(7,'Carlos',NULL,NULL,NULL,NULL,NULL),(8,'Jose Manuel','Guerrero','1997-03-21','23452104D','guerre@cojo.com',666888999),(9,'Angel','Nu�ez','1994-05-03','11223344v','angelnt@manco.es',669667887);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -246,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 11:21:21
+-- Dump completed on 2018-11-05 10:56:06
