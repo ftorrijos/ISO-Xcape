@@ -92,10 +92,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "usuario_id=" + usuario_id + ", movil=" + movil
-                + ", nombre=" + nombre + ", apellido=" + apellido + ", dni="
-                + dni + ", correo=" + correo + ", fecha_nacimiento="
-                + fecha_nacimiento + '}';
+        return "--------------------------------" + "\n\t USUARIO ID -> " + usuario_id
+                + "\nNombre: " + nombre + "\nApellido: " + apellido + "\nDNI: "
+                + dni + "\nCorreo: " + correo + "\nFecha de nacimiento: " + fecha_nacimiento
+                + "\nMovil: " + movil + "\n--------------------------------";
     }
-
 }

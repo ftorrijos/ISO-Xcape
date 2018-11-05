@@ -45,8 +45,7 @@ public class GestionPerfil {
             BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Introduzca DNI: ");
             String dni = consola.readLine();
-            Usuario usuario = db.seleccionar_usuario(dni);
-            //db.mostrarDatos(usuario);
+            db.seleccionar_usuario(dni);
         } catch (IOException e) {
             System.out.println("Se ha producido un error:" + e);
         }
