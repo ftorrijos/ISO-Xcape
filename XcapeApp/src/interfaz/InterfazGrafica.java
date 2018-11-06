@@ -4,11 +4,23 @@
  * and open the template in the editor.
  */
 package interfaz;
+import java.awt.*;
+
+import java.sql.SQLException;
 
 /**
  *
  * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
  */
-public class InterfazGrafica {
+ public class InterfazGrafica  extends Frame{
+     private Button b1, b2, b3;
+     
+
+        public static void run() throws SQLException {
+            
+                IntGraficaPrincipal.main();
+                
+            
+        }
     
 }
