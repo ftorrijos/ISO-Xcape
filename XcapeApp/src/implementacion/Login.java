@@ -5,7 +5,7 @@
  */
 package implementacion;
 
-import dBManager.*;
+import dBManager.DBManager;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,9 +24,7 @@ public class Login {
 
         DBManager db = new DBManager();
         LoginObjeto log = new LoginObjeto();
-        Boolean ok = true;
-        Boolean nook = false;
-
+      
         System.out.println("Por favor introducir el nombre del usuario:");
         Scanner sc = new Scanner(System.in);
         String username = sc.nextLine();

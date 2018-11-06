@@ -30,7 +30,6 @@ public class InterfazConsola {
     public static void login() throws IOException {
         try {
             Login log = new Login();
-            // log.comprobacion();
             LoginObjeto x = log.comprobacion();
             if (x.getPass() == "okadmin") {
                 MenuAdmin ma = new MenuAdmin();
