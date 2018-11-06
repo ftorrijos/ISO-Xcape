@@ -32,7 +32,7 @@ CREATE TABLE `grupo` (
   KEY `viaje_id` (`viaje_id`),
   CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`responsable_id`) REFERENCES `responsables` (`responsable_id`),
   CONSTRAINT `grupo_ibfk_2` FOREIGN KEY (`viaje_id`) REFERENCES `info_viaje` (`viaje_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-INSERT INTO `grupo` VALUES (1,'AND-01',NULL,NULL),(2,'AND-02',NULL,NULL),(3,'CAN-01',NULL,NULL);
+INSERT INTO `grupo` VALUES (1,'AND-01',1,1),(2,'AND-02',NULL,NULL),(3,'CAN-01',NULL,NULL),(6,'CAN-02',3,1),(7,'ARG-01',2,2),(8,'AUS-01',1,2);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `incidencias` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `incidencias_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`grupo_id`),
   CONSTRAINT `incidencias_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
-INSERT INTO `incidencias` VALUES (1,3,2,'El viaje es la ****, este anno repito!'),(2,3,2,'El viaje es la ****, este anno repito!');
+INSERT INTO `incidencias` VALUES (1,3,2,'El viaje es la ****, este anno repito!'),(2,3,2,'El viaje es la ****, este anno repito!'),(10,3,7,'me faltan las pilas del....');
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `info_viaje` (
   `estacion_forfait` varchar(50) DEFAULT NULL,
   `duracion` int(11) DEFAULT NULL,
   PRIMARY KEY (`viaje_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `info_viaje` (
 
 LOCK TABLES `info_viaje` WRITE;
 /*!40000 ALTER TABLE `info_viaje` DISABLE KEYS */;
-INSERT INTO `info_viaje` VALUES (1,'SPA RESORT ANDORRA','123,GrandValira,Andorra','desayuno','grandvalira',5);
+INSERT INTO `info_viaje` VALUES (1,'SPA RESORT ANDORRA','123,GrandValira,Andorra','desayuno','grandvalira',5),(2,'TiesoHotel','TiesoLandia, Andorra','niWifi','grandvalira',2),(3,'Alpes Ski Hotel','Los Alpes, Alpes','todo incluido','Serre Chevalier',7);
 /*!40000 ALTER TABLE `info_viaje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `pagos` (
   PRIMARY KEY (`pago_id`),
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (1,'Bitcoin','ok','ok',3,'47228811C');
+INSERT INTO `pagos` VALUES (1,'Bitcoin','ok',NULL,3,'47228811C'),(2,'no paga','ok','ok',10,'18918811K'),(7,'tarjeta','ok','ok',5,'81818181K'),(8,'Visa','ok','ok',3,'47228819K');
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +146,7 @@ CREATE TABLE `responsables` (
   `apellido` varchar(30) DEFAULT NULL,
   `movil` int(11) DEFAULT NULL,
   PRIMARY KEY (`responsable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `responsables` (
 
 LOCK TABLES `responsables` WRITE;
 /*!40000 ALTER TABLE `responsables` DISABLE KEYS */;
-INSERT INTO `responsables` VALUES (1,'Javier','Sancerni',111222333),(2,'Alvaro','Cordoba',111222313),(3,'Ignacio','Goiriena',12222313);
+INSERT INTO `responsables` VALUES (1,'Javier','Sancerni',111222333),(2,'Alvaro','Cordoba',111222313),(3,'Ignacio','Goiriena',12222313),(4,'Juanan','Merino',612626272);
 /*!40000 ALTER TABLE `responsables` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `user_login` (
 
 LOCK TABLES `user_login` WRITE;
 /*!40000 ALTER TABLE `user_login` DISABLE KEYS */;
-INSERT INTO `user_login` VALUES (3,'FernandoTorrijos','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(1,'AlejandroGutierrez','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+INSERT INTO `user_login` VALUES (3,'FernandoTorrijos','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(1,'AlejandroGutierrez','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(10,'admin','d033e22ae348aeb5660fc2140aec35850c4da997');
 /*!40000 ALTER TABLE `user_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +229,7 @@ CREATE TABLE `usuarios` (
   `correo` varchar(40) DEFAULT NULL,
   `movil` int(9) DEFAULT NULL,
   PRIMARY KEY (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez',NULL,NULL,'05467810C',NULL,NULL),(2,'Javier Sancerni',NULL,NULL,NULL,NULL,NULL),(3,'Fernando Torrijos',NULL,NULL,NULL,NULL,NULL),(4,'Eduardo Benzo',NULL,NULL,NULL,NULL,NULL),(5,'Javier',NULL,NULL,NULL,NULL,NULL),(7,'Carlos',NULL,NULL,NULL,NULL,NULL),(8,'Jose Manuel','Guerrero','1997-03-21','23452104D','guerre@cojo.com',666888999),(9,'Angel','Nu�ez','1994-05-03','11223344v','angelnt@manco.es',669667887);
+INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez',NULL,NULL,'05467810C',NULL,NULL),(2,'Javier Sancerni',NULL,NULL,NULL,NULL,NULL),(3,'Fernando Torrijos',NULL,NULL,NULL,NULL,NULL),(4,'Eduardo Benzo',NULL,NULL,NULL,NULL,NULL),(5,'Javier',NULL,NULL,NULL,NULL,NULL),(7,'Carlos',NULL,NULL,NULL,NULL,NULL),(8,'Jose Manuel','Guerrero','1997-03-21','23452104D','guerre@cojo.com',666888999),(9,'Angel','Nu�ez','1994-05-03','11223344v','angelnt@manco.es',669667887),(10,'admin',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -251,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-05 10:56:06
+-- Dump completed on 2018-11-05 23:26:55

@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Scanner;
 import javax.xml.bind.DatatypeConverter;
+import modelo.LoginObjeto;
 
 /**
  *
@@ -19,9 +20,10 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class Login {
 
-    public String comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
+    public LoginObjeto comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
 
         DBManager db = new DBManager();
+        LoginObjeto log = new LoginObjeto();
         Boolean ok = true;
         Boolean nook = false;
 
@@ -34,14 +36,20 @@ public class Login {
         String dbPass = db.selectPasswordUsuario(username);
         // System.out.println(passHash);
         //System.out.println(dbPass);
-        if (dbPass.equalsIgnoreCase(passHash)) {
-            return "ok";
-        } else if(username=="admin" && dbPass.equals(passHash)){
-            return "okadmin";
-        }else {
+        if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
+            log.setUsuario_id(db.selectIDUsuario(username));
+            log.setPass("okadmin");
+            return log;
+        } else if (dbPass.equalsIgnoreCase(passHash)) {
+            log.setUsuario_id(db.selectIDUsuario(username));
+            log.setPass("ok");
+            return log;
+        } else {
             System.out.println("ACCESSS DENIED BITCH*S");
             comprobacion();
-            return "nook";
+            log.setUsuario_id(0);
+            log.setPass("nook");
+            return log;
         }
     }
 

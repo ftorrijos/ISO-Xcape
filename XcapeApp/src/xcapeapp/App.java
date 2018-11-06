@@ -4,6 +4,7 @@ Aplicación
 package xcapeapp;
 
 
+import dBManager.DBManager;
 import implementacion.Login;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -28,6 +29,8 @@ public class App {
 
             System.out.println("Cargando App...\n");
             interfaz.InterfazConsola.run();
+          
+            
             System.out.println("Cerrando App...");
       
 
