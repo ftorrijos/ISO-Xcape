@@ -21,6 +21,13 @@ public class Viaje {
        this.estacion_forfait= estacion_forfait;
        this.duracion=duracion;
     }
+     public Viaje(String hotel, String direccion_hotel, String regimen, String estacion_forfait, int duracion) {
+       this.hotel=hotel;
+       this.direccion_hotel=direccion_hotel;
+       this.regimen=regimen;
+       this.estacion_forfait= estacion_forfait;
+       this.duracion=duracion;
+    }
 
  
     /**

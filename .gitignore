@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /XcapeAppV3/nbproject/private/
 /XcapeAppV3/build/
 /XcapeAppV3/dist/
@@ -5,3 +6,7 @@
 /XcapeApp/dist/
 /XcapeApp/nbproject/private/
 /.metadata/
+=======
+/XcapeApp/build/*
+/XcapeApp/nbproject/private/
+>>>>>>> 2303296af71e7bfddf22c5853f245e8d9bc8639f
