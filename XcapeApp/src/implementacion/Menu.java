@@ -60,17 +60,9 @@ public class Menu {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-<<<<<<< HEAD
-                                    //db.listarResponsables();
-                                    break;
-                                case 3:
-                                    //db.listarGrupos();
+
+                                    db.listarGruposSoloNombre(db.IdGrupoPorIdUsuarios(usuario_id));
                                     System.out.println("\nVolviendo al menu ...");
-                                    break;
-                                case 4:
-                                    //db.listarIncidencias();
-=======
-                                    db.listarPagosPorUserID(usuario_id);
                                     break;
                                 case 3:
                                     System.out.println("Tu grupo es: " + db.listarGruposSoloNombre(db.IdGrupoPorIdUsuarios(usuario_id)));
@@ -79,13 +71,13 @@ public class Menu {
                                 case 4:
                                     int id_grupo = db.IdGrupoPorIdUsuarios(usuario_id);
                                     int responsable_id = db.IdResponsablePorGrupoID(id_grupo);
-                                    Responsable respon =db.listarResponsableYContacto(responsable_id);
-                                    System.out.println("Tu responsable se llama:"+respon.getNombre()+" "+respon.getApellido() + " y su contacto es: "+ respon.getMovil());
+                                    Responsable respon = db.listarResponsableYContacto(responsable_id);
+                                    System.out.println("Tu responsable se llama:" + respon.getNombre() + " " + respon.getApellido() + " y su contacto es: " + respon.getMovil());
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 5:
                                     db.listarIncidenciasUserID(usuario_id);
->>>>>>> ef9c922cc2a39f6b068dc0289b324263dd9049d2
+
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 default:
