@@ -127,7 +127,7 @@ public class Pagos {
     public String toString() {
         try {
             return "Pago{" + "pago_id=" + getPago_id() + ", metodo de pago =" + getMetodo_pago()+ ", primer pago ="+ getPrimer_pago()
-                    + " ,segundo pago="+getSegundo_pago()+ " ,DNI="+getDni()+ " , usuario="+ db.selectNombreUsuario(getUsuario_id())+'}';
+                    + " ,segundo pago="+getSegundo_pago()+ " ,DNI="+getDni()+ " , usuario="+ db.selectUserNameUsuario(getUsuario_id())+'}';
         } catch (SQLException ex) {
             Logger.getLogger(Pagos.class.getName()).log(Level.SEVERE, null, ex);
         }

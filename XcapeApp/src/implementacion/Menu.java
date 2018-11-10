@@ -27,7 +27,7 @@ public class Menu {
         int opcion = 0;
         int opcionC = 0;
         do {
-            System.out.println("Hola: " + db.selectNombreUsuario(usuario_id) + " bienvenido.");
+            System.out.println("Hola: " + db.selectUserNameUsuario(usuario_id) + " bienvenido.");
             mostrarMenu();
             try {
                 BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -60,12 +60,14 @@ public class Menu {
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 2:
-
                                     db.listarGruposSoloNombre(db.IdGrupoPorIdUsuarios(usuario_id));
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 3:
-                                    System.out.println("Tu grupo es: " + db.listarGruposSoloNombre(db.IdGrupoPorIdUsuarios(usuario_id)));
+                                    int id_group = db.IdGrupoPorIdUsuarios(usuario_id);
+                                    System.out.println("Tu grupo es: " + db.listarGruposSoloNombre(id_group));
+                                    System.out.println("El grupo lo componen:");
+                                    db.listarComponentesGrupoPorID(id_group);
                                     System.out.println("\nVolviendo al menu ...");
                                     break;
                                 case 4:

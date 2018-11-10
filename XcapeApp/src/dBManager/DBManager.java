@@ -164,6 +164,24 @@ public class DBManager {
         return null;
     }
 
+    public Usuario selectNombreApellidoUsuarioPorUserID(int user_id) throws SQLException {
+
+        String selectSql = "SELECT nombre,apellido FROM usuarios WHERE usuario_id=?;";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
+        ps.setInt(1, user_id);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString("nombre");
+            String apellido = rs.getString("apellido");
+            Usuario user = new Usuario(0, nombre, apellido, null, null, null);
+            return user;
+        }
+        rs.close();
+        ps.close();
+        return null;
+    }
+
     public void insertarUsuarios(Usuario usuario) {
 
         try {
@@ -234,7 +252,7 @@ public class DBManager {
         return null;
     }
 
-    public String selectNombreUsuario(int user_id) throws SQLException {
+    public String selectUserNameUsuario(int user_id) throws SQLException {
 
         String sql = "SELECT username FROM user_login WHERE user_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
@@ -387,8 +405,25 @@ public class DBManager {
         return null;
 
     }
-//-------------------------------------------RESPONSABLES-----------------------------------------------
 
+    public void listarComponentesGrupoPorID(int id_grupo) throws SQLException {
+
+        String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, id_grupo);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int user_id = rs.getInt("user_id");
+            Usuario user = selectNombreApellidoUsuarioPorUserID(user_id);
+            System.out.println("Nombre= " + user.getNombre() + " , Apellido=" + user.getApellido());
+        }
+
+        rs.close();
+        prep.close();
+
+    }
+
+//-------------------------------------------RESPONSABLES-----------------------------------------------
     public void listarResponsables() throws SQLException {
 
         try {

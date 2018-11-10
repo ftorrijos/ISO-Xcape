@@ -25,7 +25,7 @@ public class MenuAdmin {
         System.out.println("\b");
         System.out.println("\b");
         //dejar un espacio
-        System.out.println("Hola: " + db.selectNombreUsuario(usuario_id) + ", bienvenido al menu administración:");
+        System.out.println("Hola: " + db.selectUserNameUsuario(usuario_id) + ", bienvenido al menu administración:");
         int opcion = 0;
         MenuAdmin.mostrartMenuAdmin();
         BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
