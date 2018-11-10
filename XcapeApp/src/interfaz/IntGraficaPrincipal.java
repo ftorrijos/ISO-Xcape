@@ -95,6 +95,11 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
         jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 373, -1, -1));
 
         jButtonRegister.setText("REGISTER");
+        jButtonRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRegisterMouseClicked(evt);
+            }
+        });
         jPanel1.add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 373, -1, -1));
 
         BotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar.png"))); // NOI18N
@@ -139,6 +144,11 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_BotonCerrarMouseClicked
+
+    private void jButtonRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRegisterMouseClicked
+        IntGraficaRegister.main();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRegisterMouseClicked
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import java.util.Date;
+import modelo.Usuario;
+
+
 /**
  *
  * @author javiersancerninozaleda
@@ -71,6 +75,11 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         jLabel1.setText("Actualiza tus datos");
 
         jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonActualizarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,6 +175,15 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseClicked
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButtonActualizarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -197,8 +215,32 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IntGraficaGestionPerfil().setVisible(true);
+
+                cargarDatos();
+                
             }
         });
+        
+    }
+    
+    private static void cargarDatos(){
+        /*
+        String nombre = Usuario.getNombre();
+        String apellidos = Usuario.getApellido();
+        int movil = Usuario.getTelefono();
+        String DNI = Usuario.getDNI();
+        String mail = Usuario.getMail();
+        Date fnacimiento = Usuario.getFecha_nacimiento();
+        jTextFieldNombre.setText(nombre);
+        jTextFieldApellidos.setText(apellidos);
+        jTextFieldMovil.setText(Integer.toString(movil));
+        jTextFieldDNI.setText(DNI);
+        jTextFieldMail.setText(mail);
+        jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
+        jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
+        jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
+
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
