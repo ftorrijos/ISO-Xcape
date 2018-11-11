@@ -106,6 +106,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -142,7 +143,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
 
         jLabelFont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape.jpg"))); // NOI18N
 
-        ImagenCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/X.png"))); // NOI18N
+        ImagenCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar.png"))); // NOI18N
         ImagenCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ImagenCerrarMouseClicked(evt);
@@ -167,7 +168,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
                 .addComponent(ImagenCerrar)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelFont, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 520, 590));
