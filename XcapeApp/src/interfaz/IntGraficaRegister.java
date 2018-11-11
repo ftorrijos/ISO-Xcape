@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import java.util.Date;
+import modelo.Usuario;
+import dBManager.DBManager;
+
 /**
  *
  * @author javiersancerninozaleda
@@ -91,6 +95,11 @@ public class IntGraficaRegister extends javax.swing.JFrame {
         jBotonRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBotonRegistroMouseClicked(evt);
+            }
+        });
+        jBotonRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonRegistroActionPerformed(evt);
             }
         });
 
@@ -201,10 +210,7 @@ public class IntGraficaRegister extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +240,22 @@ public class IntGraficaRegister extends javax.swing.JFrame {
                        }
        
     }//GEN-LAST:event_jBotonRegistroMouseClicked
+
+    private void jBotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonRegistroActionPerformed
+        // TODO add your handling code here:
+        
+        String nombre = jTextFieldNombre.getText();
+        String apellido = jTextFieldApellidos.getText();
+        String dni = jTextFieldDNI.getText();
+        int movil = Integer.parseInt(jTextFieldMovil.getText());
+        String correo = jTextFieldMail.getText();
+        Date fecha = new Date (Integer.parseInt(jTextFieldFNacimientoAno.getText()), Integer.parseInt(jTextFieldFNacimientoMes.getText()), Integer.parseInt(jTextFieldFNacimientoDia.getText()));
+        
+        Usuario user = new Usuario(movil, nombre, apellido, dni, correo, fecha);
+        
+        DBManager.insertarUsuarios(user);
+        
+    }//GEN-LAST:event_jBotonRegistroActionPerformed
 
     /**
      * @param args the command line arguments
