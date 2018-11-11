@@ -190,6 +190,9 @@ public class IntGraficaLogin extends javax.swing.JFrame {
       
        } 
        else{
+           
+           
+           
            interfaz.IntGraficaMenu.main();
        }
            

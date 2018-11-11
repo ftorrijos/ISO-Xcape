@@ -13,7 +13,6 @@ import java.sql.SQLException;
  * @author Alejandro Gutiérrez <agutierrezvivancos@gmail.com>
  */
  public class InterfazGrafica  extends Frame{
-     private Button b1, b2, b3;
      
 
         public static void run() throws SQLException {

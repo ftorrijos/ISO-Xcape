@@ -42,6 +42,7 @@ public class LoginObjeto {
     /**
      * @param pass the pass to set
      */
+    
     public void setPass(String pass) {
         this.pass = pass;
     }
