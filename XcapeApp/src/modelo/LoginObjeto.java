@@ -9,6 +9,7 @@ package modelo;
  *
  * @author usuario
  */
+
 public class LoginObjeto {
       private int usuario_id;
     private String pass;
@@ -42,6 +43,7 @@ public class LoginObjeto {
     /**
      * @param pass the pass to set
      */
+    
     public void setPass(String pass) {
         this.pass = pass;
     }

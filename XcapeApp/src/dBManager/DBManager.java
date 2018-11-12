@@ -182,7 +182,7 @@ public class DBManager {
         return null;
     }
 
-    public void insertarUsuarios(Usuario usuario) {
+    public static void insertarUsuarios(Usuario usuario) {
 
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";

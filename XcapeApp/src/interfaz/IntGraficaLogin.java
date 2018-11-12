@@ -11,6 +11,16 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import dBManager.*;
+import java.sql.SQLException;
+import static java.util.Objects.hash;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.LoginObjeto;
+import implementacion.Login;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author javiersancerninozaleda
@@ -42,12 +52,13 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         BotonAcceder = new javax.swing.JButton();
         jLabelPassword = new javax.swing.JLabel();
-        jUsuario = new javax.swing.JTextField();
         jLabelUser1 = new javax.swing.JLabel();
-        jContrasena = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabelFont = new javax.swing.JLabel();
         ImagenCerrar = new javax.swing.JLabel();
+        jUsuario = new javax.swing.JTextField();
+        jContrasena = new javax.swing.JTextField();
+        jUsuario1 = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -121,22 +132,8 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         jLabelPassword.setText("Contraseñ");
         getContentPane().add(jLabelPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 360, 90, -1));
 
-        jUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jUsuarioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 150, 40));
-
         jLabelUser1.setText("Usuario:");
         getContentPane().add(jLabelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, -1, -1));
-
-        jContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jContrasenaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 150, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
         jPanel1.setForeground(new java.awt.Color(255, 153, 0));
@@ -150,6 +147,18 @@ public class IntGraficaLogin extends javax.swing.JFrame {
             }
         });
 
+        jUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUsuarioActionPerformed(evt);
+            }
+        });
+
+        jContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jContrasenaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,9 +166,16 @@ public class IntGraficaLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelFont, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImagenCerrar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFont, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ImagenCerrar, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(107, 107, 107))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,10 +184,21 @@ public class IntGraficaLogin extends javax.swing.JFrame {
                 .addComponent(ImagenCerrar)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelFont, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 520, 590));
+
+        jUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUsuario1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,27 +206,34 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     private void BotonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAccederActionPerformed
         // TODO add your handling code here:
        //ESTO ES UNA PRUEBA DE QUE FUNCIONA
+       
        String TextoVacio = "";
-       
-       
-       if(this.jUsuario.getText().equals(TextoVacio) || this.jContrasena.getPassword().equals(TextoVacio)){
-           
+       LoginObjeto log = new LoginObjeto();
+
+      
+      if(jUsuario.getText().equals(TextoVacio) || jContrasena.getText().equals(TextoVacio)){
            
       JOptionPane.showMessageDialog(null, "Introduzca usuario y contrasena");
-    
       
+    
        } 
-       else{
-           interfaz.IntGraficaMenu.main();
-       }
+      else{
+           try {
+               log = haceLogin();
+           } catch (SQLException ex) {
+               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (NoSuchAlgorithmException ex) {
+               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (UnsupportedEncodingException ex) {
+               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+           }
            
-        
+       //  IntGraficaMenu (log);
+           
+      } 
+         
        
     }//GEN-LAST:event_BotonAccederActionPerformed
-
-    private void jContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jContrasenaActionPerformed
 
     private void jUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUsuarioActionPerformed
         // TODO add your handling code here:
@@ -212,6 +246,14 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     private void ImagenCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ImagenCerrarMouseClicked
+
+    private void jUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUsuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jUsuario1ActionPerformed
+
+    private void jContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,13 +297,54 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     }
     
    
+    
+    public LoginObjeto haceLogin() throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
+        
+        DBManager db = new DBManager();
+        LoginObjeto log = new LoginObjeto();
+
+     
+           
+          String username = jUsuario.getText();
+          String password = jContrasena.getText();
+          String passHash = "h";
+                  //passHash= Login.hash(password);
+         
+
+          String dbPass = db.selectPasswordUsuario(username);
+
+         
+          if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
+            log.setUsuario_id(db.selectIDUsuario(username));
+            log.setPass("okadmin");
+            return log;
+        } else if (dbPass.equalsIgnoreCase(passHash)) {
+            log.setUsuario_id(db.selectIDUsuario(username));
+            log.setPass("ok");
+            return log;
+        } else {
+            JOptionPane.showMessageDialog(null, "Introduzca usuario y contrasena validos");
+
+            log.setUsuario_id(0);
+            log.setPass("nook");
+            return log;
+        }
+          
+          
+          
+          
+       
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;
     private javax.swing.JButton BotonAcceder;
     private javax.swing.JLabel ImagenCerrar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPasswordField jContrasena;
+    private javax.swing.JTextField jContrasena;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFont;
@@ -270,5 +353,6 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jUsuario;
+    private javax.swing.JTextField jUsuario1;
     // End of variables declaration//GEN-END:variables
 }
