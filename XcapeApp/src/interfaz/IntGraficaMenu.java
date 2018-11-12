@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import modelo.LoginObjeto;
+
 /**
  *
  * @author javiersancerninozaleda
