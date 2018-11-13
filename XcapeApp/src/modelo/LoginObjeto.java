@@ -9,6 +9,7 @@ package modelo;
  *
  * @author usuario
  */
+
 public class LoginObjeto {
       private int usuario_id;
     private String pass;

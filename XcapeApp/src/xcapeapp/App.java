@@ -28,8 +28,13 @@ public class App {
     public static void main(String[] args) throws SQLException {
 
             System.out.println("Cargando App...\n");
+<<<<<<< HEAD
            interfaz.InterfazGrafica.run();
            //interfaz.InterfazConsola.run();
+=======
+         //    interfaz.InterfazGrafica.run();
+           interfaz.InterfazConsola.run();
+>>>>>>> 79139bc59e2b4934082371b215144d90877924ea
            
            System.out.println("Cerrando App...");
       
