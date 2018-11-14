@@ -52,7 +52,7 @@ public class Login {
         }
     }
 
-    private String hash(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public static String hash(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
         msdDigest.update(pass.getBytes("UTF-8"), 0, pass.length());
         pass = DatatypeConverter.printHexBinary(msdDigest.digest());

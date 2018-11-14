@@ -7,6 +7,7 @@ package interfaz;
 
 import java.util.Date;
 import modelo.Usuario;
+import java.awt.*;
 
 
 /**
@@ -15,12 +16,19 @@ import modelo.Usuario;
  */
 public class IntGraficaGestionPerfil extends javax.swing.JFrame {
 
+  /*  static void main(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
+
     /**
      * Creates new form IntGraficaGestionPerfil
      */
     public IntGraficaGestionPerfil() {
         initComponents();
                 this.setLocationRelativeTo(null);
+         
+        
 
     }
 
@@ -78,6 +86,11 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         jButtonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonActualizarMouseClicked(evt);
+            }
+        });
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
             }
         });
 
@@ -184,10 +197,15 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonActualizarMouseClicked
 
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
     /**
+     * @param user
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(Usuario user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

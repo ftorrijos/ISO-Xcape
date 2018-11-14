@@ -5,7 +5,9 @@
  */
 package interfaz;
 
-import modelo.LoginObjeto;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
@@ -13,10 +15,12 @@ import modelo.LoginObjeto;
  */
 public class IntGraficaMenu extends javax.swing.JFrame {
 
+ 
     /**
      * Creates new form IntGraficaMenu
      */
-    public IntGraficaMenu() {
+    public IntGraficaMenu(Usuario user) {
+        
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -187,15 +191,15 @@ public class IntGraficaMenu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(214, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelMapa1)
-                                    .addComponent(jLabelEventos2)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabelLogo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelMiViaje)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                                .addComponent(jLabelMiViaje))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelMapa1)
+                                    .addComponent(jLabelEventos2))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,15 +213,14 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(ImagenCerrar)
-                            .addGap(28, 28, 28)
-                            .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabelMiViaje)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ImagenCerrar)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelMiViaje, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabelLogo)))
@@ -259,13 +262,13 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private void ImagenCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ImagenCerrarMouseClicked
-
+/*
     private void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGestionPerfilMouseClicked
         
-        interfaz.IntGraficaGestionPerfil.main();
+        interfaz.IntGraficaGestionPerfil.main(user);
         
     }//GEN-LAST:event_jLabelGestionPerfilMouseClicked
-
+*/
     private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
         
         interfaz.IntGraficaPrincipal.main();
@@ -273,10 +276,19 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSalirMouseClicked
 
+    public void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+        
+     
+        
+    }
+    
+   
+    
+    
     /**
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(Usuario user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -301,12 +313,18 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IntGraficaMenu().setVisible(true);
+                new IntGraficaMenu(user).setVisible(true);
+
             }
         });
+        
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImagenCerrar;
@@ -323,4 +341,5 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelValora1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }
