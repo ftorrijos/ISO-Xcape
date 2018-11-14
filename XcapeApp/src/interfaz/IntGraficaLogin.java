@@ -239,7 +239,8 @@ public class IntGraficaLogin extends javax.swing.JFrame {
                Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
            }
            
-            new IntGraficaMenu(user).setVisible(true);
+            IntGraficaMenu.main(user);
+            new IntGraficaGestionPerfil().setVisible(false);
            
       } 
          

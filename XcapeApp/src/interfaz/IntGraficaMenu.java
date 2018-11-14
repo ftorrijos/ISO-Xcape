@@ -14,12 +14,12 @@ import modelo.Usuario;
  * @author javiersancerninozaleda
  */
 public class IntGraficaMenu extends javax.swing.JFrame {
-
+    public static Usuario user;
  
     /**
      * Creates new form IntGraficaMenu
      */
-    public IntGraficaMenu(Usuario user) {
+    public  IntGraficaMenu() {
         
         initComponents();
         this.setLocationRelativeTo(null);
@@ -278,7 +278,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 
     public void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {                                                 
         
-     
+        interfaz.IntGraficaGestionPerfil.main(user);
         
     }
     
@@ -288,7 +288,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(Usuario user) {
+    public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -313,10 +313,12 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-
+        
+        user=usuario;
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IntGraficaMenu(user).setVisible(true);
+                new IntGraficaMenu().setVisible(true);
 
             }
         });

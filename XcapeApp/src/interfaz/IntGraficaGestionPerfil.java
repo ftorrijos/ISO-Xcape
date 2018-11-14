@@ -143,14 +143,14 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel1)))
-                .addGap(77, 77, 77)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelApellidos)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelMovil)
@@ -205,7 +205,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
      * @param user
      * @param args the command line arguments
      */
-    public static void main(Usuario user) {
+    public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -234,21 +234,21 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
             public void run() {
                 new IntGraficaGestionPerfil().setVisible(true);
 
-                cargarDatos();
+                cargarDatos(usuario);
                 
             }
         });
         
     }
     
-    private static void cargarDatos(){
-        /*
-        String nombre = Usuario.getNombre();
-        String apellidos = Usuario.getApellido();
-        int movil = Usuario.getTelefono();
-        String DNI = Usuario.getDNI();
-        String mail = Usuario.getMail();
-        Date fnacimiento = Usuario.getFecha_nacimiento();
+    public static void cargarDatos(Usuario usuario){
+        
+        String nombre = usuario.getNombre();
+        String apellidos = usuario.getApellido();
+        int movil = usuario.getMovil();
+        String DNI = usuario.getDni();
+        String mail = usuario.getCorreo();
+        Date fnacimiento = usuario.getFecha_nacimiento();
         jTextFieldNombre.setText(nombre);
         jTextFieldApellidos.setText(apellidos);
         jTextFieldMovil.setText(Integer.toString(movil));
@@ -258,7 +258,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
         jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
 
-        */
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,20 +266,20 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelDNI;
-    private javax.swing.JLabel jLabelFNacimiento;
+    private static javax.swing.JLabel jLabelFNacimiento;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelMail;
     private javax.swing.JLabel jLabelMovil;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldApellidos;
-    private javax.swing.JTextField jTextFieldDNI;
-    private javax.swing.JTextField jTextFieldFNacimientoAno;
-    private javax.swing.JTextField jTextFieldFNacimientoDia;
-    private javax.swing.JTextField jTextFieldFNacimientoMes;
-    private javax.swing.JTextField jTextFieldMail;
-    private javax.swing.JTextField jTextFieldMovil;
-    private javax.swing.JTextField jTextFieldNombre;
+    private static javax.swing.JTextField jTextFieldApellidos;
+    private static javax.swing.JTextField jTextFieldDNI;
+    private static javax.swing.JTextField jTextFieldFNacimientoAno;
+    private static javax.swing.JTextField jTextFieldFNacimientoDia;
+    private static javax.swing.JTextField jTextFieldFNacimientoMes;
+    private static javax.swing.JTextField jTextFieldMail;
+    private static javax.swing.JTextField jTextFieldMovil;
+    private static javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNombre3;
     // End of variables declaration//GEN-END:variables
 }
