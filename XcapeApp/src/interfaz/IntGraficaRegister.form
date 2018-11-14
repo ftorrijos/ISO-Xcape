@@ -161,11 +161,11 @@
                       <Component id="jTextFieldMail" pref="24" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelFNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jTextFieldFNacimientoDia" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextFieldFNacimientoMes" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextFieldFNacimientoAno" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="jLabelFNacimiento" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

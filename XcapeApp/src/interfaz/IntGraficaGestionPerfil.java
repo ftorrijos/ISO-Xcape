@@ -8,6 +8,7 @@ package interfaz;
 import java.util.Date;
 import modelo.Usuario;
 import java.awt.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -15,6 +16,7 @@ import java.awt.*;
  * @author javiersancerninozaleda
  */
 public class IntGraficaGestionPerfil extends javax.swing.JFrame {
+    public static Usuario user;
 
   /*  static void main(Usuario user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -189,8 +191,12 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseClicked
-        // TODO add your handling code here:
+        Usuario fake = user;
         
+        fake = actualizarDatos(fake);
+        
+        JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n"+fake);
+
         
         
         
@@ -230,35 +236,55 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        user=usuario;
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IntGraficaGestionPerfil().setVisible(true);
 
-                cargarDatos(usuario);
+             //   cargarDatos();
                 
             }
         });
         
     }
     
-    public static void cargarDatos(Usuario usuario){
+    public static void cargarDatos(){
         
-        String nombre = usuario.getNombre();
-        String apellidos = usuario.getApellido();
-        int movil = usuario.getMovil();
-        String DNI = usuario.getDni();
-        String mail = usuario.getCorreo();
-        Date fnacimiento = usuario.getFecha_nacimiento();
+        String nombre = user.getNombre();
+        String apellidos = user.getApellido();
+        int movil = user.getMovil();
+        String DNI = user.getDni();
+        String mail = user.getCorreo();
+        Date fnacimiento = user.getFecha_nacimiento();
         jTextFieldNombre.setText(nombre);
         jTextFieldApellidos.setText(apellidos);
-        jTextFieldMovil.setText(Integer.toString(movil));
+        jTextFieldMovil.setText("" + movil);
         jTextFieldDNI.setText(DNI);
         jTextFieldMail.setText(mail);
         jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
         jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
         jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
 
+  
+
+    }
+    
+    public static Usuario actualizarDatos(Usuario fake){
         
+        fake.setNombre(jTextFieldNombre.getText());
+        fake.setApellido(jTextFieldApellidos.getText());
+        fake.setMovil(Integer.parseInt(jTextFieldMovil.getText()));
+        fake.setDni(jTextFieldDNI.getText());
+        fake.setCorreo(jTextFieldMail.getText());
+       // int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
+       // int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
+      //  int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
+      //  Date fecha = new Date (ano, mes, dia);
+      //  fake.setFecha_nacimiento(fecha);
+        return fake;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
