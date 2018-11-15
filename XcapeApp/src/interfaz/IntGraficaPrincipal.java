@@ -48,10 +48,8 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IntGraficaPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IntGraficaPrincipal().setVisible(true);
         });
         
         
