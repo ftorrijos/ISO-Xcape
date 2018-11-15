@@ -281,6 +281,24 @@ public class DBManager {
 
         return null;
     }
+    
+     public void insertarTablaUserPassword(int usuario_id,String username, String password){
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "INSERT INTO user_login(user_id,username,password) VALUES(?,?,sha1(?))";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setInt(1, usuario_id);
+            ps.setString(2, username);
+            ps.setString(3,password);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public String selectUserNameUsuario(int user_id) throws SQLException {
 
