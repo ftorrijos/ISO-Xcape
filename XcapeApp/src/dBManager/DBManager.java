@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -139,6 +139,36 @@ public class DBManager {
         }
 
     }
+    
+      public void UpdateUsuario(Usuario user)
+	{
+	 try {
+            String sql = "UPDATE usuarios SET nombre=?, apellido=?, fecha_nacimiento=?,dni=?,correo=?,movil=? WHERE usuario_id=? ";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setString(1, user.getNombre());
+            prep.setString(2, user.getApellido());
+            
+            
+            Instant instant = (user.getFecha_nacimiento()).toInstant();
+            ZoneId zoneId = ZoneId.of("Europe/Paris");
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+            LocalDate localDate = zdt.toLocalDate();
+            java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate);
+
+            prep.setDate(3,fecha_nacimiento);
+            prep.setString(4,user.getDni());
+            prep.setString(5,user.getCorreo());
+            prep.setInt(6,user.getMovil());
+            prep.setInt(7, user.getUsuario_id());
+            prep.executeUpdate();
+            prep.close();
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+			
+		}	
+          
 
     public Usuario seleccionar_usuario(String dni) throws SQLException {
 
