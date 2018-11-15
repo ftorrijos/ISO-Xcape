@@ -7,6 +7,8 @@ package interfaz;
 
 import java.util.Date;
 import modelo.Usuario;
+import java.awt.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -14,6 +16,12 @@ import modelo.Usuario;
  * @author javiersancerninozaleda
  */
 public class IntGraficaGestionPerfil extends javax.swing.JFrame {
+    public static Usuario user;
+
+  /*  static void main(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
 
     /**
      * Creates new form IntGraficaGestionPerfil
@@ -21,6 +29,8 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     public IntGraficaGestionPerfil() {
         initComponents();
                 this.setLocationRelativeTo(null);
+         
+        
 
     }
 
@@ -80,6 +90,11 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
                 jButtonActualizarMouseClicked(evt);
             }
         });
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,14 +145,14 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel1)))
-                .addGap(77, 77, 77)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelApellidos)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelMovil)
@@ -176,18 +191,27 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseClicked
-        // TODO add your handling code here:
+        Usuario fake = user;
         
+        fake = actualizarDatos(fake);
+        
+        JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n"+fake);
+
         
         
         
         
     }//GEN-LAST:event_jButtonActualizarMouseClicked
 
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
     /**
+     * @param user
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -212,35 +236,55 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        user=usuario;
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IntGraficaGestionPerfil().setVisible(true);
 
-                cargarDatos();
+             //   cargarDatos();
                 
             }
         });
         
     }
     
-    private static void cargarDatos(){
-        /*
-        String nombre = Usuario.getNombre();
-        String apellidos = Usuario.getApellido();
-        int movil = Usuario.getTelefono();
-        String DNI = Usuario.getDNI();
-        String mail = Usuario.getMail();
-        Date fnacimiento = Usuario.getFecha_nacimiento();
+    public static void cargarDatos(){
+        
+        String nombre = user.getNombre();
+        String apellidos = user.getApellido();
+        int movil = user.getMovil();
+        String DNI = user.getDni();
+        String mail = user.getCorreo();
+        Date fnacimiento = user.getFecha_nacimiento();
         jTextFieldNombre.setText(nombre);
         jTextFieldApellidos.setText(apellidos);
-        jTextFieldMovil.setText(Integer.toString(movil));
+        jTextFieldMovil.setText("" + movil);
         jTextFieldDNI.setText(DNI);
         jTextFieldMail.setText(mail);
         jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
         jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
         jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
 
-        */
+  
+
+    }
+    
+    public static Usuario actualizarDatos(Usuario fake){
+        
+        fake.setNombre(jTextFieldNombre.getText());
+        fake.setApellido(jTextFieldApellidos.getText());
+        fake.setMovil(Integer.parseInt(jTextFieldMovil.getText()));
+        fake.setDni(jTextFieldDNI.getText());
+        fake.setCorreo(jTextFieldMail.getText());
+       // int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
+       // int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
+      //  int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
+      //  Date fecha = new Date (ano, mes, dia);
+      //  fake.setFecha_nacimiento(fecha);
+        return fake;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -248,20 +292,20 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelDNI;
-    private javax.swing.JLabel jLabelFNacimiento;
+    private static javax.swing.JLabel jLabelFNacimiento;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelMail;
     private javax.swing.JLabel jLabelMovil;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldApellidos;
-    private javax.swing.JTextField jTextFieldDNI;
-    private javax.swing.JTextField jTextFieldFNacimientoAno;
-    private javax.swing.JTextField jTextFieldFNacimientoDia;
-    private javax.swing.JTextField jTextFieldFNacimientoMes;
-    private javax.swing.JTextField jTextFieldMail;
-    private javax.swing.JTextField jTextFieldMovil;
-    private javax.swing.JTextField jTextFieldNombre;
+    private static javax.swing.JTextField jTextFieldApellidos;
+    private static javax.swing.JTextField jTextFieldDNI;
+    private static javax.swing.JTextField jTextFieldFNacimientoAno;
+    private static javax.swing.JTextField jTextFieldFNacimientoDia;
+    private static javax.swing.JTextField jTextFieldFNacimientoMes;
+    private static javax.swing.JTextField jTextFieldMail;
+    private static javax.swing.JTextField jTextFieldMovil;
+    private static javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNombre3;
     // End of variables declaration//GEN-END:variables
 }

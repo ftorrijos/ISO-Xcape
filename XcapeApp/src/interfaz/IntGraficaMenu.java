@@ -5,18 +5,22 @@
  */
 package interfaz;
 
-import modelo.LoginObjeto;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
  * @author javiersancerninozaleda
  */
 public class IntGraficaMenu extends javax.swing.JFrame {
-
+    public static Usuario user;
+ 
     /**
      * Creates new form IntGraficaMenu
      */
-    public IntGraficaMenu() {
+    public  IntGraficaMenu() {
+        
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -43,6 +47,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelValora1 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
         ImagenCerrar = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 0));
@@ -169,6 +174,9 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setText("Bienvenido, " +user.getNombre()+ "!");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -185,17 +193,15 @@ public class IntGraficaMenu extends javax.swing.JFrame {
                             .addComponent(jLabelMedia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelSalir, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(214, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelMapa1)
-                                    .addComponent(jLabelEventos2)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabelLogo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelMiViaje)))
+                            .addComponent(jLabelLogo)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMiViaje, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelMapa1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelEventos2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,22 +215,23 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(ImagenCerrar)
-                            .addGap(28, 28, 28)
-                            .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabelMiViaje)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ImagenCerrar)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabelGestionPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelMiViaje, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabelLogo)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEventos2)
-                    .addComponent(jLabelChat1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelEventos2)
+                        .addComponent(jLabelChat1))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelTiempo1)
@@ -259,13 +266,13 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private void ImagenCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ImagenCerrarMouseClicked
-
+/*
     private void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGestionPerfilMouseClicked
         
-        interfaz.IntGraficaGestionPerfil.main();
+        interfaz.IntGraficaGestionPerfil.main(user);
         
     }//GEN-LAST:event_jLabelGestionPerfilMouseClicked
-
+*/
     private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
         
         interfaz.IntGraficaPrincipal.main();
@@ -273,10 +280,19 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSalirMouseClicked
 
+    public void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+        
+        interfaz.IntGraficaGestionPerfil.main(user);
+        
+    }
+    
+   
+    
+    
     /**
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -301,15 +317,24 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        user=usuario;
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IntGraficaMenu().setVisible(true);
+
             }
         });
+        
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImagenCerrar;
+    private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelChat1;
     private javax.swing.JLabel jLabelEventos2;
     private javax.swing.JLabel jLabelGestionPerfil;
@@ -323,4 +348,5 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelValora1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }

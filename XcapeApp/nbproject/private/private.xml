@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/modelo/LoginObjeto.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/interfaz/IntGraficaLogin.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/interfaz/IntGraficaRegister.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/xcapeapp/App.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/interfaz/IntGraficaGestionPerfil.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/implementacion/Login.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/interfaz/IntGraficaPrincipal.java</file>
+            <file>file:/Users/javiersancerninozaleda/Desktop/new/iso-xcape/XcapeApp/src/interfaz/IntGraficaMenu.java</file>
+        </group>
+>>>>>>> 57fe2ba2e8e286072c3f73c443b13e40fa3c49af
     </open-files>
 </project-private>

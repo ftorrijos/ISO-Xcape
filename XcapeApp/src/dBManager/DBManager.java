@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "root";
+        String clave = "rootroot";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -164,7 +164,7 @@ public class DBManager {
         return null;
     }
 
-    public Usuario selectNombreApellidoUsuarioPorUserID(int user_id) throws SQLException {
+    public static Usuario selectNombreApellidoUsuarioPorUserID(int user_id) throws SQLException {
 
         String selectSql = "SELECT nombre,apellido FROM usuarios WHERE usuario_id=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
