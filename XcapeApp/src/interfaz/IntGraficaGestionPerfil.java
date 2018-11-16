@@ -29,6 +29,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     public IntGraficaGestionPerfil() {
         initComponents();
                 this.setLocationRelativeTo(null);
+                
          
         
 
@@ -244,7 +245,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
             public void run() {
                 new IntGraficaGestionPerfil().setVisible(true);
 
-             //   cargarDatos();
+                cargarDatos();
                 
             }
         });
