@@ -67,11 +67,10 @@
                           </Group>
                           <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextFieldMail" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="jTextFieldDNI" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="jTextFieldMovil" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="jTextFieldApellidos" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="jTextFieldNombre" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="jTextFieldDNI" pref="167" max="32767" attributes="0"/>
+                              <Component id="jTextFieldMovil" pref="167" max="32767" attributes="0"/>
+                              <Component id="jTextFieldApellidos" pref="167" max="32767" attributes="0"/>
+                              <Component id="jTextFieldNombre" pref="167" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jTextFieldFNacimientoDia" min="-2" pref="39" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -79,6 +78,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jTextFieldFNacimientoAno" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -110,35 +110,50 @@
                       <Component id="jTextFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldApellidos" alignment="3" pref="24" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelMovil" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldMovil" pref="24" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabelApellidos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabelMovil" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jTextFieldApellidos" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jTextFieldMovil" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelDNI" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldDNI" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Component id="jLabelDNI" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jTextFieldDNI" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelMail" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldMail" pref="24" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabelMail" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jTextFieldCorreo" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelFNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFNacimientoDia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFNacimientoMes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFNacimientoAno" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonActualizar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,12 +216,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldDNI">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldMail">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldFNacimientoDia">
@@ -240,6 +250,11 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonActualizarMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActualizarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldCorreo">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

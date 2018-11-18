@@ -7,7 +7,6 @@ package interfaz;
 
 import java.util.Date;
 import modelo.Usuario;
-import java.awt.*;
 import javax.swing.JOptionPane;
 
 
@@ -29,6 +28,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     public IntGraficaGestionPerfil() {
         initComponents();
                 this.setLocationRelativeTo(null);
+
                 
          
         
@@ -57,12 +57,12 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         jTextFieldApellidos = new javax.swing.JTextField();
         jTextFieldMovil = new javax.swing.JTextField();
         jTextFieldDNI = new javax.swing.JTextField();
-        jTextFieldMail = new javax.swing.JTextField();
         jTextFieldFNacimientoDia = new javax.swing.JTextField();
         jTextFieldFNacimientoMes = new javax.swing.JTextField();
         jTextFieldFNacimientoAno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonActualizar = new javax.swing.JButton();
+        jTextFieldCorreo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,17 +119,17 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
                             .addComponent(jLabelFNacimiento))
                         .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jTextFieldMovil, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextFieldFNacimientoDia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextFieldFNacimientoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldFNacimientoAno))))
+                                .addComponent(jTextFieldFNacimientoAno))
+                            .addComponent(jTextFieldCorreo)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonActualizar)
@@ -151,30 +151,40 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelApellidos)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelMovil)
-                    .addComponent(jTextFieldMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelApellidos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelMovil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDNI)
-                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabelDNI)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelMail)
-                    .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelMail)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFNacimiento)
                     .addComponent(jTextFieldFNacimientoDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFNacimientoMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFNacimientoAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(41, 41, 41)
                 .addComponent(jButtonActualizar)
-                .addGap(198, 198, 198))
+                .addGap(201, 201, 201))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -209,8 +219,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     /**
-     * @param user
-     * @param args the command line arguments
+     * @param usuario
      */
     public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
@@ -241,34 +250,33 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         user=usuario;
         
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IntGraficaGestionPerfil().setVisible(true);
+ java.awt.EventQueue.invokeLater(() -> {
+     new IntGraficaGestionPerfil().setVisible(true);
+              cargarDatos();
 
-                cargarDatos();
-                
-            }
         });
-        
+ 
+ 
+
     }
     
     public static void cargarDatos(){
         
-        String nombre = user.getNombre();
+     /*   String nombre = user.getNombre();
         String apellidos = user.getApellido();
-        int movil = user.getMovil();
+     //   int movil = user.getMovil();
         String DNI = user.getDni();
-        String mail = user.getCorreo();
-        Date fnacimiento = user.getFecha_nacimiento();
-        jTextFieldNombre.setText(nombre);
-        jTextFieldApellidos.setText(apellidos);
-        jTextFieldMovil.setText("" + movil);
-        jTextFieldDNI.setText(DNI);
-        jTextFieldMail.setText(mail);
-        jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
+    //    String mail = user.getCorreo();
+        Date fnacimiento = user.getFecha_nacimiento();*/
+        jTextFieldNombre.setText(user.getNombre());
+        jTextFieldApellidos.setText(user.getApellido());
+    //    jTextFieldMovil.setText(" " + movil);
+        jTextFieldDNI.setText(user.getDni());
+        jTextFieldCorreo.setText(user.getCorreo());
+    /*    jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
         jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
         jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
-
+*/
   
 
     }
@@ -279,7 +287,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         fake.setApellido(jTextFieldApellidos.getText());
         fake.setMovil(Integer.parseInt(jTextFieldMovil.getText()));
         fake.setDni(jTextFieldDNI.getText());
-        fake.setCorreo(jTextFieldMail.getText());
+        fake.setCorreo(jTextFieldCorreo.getText());
        // int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
        // int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
       //  int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
@@ -300,11 +308,11 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField jTextFieldApellidos;
-    private static javax.swing.JTextField jTextFieldDNI;
+    private static javax.swing.JTextField jTextFieldCorreo;
+    public static javax.swing.JTextField jTextFieldDNI;
     private static javax.swing.JTextField jTextFieldFNacimientoAno;
     private static javax.swing.JTextField jTextFieldFNacimientoDia;
     private static javax.swing.JTextField jTextFieldFNacimientoMes;
-    private static javax.swing.JTextField jTextFieldMail;
     private static javax.swing.JTextField jTextFieldMovil;
     private static javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNombre3;

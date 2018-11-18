@@ -239,8 +239,8 @@ public class IntGraficaLogin extends javax.swing.JFrame {
                Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
            }
            
+           this.setVisible(false);
             IntGraficaMenu.main(user);
-            new IntGraficaGestionPerfil().setVisible(false);
            
       } 
          
@@ -306,12 +306,9 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         });
         
         
-       
-        
     }
     
    
-    
     public Usuario haceLogin() throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         
         DBManager db = new DBManager();

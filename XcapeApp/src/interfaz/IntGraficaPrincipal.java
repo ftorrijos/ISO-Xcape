@@ -126,16 +126,16 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
         
-        this.setVisible(false);
+    /*    this.setVisible(false);
         interfaz.IntGraficaLogin.main();
-        
+        */
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseClicked
         // TODO add your handling code here:
        
         this.setVisible(false);
-        //interfaz.IntGraficaLogin.
+        interfaz.IntGraficaLogin.main();
         
     }//GEN-LAST:event_jButtonLoginMouseClicked
 

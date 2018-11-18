@@ -5,8 +5,7 @@
  */
 package interfaz;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
+import java.awt.Cursor;
 import modelo.Usuario;
 
 /**
@@ -80,6 +79,9 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelGestionPerfilMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelGestionPerfilMouseEntered(evt);
+            }
         });
 
         jLabelMedia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Media.png"))); // NOI18N
@@ -145,15 +147,20 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelTiempo1.setSize(new java.awt.Dimension(45, 25));
         jLabelTiempo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jLabelSplitwise1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Splitwise.png"))); // NOI18N
+        jLabelSplitwise1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Alert.png"))); // NOI18N
         jLabelSplitwise1.setLabelFor(jLabelSalir);
-        jLabelSplitwise1.setText("Splitwise");
+        jLabelSplitwise1.setText("Incidencias");
         jLabelSplitwise1.setToolTipText("");
         jLabelSplitwise1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelSplitwise1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelSplitwise1.setIconTextGap(5);
         jLabelSplitwise1.setSize(new java.awt.Dimension(45, 25));
         jLabelSplitwise1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelSplitwise1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSplitwise1MouseClicked(evt);
+            }
+        });
 
         jLabelValora1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/experiencia.png"))); // NOI18N
         jLabelValora1.setLabelFor(jLabelSalir);
@@ -164,6 +171,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelValora1.setIconTextGap(5);
         jLabelValora1.setSize(new java.awt.Dimension(45, 25));
         jLabelValora1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelValora1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelValora1MouseClicked(evt);
+            }
+        });
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
@@ -175,7 +187,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Bienvenido, " +user.getNombre()+ "!");
+        jLabel1.setText("Bienvenido, " +user.getCorreo()+ "!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,11 +196,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 13, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelSplitwise1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelValora1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(77, 77, 77)
+                            .addComponent(jLabelSplitwise1)
+                            .addComponent(jLabelValora1))
+                        .addGap(64, 64, 64)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelMedia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelSalir, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -266,31 +278,45 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private void ImagenCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ImagenCerrarMouseClicked
-/*
+
     private void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGestionPerfilMouseClicked
         
-        interfaz.IntGraficaGestionPerfil.main(user);
+        this.setVisible(false);
+         IntGraficaGestionPerfil.main(user);
         
     }//GEN-LAST:event_jLabelGestionPerfilMouseClicked
-*/
+
     private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
         
-        interfaz.IntGraficaPrincipal.main();
+        IntGraficaPrincipal.main();
         
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSalirMouseClicked
 
-    public void jLabelGestionPerfilMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+    private void jLabelGestionPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGestionPerfilMouseEntered
+        // TODO add your handling code here:
+        jLabelGestionPerfil.setCursor(new Cursor(HAND_CURSOR));
+
+        jLabelGestionPerfil.getRootPane().setOpaque(false);
+
+    }//GEN-LAST:event_jLabelGestionPerfilMouseEntered
+
+    private void jLabelSplitwise1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSplitwise1MouseClicked
+        // TODO add your handling code here:
         
-        interfaz.IntGraficaGestionPerfil.main(user);
+        IntGraficaInci.main(user);
         
-    }
-    
-   
-    
+    }//GEN-LAST:event_jLabelSplitwise1MouseClicked
+
+    private void jLabelValora1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValora1MouseClicked
+
+        this.setVisible(false);
+        IntGraficaValora.main(user);
+    }//GEN-LAST:event_jLabelValora1MouseClicked
+
     
     /**
-     * @param args the command line arguments
+     * @param usuario
      */
     public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
