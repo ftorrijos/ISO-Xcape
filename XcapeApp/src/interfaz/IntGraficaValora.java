@@ -12,7 +12,7 @@ import modelo.Usuario;
  * @author javiersancerninozaleda
  */
 public class IntGraficaValora extends javax.swing.JPanel {
-public static Usuario user;
+    public static Usuario user;
     /**
      * Creates new form IntGraficaValora
      */
@@ -152,11 +152,8 @@ public static Usuario user;
         
         user=usuario;
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IntGraficaValora().setVisible(true);
-
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IntGraficaValora().setVisible(true);
         });
         
     }

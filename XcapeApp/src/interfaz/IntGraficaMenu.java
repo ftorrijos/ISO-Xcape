@@ -304,6 +304,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private void jLabelSplitwise1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSplitwise1MouseClicked
         // TODO add your handling code here:
         
+        this.setVisible(false);
         IntGraficaInci.main(user);
         
     }//GEN-LAST:event_jLabelSplitwise1MouseClicked

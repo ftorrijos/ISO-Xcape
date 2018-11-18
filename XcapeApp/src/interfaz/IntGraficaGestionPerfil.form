@@ -43,6 +43,9 @@
           <Color blue="0" green="99" red="ff" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="setUndecorated(true);"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -57,37 +60,41 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelMovil" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDNI" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelMail" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelFNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextFieldDNI" pref="167" max="32767" attributes="0"/>
-                              <Component id="jTextFieldMovil" pref="167" max="32767" attributes="0"/>
-                              <Component id="jTextFieldApellidos" pref="167" max="32767" attributes="0"/>
-                              <Component id="jTextFieldNombre" pref="167" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextFieldFNacimientoDia" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldFNacimientoMes" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldFNacimientoAno" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jButtonVolver" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                  <Component id="jButtonActualizar" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMovil" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelFNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jTextFieldDNI" pref="167" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldMovil" pref="167" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldApellidos" pref="167" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldNombre" pref="167" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jTextFieldFNacimientoDia" min="-2" pref="39" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldFNacimientoMes" min="-2" pref="39" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldFNacimientoAno" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonActualizar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
+                  <EmptySpace pref="94" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,9 +158,12 @@
                       <Component id="jTextFieldFNacimientoMes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFNacimientoAno" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jButtonActualizar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonVolver" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,6 +265,15 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonVolver">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Volver sin guardar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonVolverMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVolverActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -5,8 +5,7 @@
  */
 package interfaz;
 
-//import static interfaz.IntGraficaGestionPerfil.cargarDatos;
-//import static interfaz.IntGraficaGestionPerfil.user;
+
 import modelo.Usuario;
 
 /**
