@@ -5,7 +5,7 @@
  */
 package interfaz;
 import java.awt.*;
-
+import modelo.Usuario;
 import java.sql.SQLException;
 
 /**
@@ -16,9 +16,8 @@ import java.sql.SQLException;
      
 
         public static void run() throws SQLException {
-            
-                IntGraficaPrincipal.main();
-                
+       
+            IntGraficaPrincipal.main();
             
         }
     

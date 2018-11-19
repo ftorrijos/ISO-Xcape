@@ -305,7 +305,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.setVisible(false);
-        IntGraficaInci.main(user);
+        IntGraficaInciden.main(user);
         
     }//GEN-LAST:event_jLabelSplitwise1MouseClicked
 
