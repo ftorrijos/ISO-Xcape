@@ -97,7 +97,7 @@ public class DBManager {
 
     }
 
-    public void insertarIncidencia(Incidencia inci) {
+    public static void insertarIncidencia(Incidencia inci) {
 
         try {
             String insertSql = "INSERT INTO incidencias(usuario_id,grupo_id, mensaje) VALUES(?,?,?)";
