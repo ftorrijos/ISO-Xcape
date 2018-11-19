@@ -8,6 +8,8 @@ package interfaz;
 
 import modelo.Usuario;
 
+
+
 /**
  *
  * @author javiersancerninozaleda
@@ -18,8 +20,19 @@ public class IntGraficaInci extends javax.swing.JPanel {
     /**
      * Creates new form inci
      */
+    
+    
+   
+    
+    
+    
+    
+    
     public IntGraficaInci() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
+        
     }
 
     /**
@@ -142,8 +155,7 @@ public class IntGraficaInci extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-
-    public static void main(Usuario usuario) {
+ public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
