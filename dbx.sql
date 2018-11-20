@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `eventos`
+--
+
+DROP TABLE IF EXISTS `eventos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `eventos` (
+  `evento_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) DEFAULT NULL,
+  `direccion` varchar(60) DEFAULT NULL,
+  `ciudad` varchar(50) DEFAULT NULL,
+  `fecha` varchar(20) DEFAULT NULL,
+  `listas` int(11) DEFAULT NULL,
+  PRIMARY KEY (`evento_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eventos`
+--
+
+LOCK TABLES `eventos` WRITE;
+/*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
+INSERT INTO `eventos` VALUES (1,'Ski Welcome Party','La pista nº2','andorra','24/01/2019',51),(2,'Ski Welcome Party Night 2','La pista nº2','andorra','25/01/2019',54);
+/*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `grupo`
 --
 
@@ -62,7 +90,7 @@ CREATE TABLE `incidencias` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `incidencias_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`grupo_id`),
   CONSTRAINT `incidencias_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +99,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
-INSERT INTO `incidencias` VALUES (1,3,2,'El viaje es la ****, este anno repito!'),(2,3,2,'El viaje es la ****, este anno repito!'),(10,3,7,'me faltan las pilas del....');
+INSERT INTO `incidencias` VALUES (1,3,2,'El viaje es la ****, este anno repito!'),(2,3,2,'El viaje es la ****, este anno repito!'),(10,3,7,'me faltan las pilas del....'),(11,10,1,'No me gusta esto');
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +209,7 @@ CREATE TABLE `user_login` (
 
 LOCK TABLES `user_login` WRITE;
 /*!40000 ALTER TABLE `user_login` DISABLE KEYS */;
-INSERT INTO `user_login` VALUES (3,'FernandoTorrijos','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(1,'AlejandroGutierrez','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(10,'admin','d033e22ae348aeb5660fc2140aec35850c4da997');
+INSERT INTO `user_login` VALUES (3,'FernandoTorrijos','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(1,'AlejandroGutierrez','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(10,'admin','d033e22ae348aeb5660fc2140aec35850c4da997'),(8,'JoseManuelGuerrero','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),(4,'EduardoBenzo','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
 /*!40000 ALTER TABLE `user_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +266,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez',NULL,NULL,'05467810C',NULL,NULL),(2,'Javier Sancerni',NULL,NULL,NULL,NULL,NULL),(3,'Fernando Torrijos',NULL,NULL,NULL,NULL,NULL),(4,'Eduardo Benzo',NULL,NULL,NULL,NULL,NULL),(5,'Javier',NULL,NULL,NULL,NULL,NULL),(7,'Carlos',NULL,NULL,NULL,NULL,NULL),(8,'Jose Manuel','Guerrero','1997-03-21','23452104D','guerre@cojo.com',666888999),(9,'Angel','Nu�ez','1994-05-03','11223344v','angelnt@manco.es',669667887),(10,'admin',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `usuarios` VALUES (1,'Alejandro Gutierrez',NULL,NULL,'05467810C',NULL,NULL),(2,'Javier Sancerni',NULL,NULL,NULL,NULL,NULL),(3,'Fernando','Torrijos',NULL,'47228819K','fer@fer.com',18181818),(4,'Eduardo Benzo',NULL,NULL,NULL,NULL,NULL),(5,'Javier',NULL,NULL,NULL,NULL,NULL),(7,'Carlos',NULL,NULL,NULL,NULL,NULL),(8,'Jose Manuel','Guerrero','1997-03-21','23452104D','guerre@cojo.com',666888999),(9,'Angel','Nu�ez','1994-05-03','11223344v','angelnt@manco.es',669667887),(10,'admin',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -251,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-05 23:26:55
+-- Dump completed on 2018-11-20 10:43:05

@@ -139,36 +139,33 @@ public class DBManager {
         }
 
     }
-    
-      public void UpdateUsuario(Usuario user)
-	{
-	 try {
+
+    public void UpdateUsuario(Usuario user) {
+        try {
             String sql = "UPDATE usuarios SET nombre=?, apellido=?, fecha_nacimiento=?,dni=?,correo=?,movil=? WHERE usuario_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
             prep.setString(1, user.getNombre());
             prep.setString(2, user.getApellido());
-            
-            
+
             Instant instant = (user.getFecha_nacimiento()).toInstant();
             ZoneId zoneId = ZoneId.of("Europe/Paris");
             ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
             LocalDate localDate = zdt.toLocalDate();
             java.sql.Date fecha_nacimiento = java.sql.Date.valueOf(localDate);
 
-            prep.setDate(3,fecha_nacimiento);
-            prep.setString(4,user.getDni());
-            prep.setString(5,user.getCorreo());
-            prep.setInt(6,user.getMovil());
+            prep.setDate(3, fecha_nacimiento);
+            prep.setString(4, user.getDni());
+            prep.setString(5, user.getCorreo());
+            prep.setInt(6, user.getMovil());
             prep.setInt(7, user.getUsuario_id());
             prep.executeUpdate();
             prep.close();
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-			
-		}	
-          
+
+    }
 
     public Usuario seleccionar_usuario(String dni) throws SQLException {
 
@@ -281,8 +278,8 @@ public class DBManager {
 
         return null;
     }
-    
-     public void insertarTablaUserPassword(int usuario_id,String username, String password){
+
+    public void insertarTablaUserPassword(int usuario_id, String username, String password) {
         Connection c = DBManager.getConnection();
 
         try {
@@ -291,7 +288,7 @@ public class DBManager {
 
             ps.setInt(1, usuario_id);
             ps.setString(2, username);
-            ps.setString(3,password);
+            ps.setString(3, password);
             ps.executeUpdate();
             ps.close();
 
@@ -669,4 +666,83 @@ public class DBManager {
         }
     }
 
+    //---------------------------------------------- EVENTOS -------------------------------------------------------------
+    public void listarEventos() {
+        try {
+            Statement stmt5 = c.createStatement();
+            String sql5 = "SELECT * FROM eventos;";
+            ResultSet rs = stmt5.executeQuery(sql5);
+            System.out.println("Lista de Eventos: ");
+
+            while (rs.next()) {
+                int evento_id = rs.getInt("evento_id");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                String ciudad = rs.getString("ciudad");
+                String fecha = rs.getString("fecha");
+                int listas = rs.getInt("listas");
+                Evento evento = new Evento(evento_id, nombre, direccion, ciudad, fecha, listas);
+                System.out.println(evento);
+            }
+
+            rs.close();
+            stmt5.close();
+
+        } catch (SQLException e) {
+        }
+    }
+
+
+    public int asistenciaEventos(int evento_id) {
+        try {
+            String insertSql = "SELECT listas from eventos where  evento_id=?";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            ps.setInt(1, evento_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("listas");
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public void insertarEventos(Evento evento) {
+        try {
+            String insertSql = "INSERT INTO eventos(nombre,direccion,ciudad,fecha,listas) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            ps.setString(1, evento.getNombre());
+            ps.setString(2, evento.getDireccion());
+            ps.setString(3, evento.getCiudad());
+            ps.setString(4, evento.getFecha());
+            ps.setInt(5, evento.getListas());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateAsistentesEvento(int evento_id){
+       try {
+            String sql = "UPDATE eventos set listas=? where evento_id=? ";
+            PreparedStatement prep = c.prepareStatement(sql);
+            int newAsistencia = asistenciaEventos(evento_id) +1;
+            prep.setInt(1, newAsistencia);
+            prep.setInt(2, evento_id);
+            prep.executeUpdate();
+            prep.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    
+    }
 }

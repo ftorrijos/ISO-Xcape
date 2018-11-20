@@ -85,6 +85,10 @@ public class MenuAdmin {
                 db.insertarViajes(viaje);
                 Menuadmin(usuario_id);
                 break;
+            case 13:
+                db.updateAsistentesEvento(2);
+                Menuadmin(usuario_id);
+                break;
             default:
                 System.out.println("\nVolviendo al menu principal...");
                 break;
@@ -106,7 +110,8 @@ public class MenuAdmin {
         System.out.println("10.Insertar usuarios(CURRENTLY UNAVAILABLE)");
         System.out.println("11.Mostrar viajes");
         System.out.println("12.Insertar viajes");
-        System.out.println("13.SALIR");
+        System.out.println("13.Listar Eventos");
+        System.out.println("14.SALIR");
 
     }
 
@@ -212,7 +217,7 @@ public class MenuAdmin {
         String estacion_forfait = scViaje.nextLine();
         System.out.println("Por favor introducir la duración:");
         int duracion = scViaje.nextInt();
-        Viaje viaje = new Viaje(hotel,direccion_hotel,regimen,estacion_forfait,duracion);
+        Viaje viaje = new Viaje(hotel, direccion_hotel, regimen, estacion_forfait, duracion);
         return viaje;
     }
 }
