@@ -314,7 +314,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         this.setVisible(false);
         IntGraficaValora.main(user);
     }//GEN-LAST:event_jLabelValora1MouseClicked
-
+    
     
     /**
      * @param usuario

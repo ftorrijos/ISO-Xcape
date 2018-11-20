@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaMenu.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaGestionPerfil.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/modelo/Usuario.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaPrincipal.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/modelo/Viaje.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaLogin.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/dBManager/DBManager.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/InterfazGrafica.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaValora.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaRegister.java</file>
-            <file>file:/Users/javiersancerninozaleda/Desktop/iso-xcape/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaInciden.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/modelo/Incidencia.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/interfaz/IntGraficaInciden.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/xcapeapp/App.java</file>
+            <file>file:/C:/Users/usuario/Documents/GitHub/ISO-Xcape/XcapeApp/src/dBManager/DBManager.java</file>
         </group>
     </open-files>
 </project-private>
