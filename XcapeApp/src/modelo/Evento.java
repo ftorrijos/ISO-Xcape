@@ -14,7 +14,8 @@ import java.util.logging.Logger;
  * @author usuario
  */
 public class Evento {
-
+    
+    
     private int evento_id, listas;
     private String nombre, direccion, ciudad, fecha;
 

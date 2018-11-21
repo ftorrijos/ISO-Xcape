@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 import modelo.Usuario;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -42,17 +44,19 @@ public class IntGraficaValora extends javax.swing.JFrame {
         AlertImage = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanelSlider = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
         BotonAcceder = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jCheckSI = new javax.swing.JCheckBox();
-        jCheckNO = new javax.swing.JCheckBox();
         jSlider1 = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jCheckSI = new javax.swing.JRadioButton();
+        jCheckNO = new javax.swing.JRadioButton();
         jUsuario1 = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
@@ -110,6 +114,9 @@ public class IntGraficaValora extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        buttonGroup1.add(jCheckSI);
+        buttonGroup1.add(jCheckNO);
+
         jSliderTutorial();
 
         javax.swing.GroupLayout jPanelSliderLayout = new javax.swing.GroupLayout(jPanelSlider);
@@ -121,6 +128,17 @@ public class IntGraficaValora extends javax.swing.JFrame {
         jPanelSliderLayout.setVerticalGroup(
             jPanelSliderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,7 +159,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
-        BotonAcceder.setText("ACCEDER");
+        BotonAcceder.setText("ENVIAR");
         BotonAcceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAccederActionPerformed(evt);
@@ -150,27 +168,25 @@ public class IntGraficaValora extends javax.swing.JFrame {
 
         jLabel2.setText("Recomendarias tu experiencia?");
 
-        jCheckSI.setText("Si");
-
-        jCheckNO.setText("No");
-
         jSlider1.setMinorTickSpacing(5);
         jSlider1.setMajorTickSpacing(20);
         jSlider1.setPaintTicks(true);
         jSlider1.setPaintLabels(true);
         jSlider1.addChangeListener(new ChangeListener(){
 
-            @Override
-            public void stateChanged(ChangeEvent e){
-
+            public void stateChanged(ChangeEvent e) {
+                jLabel3.setText("Ahora la nota de tu experiencia es: " + ((JSlider)e.getSource()).getValue());
             }
-
         });
 
         jLabel3.setText("Pon nota a tu experiencia");
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel7.setText("VALORA TU EXPERIENCIA");
+
+        jCheckSI.setText("SI");
+
+        jCheckNO.setText("NO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,63 +197,63 @@ public class IntGraficaValora extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelLogo)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(52, 52, 52)
-                            .addComponent(jLabel7)
-                            .addGap(79, 79, 79))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(57, 57, 57)
-                                    .addComponent(jCheckSI)
-                                    .addGap(45, 45, 45)
-                                    .addComponent(jCheckNO))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(42, 42, 42)
-                                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(42, 42, 42)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(BotonAcceder)
-                        .addGap(193, 193, 193))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(jCheckSI)
+                                .addGap(29, 29, 29)
+                                .addComponent(jCheckNO))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(BotonAcceder)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLogo)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelLogo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCheckSI)
-                        .addComponent(jLabel2))
-                    .addComponent(jCheckNO))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckSI)
+                            .addComponent(jCheckNO))
                         .addGap(18, 18, 18)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel3)
+                        .addGap(43, 43, 43)))
                 .addComponent(BotonAcceder)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 520, 410));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 410));
         JLabel label = new JLabel("  ", SwingConstants.CENTER);
 
         jUsuario1.addActionListener(new java.awt.event.ActionListener() {
@@ -339,9 +355,10 @@ public class IntGraficaValora extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;
     private javax.swing.JButton BotonAcceder;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckNO;
-    private javax.swing.JCheckBox jCheckSI;
+    public static javax.swing.JRadioButton jCheckNO;
+    public static javax.swing.JRadioButton jCheckSI;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -351,6 +368,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     public javax.swing.JPanel jPanelSlider;
     public javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jUsuario1;
