@@ -86,7 +86,12 @@ public class MenuAdmin {
                 Menuadmin(usuario_id);
                 break;
             case 13:
-                db.updateAsistentesEvento(2);
+                db.listarEventos();
+                Menuadmin(usuario_id);
+                break;
+            case 14:
+                Evento evento = insertarEvento();
+                db.insertarEventos(evento);
                 Menuadmin(usuario_id);
                 break;
             default:
@@ -111,7 +116,16 @@ public class MenuAdmin {
         System.out.println("11.Mostrar viajes");
         System.out.println("12.Insertar viajes");
         System.out.println("13.Listar Eventos");
-        System.out.println("14.SALIR");
+        System.out.println("14.Insertar Eventos");
+        System.out.println("15.SALIR");
+
+    }
+     private static void mostrartMenuGrupos() {
+        System.out.println("\t" + "MENU GRUPOS");
+        System.out.println("1.Mostrar");
+        System.out.println("2.Insertar");
+        System.out.println("3.Borrar");
+        System.out.println("15.SALIR");
 
     }
 
@@ -219,5 +233,23 @@ public class MenuAdmin {
         int duracion = scViaje.nextInt();
         Viaje viaje = new Viaje(hotel, direccion_hotel, regimen, estacion_forfait, duracion);
         return viaje;
+    }
+    
+    private Evento insertarEvento() throws SQLException {
+
+        Scanner scViaje = new Scanner(System.in);
+        System.out.println("Por favor introducir el nombre de la fiesta:");
+        String nombre = scViaje.nextLine();
+        System.out.println("Por favor introducir la direccion:");
+        String direccion = scViaje.nextLine();
+        System.out.println("Por favor introducir la ciudad:");
+        String ciudad = scViaje.nextLine();
+        System.out.println("Por favor introducir la fecha(xx/xx/xxxx):");
+        String fecha = scViaje.nextLine().toLowerCase();
+        
+        
+        Evento evento = new Evento(nombre,direccion,ciudad,fecha,0);
+        
+        return evento;
     }
 }

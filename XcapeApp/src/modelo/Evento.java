@@ -14,20 +14,20 @@ import java.util.logging.Logger;
  * @author usuario
  */
 public class Evento {
-    
-    
+
     private int evento_id, listas;
     private String nombre, direccion, ciudad, fecha;
 
-    public Evento(int evento_id, String nombre, String direccion, String ciudad, String fecha, int listas) {
-        this.evento_id = evento_id;
+    public Evento(String nombre, String direccion, String ciudad, String fecha, int listas) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.fecha = fecha;
         this.listas = listas;
     }
-    public Evento( String nombre, String direccion, String ciudad, String fecha, int listas) {
+
+    public Evento(int evento_id, String nombre, String direccion, String ciudad, String fecha, int listas) {
+        this.evento_id = evento_id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;

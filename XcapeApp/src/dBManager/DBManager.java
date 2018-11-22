@@ -736,7 +736,6 @@ public class DBManager {
         }
     }
 
-
     public int asistenciaEventos(int evento_id) {
         try {
             String insertSql = "SELECT listas from eventos where  evento_id=?";
