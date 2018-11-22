@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -185,6 +185,30 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+  public static Usuario seleccionar_usuarioPorID(int id) throws SQLException {
+
+        String selectSql = "SELECT * FROM usuarios WHERE usuario_id=?;";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString(2);
+            String apellido = rs.getString(3);
+            Date fecha_nacimiento = rs.getDate(4);
+            String correo = rs.getString(6);
+            String dni = rs.getString("dni");
+            int movil = rs.getInt(7);
+
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            System.out.println(usuario);
+
+            rs.close();
+            ps.close();
+            return usuario;
+        }
+        return null;
     }
 
     public Usuario seleccionar_usuario(String dni) throws SQLException {

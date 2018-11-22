@@ -343,7 +343,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     //        return log;
         }
           
-       Usuario user  = DBManager.selectNombreApellidoUsuarioPorUserID(log.getUsuario_id());
+       Usuario user  = DBManager.seleccionar_usuarioPorID(log.getUsuario_id());
           
           return user;
        
