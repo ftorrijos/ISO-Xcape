@@ -282,15 +282,10 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     
     public static void cargarDatos(){
         
-     /*   String nombre = user.getNombre();
-        String apellidos = user.getApellido();
-     //   int movil = user.getMovil();
-        String DNI = user.getDni();
-    //    String mail = user.getCorreo();
-        Date fnacimiento = user.getFecha_nacimiento();*/
+    
         jTextFieldNombre.setText(user.getNombre());
         jTextFieldApellidos.setText(user.getApellido());
-    //    jTextFieldMovil.setText(" " + movil);
+        jTextFieldMovil.setText(Integer.toString(user.getMovil()));
         jTextFieldDNI.setText(user.getDni());
         jTextFieldCorreo.setText(user.getCorreo());
     /*    jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));

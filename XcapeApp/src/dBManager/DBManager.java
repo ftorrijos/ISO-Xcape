@@ -139,6 +139,26 @@ public class DBManager {
         }
 
     }
+    
+    
+      public static int selectIDUsuarioTablaUsuarios(String username, String apellido, String dni) throws SQLException {
+
+        String sql = "SELECT usuario_id FROM usuarios WHERE nombre=? AND apellido=? AND dni=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, username);
+        prep.setString(2, apellido);
+        prep.setString(3, dni);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int user_id = rs.getInt("usuario_id");
+            return user_id;
+        }
+
+        rs.close();
+        prep.close();
+
+        return 0;
+    }
 
     public void UpdateUsuario(Usuario user) {
         try {
@@ -279,7 +299,7 @@ public class DBManager {
         return null;
     }
 
-    public void insertarTablaUserPassword(int usuario_id, String username, String password) {
+    public static void insertarTablaUserPassword(int usuario_id, String username, String password) {
         Connection c = DBManager.getConnection();
 
         try {

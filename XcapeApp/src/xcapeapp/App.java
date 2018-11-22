@@ -3,7 +3,6 @@ Aplicación
  */
 package xcapeapp;
 
-
 import dBManager.DBManager;
 import implementacion.Login;
 import java.io.UnsupportedEncodingException;
@@ -27,17 +26,14 @@ public class App {
      */
     public static void main(String[] args) throws SQLException {
 
-            System.out.println("Cargando App...\n");
-            
+        System.out.println("Cargando App...\n");
+
         interfaz.InterfazGrafica.run();
-<<<<<<< HEAD
+
         //interfaz.InterfazConsola.run();
-=======
-     //   interfaz.InterfazConsola.run();
->>>>>>> aafe69a6dbee9222f7906bc6a2930908c12d42ce
-           
-           System.out.println("Cerrando App...");
-      
+        //   interfaz.InterfazConsola.run();
+        System.out.println("Cerrando App...");
+
     }
 
 }

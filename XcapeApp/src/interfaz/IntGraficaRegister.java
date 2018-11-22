@@ -8,6 +8,9 @@ package interfaz;
 import java.util.Date;
 import modelo.Usuario;
 import dBManager.DBManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -272,7 +275,11 @@ public class IntGraficaRegister extends javax.swing.JFrame {
         Usuario user = new Usuario(movil, nombre, apellido, dni, correo, fecha);
         
         DBManager.insertarUsuarios(user);
-        
+        try {
+            DBManager.insertarTablaUserPassword(DBManager.selectIDUsuarioTablaUsuarios(nombre, apellido, dni),jTextFieldUsuario.getText(), jPasswordField.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaRegister.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBotonRegistroActionPerformed
 
     private void ImagenCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenCerrarMouseClicked
