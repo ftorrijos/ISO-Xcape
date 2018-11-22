@@ -347,11 +347,8 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         
         user=usuario;
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IntGraficaMenu().setVisible(true);
-
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IntGraficaMenu().setVisible(true);
         });
         
     }

@@ -30,7 +30,11 @@ public class App {
             System.out.println("Cargando App...\n");
             
         interfaz.InterfazGrafica.run();
+<<<<<<< HEAD
         //interfaz.InterfazConsola.run();
+=======
+     //   interfaz.InterfazConsola.run();
+>>>>>>> aafe69a6dbee9222f7906bc6a2930908c12d42ce
            
            System.out.println("Cerrando App...");
       
