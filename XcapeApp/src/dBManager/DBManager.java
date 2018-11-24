@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "root";
+        String clave = "rootroot";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -160,7 +160,7 @@ public class DBManager {
         return 0;
     }
 
-    public void UpdateUsuario(Usuario user) {
+    public static void UpdateUsuario(Usuario user) {
         try {
             String sql = "UPDATE usuarios SET nombre=?, apellido=?, fecha_nacimiento=?,dni=?,correo=?,movil=? WHERE usuario_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);

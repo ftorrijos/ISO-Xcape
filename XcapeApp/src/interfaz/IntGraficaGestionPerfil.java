@@ -214,12 +214,18 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         Usuario fake = user;
         
         fake = actualizarDatos(fake);
-        
-        JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n"+fake);
 
         
+       int respuesta =  JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n"+fake);
         
+        if (respuesta == JOptionPane.YES_OPTION){
+            dBManager.DBManager.UpdateUsuario(fake);
+                    this.setVisible(false);
         
+            IntGraficaMenu.main(fake);
+        }
+        
+
         
     }//GEN-LAST:event_jButtonActualizarMouseClicked
 
@@ -288,10 +294,10 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         jTextFieldMovil.setText(Integer.toString(user.getMovil()));
         jTextFieldDNI.setText(user.getDni());
         jTextFieldCorreo.setText(user.getCorreo());
-    /*    jTextFieldFNacimientoDia.setText(Integer.toString(fnacimiento.getDay()));
-        jTextFieldFNacimientoMes.setText(Integer.toString(fnacimiento.getMonth()));
-        jTextFieldFNacimientoAno.setText(Integer.toString(fnacimiento.getYear()));
-*/
+       jTextFieldFNacimientoDia.setText(Integer.toString(user.getFecha_nacimiento().getDay()));
+        jTextFieldFNacimientoMes.setText(Integer.toString(user.getFecha_nacimiento().getMonth()));
+        jTextFieldFNacimientoAno.setText(Integer.toString(user.getFecha_nacimiento().getYear()));
+
   
 
     }
@@ -303,11 +309,11 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         fake.setMovil(Integer.parseInt(jTextFieldMovil.getText()));
         fake.setDni(jTextFieldDNI.getText());
         fake.setCorreo(jTextFieldCorreo.getText());
-       // int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
-       // int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
-      //  int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
-      //  Date fecha = new Date (ano, mes, dia);
-      //  fake.setFecha_nacimiento(fecha);
+        int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
+        int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
+        int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
+        Date fecha = new Date (ano, mes, dia);
+        fake.setFecha_nacimiento(fecha);
         return fake;
     }
 

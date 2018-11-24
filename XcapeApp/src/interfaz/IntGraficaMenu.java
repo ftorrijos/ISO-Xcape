@@ -187,7 +187,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Bienvenido, " +user.getCorreo()+ "!");
+        jLabel1.setText("Bienvenido, " +user.getNombre()+ "!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -288,6 +288,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 
     private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
         
+        this.setVisible(false);
         IntGraficaPrincipal.main();
         
 // TODO add your handling code here:
