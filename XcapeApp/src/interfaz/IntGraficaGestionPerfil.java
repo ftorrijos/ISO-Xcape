@@ -287,7 +287,7 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
     }
     
     public static void cargarDatos(){
-        System.out.println(user);
+    //    System.out.println(user);
     
         jTextFieldNombre.setText(user.getNombre());
         jTextFieldApellidos.setText(user.getApellido());
