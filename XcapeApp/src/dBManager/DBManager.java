@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -439,6 +439,26 @@ public class DBManager {
         return 0;
     }
 
+    public int selectIDGrupoPorIDusuario(int usuario_id){
+      try {
+            String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, usuario_id);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                int grupo_id = rs.getInt("grupo_id");
+                return grupo_id;
+            }
+
+            rs.close();
+            prep.close();
+
+        } catch (SQLException e) {
+        }
+        return 0;
+    
+    }
+    
     public int IdResponsablePorGrupoID(int grupo_id) throws SQLException {
 
         try {
@@ -624,6 +644,37 @@ public class DBManager {
         rs.close();
         prep.close();
 
+    }
+    
+    
+    
+    public Viaje selectViajePorUserId(int usuario_id) throws SQLException{
+        
+        int id_grupo = selectIDGrupoPorIDusuario(usuario_id);
+        int id_viaje = IdViajePorIdGrupo(id_grupo);
+        
+       
+        String sql = "SELECT * FROM info_viaje WHERE viaje_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, id_viaje);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            String hotel = rs.getString("hotel");
+            String direccion_hotel = rs.getString("direccion_hotel");
+            String regimen = rs.getString("regimen");
+            String estacion_forfait = rs.getString("estacion_forfait");
+            int duracion = rs.getInt("duracion");
+            Viaje viaje = new Viaje(id_viaje, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
+            return viaje;
+
+        }
+
+            rs.close();
+        prep.close();
+
+        return null;
+
+    
     }
 
     public void insertarViajes(Viaje viaje) {
