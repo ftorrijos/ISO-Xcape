@@ -344,7 +344,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         }
           
        Usuario user  = DBManager.seleccionar_usuarioPorID(log.getUsuario_id());
-          
+         user.setUsuario_id(log.getUsuario_id());
           return user;
        
         
