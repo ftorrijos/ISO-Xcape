@@ -30,11 +30,9 @@ public class App {
 
         interfaz.InterfazGrafica.run();
 
-<<<<<<< HEAD
        // interfaz.InterfazConsola.run();
-=======
-        //interfaz.InterfazConsola.run();
->>>>>>> refs/remotes/origin/master
+
+
         
         System.out.println("Cerrando App...");
 

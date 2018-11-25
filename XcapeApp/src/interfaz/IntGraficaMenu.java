@@ -6,6 +6,9 @@
 package interfaz;
 
 import java.awt.Cursor;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Usuario;
 
 /**
@@ -63,6 +66,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMiViaje.setIconTextGap(5);
         jLabelMiViaje.setSize(new java.awt.Dimension(45, 25));
         jLabelMiViaje.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelMiViaje.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMiViajeMouseClicked(evt);
+            }
+        });
 
         jLabelGestionPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GestionPerfil.png"))); // NOI18N
         jLabelGestionPerfil.setLabelFor(jLabelMiViaje);
@@ -196,7 +204,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelSplitwise1)
                             .addComponent(jLabelValora1))
@@ -263,9 +271,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,6 +321,18 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         this.setVisible(false);
         IntGraficaValora.main(user);
     }//GEN-LAST:event_jLabelValora1MouseClicked
+
+    private void jLabelMiViajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMiViajeMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            IntGraficaMiViaje.main(user);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }//GEN-LAST:event_jLabelMiViajeMouseClicked
     
     
     /**

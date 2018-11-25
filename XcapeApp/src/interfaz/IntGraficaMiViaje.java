@@ -18,6 +18,7 @@ import modelo.Viaje;
  */
 public class IntGraficaMiViaje extends javax.swing.JFrame {
     public static Usuario user;
+    public static Viaje miViaje;
 
     /**
      * Creates new form IntGrafica
@@ -45,7 +46,10 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         jLabelLogo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelHotel = new javax.swing.JLabel();
+        jLabelRegimen = new javax.swing.JLabel();
+        jLabelDuracion = new javax.swing.JLabel();
+        jLabelForfait = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -126,10 +130,19 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hotel.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelHotel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hotel.png"))); // NOI18N
+        jLabelHotel.setText("Su alojamiento es: "+miViaje.getHotel()+". Se encuentra en la direccion: "+miViaje.getDireccion_hotel());
+        jLabelHotel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jLabelRegimen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/comida.png"))); // NOI18N
+        jLabelRegimen.setText("El regimen de su alojamiento es: "+miViaje.getRegimen());
+
+        jLabelDuracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eventos.png"))); // NOI18N
+        jLabelDuracion.setText("La duracion de su viaje es: "+miViaje.getDuracion()+" dias");
+
+        jLabelForfait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/esqui.png"))); // NOI18N
+        jLabelForfait.setText("Tiene contratado el forfait para la estacion: "+miViaje.getEstacion_forfait());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,15 +151,19 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(152, 152, 152)
                 .addComponent(jLabelLogo)
                 .addGap(33, 33, 33))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelForfait)
+                    .addComponent(jLabelDuracion)
+                    .addComponent(jLabelRegimen)
+                    .addComponent(jLabelHotel))
+                .addContainerGap(620, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,11 +179,17 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addComponent(jLabel2)))
                 .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addComponent(jLabelHotel)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelRegimen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelDuracion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelForfait)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 590));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,13 +239,14 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
        user = usuario; 
         
        
-       Viaje miViaje =  DBManager.selectViajePorUserId(user.getUsuario_id());
-       if (miViaje == null){
+       miViaje =  DBManager.selectViajePorUserId(user.getUsuario_id());
+  /*     if (miViaje == null){
            JOptionPane.showMessageDialog(null, "No tienes ningun viaje asignado. Contacta con tu vendedor mas cercano");
            IntGraficaMenu.main(user);
        }
+    */   
        
-       cargarDatosViaje();
+    //   cargarDatosViaje();
        
         java.awt.EventQueue.invokeLater(() -> {
             new IntGraficaMiViaje().setVisible(true);
@@ -232,12 +256,17 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         
     }
     
-   
-  public void cargarDatosViaje(){
+   /*
+  public static void cargarDatosViaje(){
+      
+      jLabelHotel.setText("Su alojamiento es: "+miViaje.getHotel()+". Se encuentra en la direccion: "+miViaje.getDireccion_hotel());
+      jLabelRegimen.setText("El regimen de su alojamiento es: "+miViaje.getRegimen());
+      jLabelDuracion.setText("La duracion de su viaje es: "+miViaje.getDuracion()+" dias");
+      jLabelForfait.setText("Tiene contratado el forfait para la estacion: "+miViaje.getEstacion_forfait());
       
       
       
-  }
+  }*/
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,9 +275,12 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
+    public static javax.swing.JLabel jLabelDuracion;
+    public static javax.swing.JLabel jLabelForfait;
+    public static javax.swing.JLabel jLabelHotel;
     private javax.swing.JLabel jLabelLogo;
+    public static javax.swing.JLabel jLabelRegimen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
