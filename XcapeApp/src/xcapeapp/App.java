@@ -30,7 +30,9 @@ public class App {
 
         interfaz.InterfazGrafica.run();
 
-        //interfaz.InterfazConsola.run();
+       // interfaz.InterfazConsola.run();
+
+
         
         System.out.println("Cerrando App...");
 

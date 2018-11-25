@@ -29,7 +29,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "root";
+        String clave = "rootroot";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -186,6 +186,8 @@ public class DBManager {
         }
 
     }
+    
+    
   public static Usuario seleccionar_usuarioPorID(int id) throws SQLException {
 
         String selectSql = "SELECT * FROM usuarios WHERE usuario_id=?;";
@@ -399,7 +401,7 @@ public class DBManager {
         }
     }
 
-    public int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
+    public static int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
 
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
@@ -419,7 +421,7 @@ public class DBManager {
         return 0;
     }
 
-    public int IdViajePorIdGrupo(int grupo_id) throws SQLException {
+    public static int IdViajePorIdGrupo(int grupo_id) throws SQLException {
 
         try {
             String sql = "SELECT viaje_id FROM grupo WHERE grupo_id=?;";
@@ -439,7 +441,7 @@ public class DBManager {
         return 0;
     }
 
-    public int selectIDGrupoPorIDusuario(int usuario_id){
+    public static int selectIDGrupoPorIDusuario(int usuario_id){
       try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -526,6 +528,7 @@ public class DBManager {
             Usuario user = selectNombreApellidoUsuarioPorUserID(user_id);
             System.out.println("Nombre= " + user.getNombre() + " , Apellido=" + user.getApellido());
         }
+        
 
         rs.close();
         prep.close();
@@ -648,7 +651,7 @@ public class DBManager {
     
     
     
-    public Viaje selectViajePorUserId(int usuario_id) throws SQLException{
+    public static Viaje selectViajePorUserId(int usuario_id) throws SQLException{
         
         int id_grupo = selectIDGrupoPorIDusuario(usuario_id);
         int id_viaje = IdViajePorIdGrupo(id_grupo);
