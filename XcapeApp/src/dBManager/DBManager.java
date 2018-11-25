@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +95,28 @@ public class DBManager {
 
         rs.close();
         prep.close();
+
+    }
+    
+      public static ArrayList<Incidencia> listarIncidenciasUserIDDevuelveArrayList(int user_id) throws SQLException {
+          ArrayList<Incidencia> arr = new ArrayList<Incidencia>();
+          
+        String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int incidencia_id = rs.getInt("incidencia_id");
+            int grupo_id = rs.getInt("grupo_id");
+            String mensaje = rs.getString("mensaje");
+            Incidencia inci = new Incidencia(incidencia_id, user_id, grupo_id, mensaje);
+            arr.add(inci);
+            System.out.println(inci);
+        }
+        
+        rs.close();
+        prep.close();
+        return arr;
 
     }
 

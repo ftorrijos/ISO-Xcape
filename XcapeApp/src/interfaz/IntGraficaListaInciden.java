@@ -7,10 +7,17 @@ package interfaz;
 
 import modelo.Usuario;
 import dBManager.DBManager;
+import java.awt.Component;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.table.TableColumn;
 import modelo.Incidencia;
 
 /**
@@ -19,6 +26,7 @@ import modelo.Incidencia;
  */
 public class IntGraficaListaInciden extends javax.swing.JFrame {
     public static Usuario user;
+  //  public static JList list;
 
     /**
      * Creates new form IntGrafica
@@ -48,6 +56,10 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
         jButtonEnviar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -139,6 +151,20 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
         jLabel7.setText(" ");
         //+DBManager.listarIncidenciasUserID(user.getUsuario_id())
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id incidencia", "Id Usuario", "Id grupo", "mensaje"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,9 +183,19 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
                 .addComponent(jLabelLogo)
                 .addGap(33, 33, 33))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(38, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(27, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +211,18 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel2)))))
-                .addGap(70, 70, 70)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
                 .addComponent(jButtonEnviar)
                 .addGap(61, 61, 61))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(273, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(85, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 590));
@@ -199,12 +242,40 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jButtonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnviarMouseClicked
-        // TODO add your handling code here:
-       // System.out.println(user);
 
+                
+        try {
+            // TODO add your handling code here:
 
+            listarIncidencias();
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaListaInciden.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonEnviarMouseClicked
 
+    public static void listarIncidencias() throws SQLException{
+       ArrayList<Incidencia> arr = DBManager.listarIncidenciasUserIDDevuelveArrayList(user.getUsuario_id());
+     
+
+   /*        for(int i=0; i<arr.size();i++){
+                  Incidencia inci = arr.get(i);
+                 
+          }*/
+   
+            jTextArea1.setText(arr.toString());
+
+           for (int fila=0; fila<arr.size(); fila++){
+               for (int col=0; col<4; col++){
+     //              jTable1.setValueAt(arr[], ERROR, NORMAL);
+
+               }
+           } 
+
+        
+        
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -260,5 +331,9 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JTable jTable1;
+    public static javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

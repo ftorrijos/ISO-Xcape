@@ -28,11 +28,12 @@ public class App {
 
         System.out.println("Cargando App...\n");
 
-        interfaz.InterfazGrafica.run();
+       interfaz.InterfazGrafica.run();
 
        // interfaz.InterfazConsola.run();
 
-
+       
+       //DBManager.listarIncidenciasUserIDDevuelveArrayList(2);
         
         System.out.println("Cerrando App...");
 
