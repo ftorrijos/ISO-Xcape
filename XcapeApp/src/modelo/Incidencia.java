@@ -100,7 +100,7 @@ public class Incidencia {
     @Override
     public String toString() {
         try {
-            return "Incidencia{" + "incidencia_id=" + getIncidencia_id() + ", usuario=" + db.listarUsuariosSoloNombre(usuario_id) + " ,grupo=" + db.listarGruposSoloNombre(grupo_id) + " ,mensaje=" + mensaje + '}';
+            return "Incidencia{" + "incidencia_id=" + getIncidencia_id() + ", usuario=" + db.listarUsuariosSoloNombre(usuario_id) + " ,grupo=" + db.listarGruposSoloNombre(grupo_id) + " ,mensaje=" + mensaje + "}\n";
         } catch (SQLException ex) {
             Logger.getLogger(Incidencia.class.getName()).log(Level.SEVERE, null, ex);
         }

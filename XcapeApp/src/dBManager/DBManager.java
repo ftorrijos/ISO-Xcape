@@ -186,6 +186,8 @@ public class DBManager {
         }
 
     }
+    
+    
   public static Usuario seleccionar_usuarioPorID(int id) throws SQLException {
 
         String selectSql = "SELECT * FROM usuarios WHERE usuario_id=?;";
@@ -399,7 +401,7 @@ public class DBManager {
         }
     }
 
-    public int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
+    public static int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
 
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";

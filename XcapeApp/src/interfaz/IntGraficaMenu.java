@@ -62,6 +62,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMiViaje.setLabelFor(jLabelMiViaje);
         jLabelMiViaje.setText("Mi Viaje");
         jLabelMiViaje.setToolTipText("");
+        jLabelMiViaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMiViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelMiViaje.setIconTextGap(5);
         jLabelMiViaje.setSize(new java.awt.Dimension(45, 25));
@@ -70,12 +71,16 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelMiViajeMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelMiViajeMouseEntered(evt);
+            }
         });
 
         jLabelGestionPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GestionPerfil.png"))); // NOI18N
         jLabelGestionPerfil.setLabelFor(jLabelMiViaje);
         jLabelGestionPerfil.setText("Gestion de Perfil");
         jLabelGestionPerfil.setToolTipText("");
+        jLabelGestionPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGestionPerfil.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelGestionPerfil.setIconTextGap(5);
         jLabelGestionPerfil.setMaximumSize(new java.awt.Dimension(80, 101));
@@ -107,6 +112,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelSalir.setText("LOG OUT");
         jLabelSalir.setToolTipText("");
         jLabelSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelSalir.setIconTextGap(5);
         jLabelSalir.setSize(new java.awt.Dimension(45, 25));
@@ -114,6 +120,9 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelSalirMouseEntered(evt);
             }
         });
 
@@ -160,6 +169,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelSplitwise1.setText("Incidencias");
         jLabelSplitwise1.setToolTipText("");
         jLabelSplitwise1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelSplitwise1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSplitwise1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelSplitwise1.setIconTextGap(5);
         jLabelSplitwise1.setSize(new java.awt.Dimension(45, 25));
@@ -168,6 +178,9 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSplitwise1MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelSplitwise1MouseEntered(evt);
+            }
         });
 
         jLabelValora1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/experiencia.png"))); // NOI18N
@@ -175,6 +188,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelValora1.setText("Valora tu Exp.");
         jLabelValora1.setToolTipText("");
         jLabelValora1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelValora1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelValora1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelValora1.setIconTextGap(5);
         jLabelValora1.setSize(new java.awt.Dimension(45, 25));
@@ -182,6 +196,9 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelValora1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelValora1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelValora1MouseEntered(evt);
             }
         });
 
@@ -333,6 +350,36 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_jLabelMiViajeMouseClicked
+
+    private void jLabelMiViajeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMiViajeMouseEntered
+        // TODO add your handling code here:
+                jLabelGestionPerfil.setCursor(new Cursor(HAND_CURSOR));
+
+        jLabelGestionPerfil.getRootPane().setOpaque(false);
+
+    }//GEN-LAST:event_jLabelMiViajeMouseEntered
+
+    private void jLabelSplitwise1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSplitwise1MouseEntered
+        // TODO add your handling code here:
+                jLabelGestionPerfil.setCursor(new Cursor(HAND_CURSOR));
+
+        jLabelGestionPerfil.getRootPane().setOpaque(false);
+
+    }//GEN-LAST:event_jLabelSplitwise1MouseEntered
+
+    private void jLabelValora1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValora1MouseEntered
+        // TODO add your handling code here:
+        jLabelGestionPerfil.setCursor(new Cursor(HAND_CURSOR));
+
+        jLabelGestionPerfil.getRootPane().setOpaque(false);
+
+    }//GEN-LAST:event_jLabelValora1MouseEntered
+
+    private void jLabelSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseEntered
+        jLabelGestionPerfil.setCursor(new Cursor(HAND_CURSOR));
+
+        jLabelGestionPerfil.getRootPane().setOpaque(false);
+    }//GEN-LAST:event_jLabelSalirMouseEntered
     
     
     /**
