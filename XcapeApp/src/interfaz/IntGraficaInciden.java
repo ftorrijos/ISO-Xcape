@@ -257,7 +257,7 @@ public class IntGraficaInciden extends javax.swing.JFrame {
 
     private void jButtonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnviarMouseClicked
         // TODO add your handling code here:
-        
+       // System.out.println(user);
         Incidencia incidencia = new Incidencia (user.getUsuario_id(), 2, jTextIncidencia.getText());
         
         DBManager.insertarIncidencia(incidencia);
