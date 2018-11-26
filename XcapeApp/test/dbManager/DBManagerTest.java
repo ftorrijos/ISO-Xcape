@@ -22,6 +22,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import org.junit.Ignore;
 
 /**
  *
@@ -30,6 +31,15 @@ import java.util.Date;
 public class DBManagerTest {
 
     DBManager db = new DBManager();
+
+//----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
+    Date date = new Date(1991 / 10 / 10);
+    Usuario mockUser = new Usuario(5000, 0, null, null, null, null, date);
+    Incidencia mockIncidencia = new Incidencia(5000, 5000, 0, "Esto es un test");
+    Evento mockEvento = new Evento("evento mock", "una dirección", "ciudad", "27/08/1960", 14632);
+    Responsable mockResponsable = new Responsable(5000, "responsablenombre", "responsableapellido", 655549786);
+    Grupo mockGrupo = new Grupo(5000, 5000, 5000, "Viaje-01");
+    Viaje mockViaje = new Viaje(5000, "ViajeHotel", "DireccionHotel", "RegimenCompletoTieso", "EstacionTodas", 15000);
 
     //primer test de prueba
     @Test
@@ -65,19 +75,18 @@ public class DBManagerTest {
         }
     }
 
+    @Ignore
     @Test
     public void testLoginUser() throws SQLException {
         Connection c = db.getConnection();
         c.setAutoCommit(false);
         String username = "FernandoTorrijos";
         String password = "password";
-        
-        Date date = new Date(1991/10/10);
-        
-        Usuario user = new Usuario(5000,0,null,null,null,null,date);
-        DBManager.insertarUsuarios(user);
+
+        DBManager.insertarUsuarios(mockUser);
+
         DBManager.insertarTablaUserPassword(5000, username, password);
-        
+
         LoginObjeto logobj = new LoginObjeto(10, "ok");
         try {
             assertEquals(logobj.getPass(), log.comprobarUserPassword(username, password).getPass());
@@ -91,8 +100,33 @@ public class DBManagerTest {
         c.close();
     }
 
-   
-
 //-----------------------------------------TEST CORRESPONDIENTES A DB_Manager------------------------------------------------
+    //-------------------------- comprobación incidencias ----------------------------------------------------------------
+    @Test
+    public void testInsercciónSelecciónTodo() throws SQLException {
+
+        Connection c = db.getConnection();
+        c.setAutoCommit(false);
+
+        db.insertarResponsable(mockResponsable);
+        System.out.println(mockResponsable);
+
+        db.insertarGrupo(mockGrupo);
+        db.insertarIncidencia(mockIncidencia);
+        Incidencia inciAlmacenada = DBManager.listarIncidenciasUserIDDevuelveIncidencia(5000);
+
+        DBManager.insertarUsuarios(mockUser);
+
+        assertEquals(mockIncidencia.getIncidencia_id(), inciAlmacenada.getIncidencia_id());
+        assertEquals(mockIncidencia.getUsuario_id(), inciAlmacenada.getUsuario_id());
+        assertEquals(mockIncidencia.getGrupo_id(), inciAlmacenada.getGrupo_id());
+        assertEquals(mockIncidencia.getMensaje(), inciAlmacenada.getMensaje());
+
+        c.rollback();
+        c.close();
+    }
+
 //http://tutorials.jenkov.com/java-unit-testing/database-testing-crud.html    
+    public DBManagerTest() {
+    }
 }
