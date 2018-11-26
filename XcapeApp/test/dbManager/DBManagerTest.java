@@ -71,7 +71,13 @@ public class DBManagerTest {
         c.setAutoCommit(false);
         String username = "FernandoTorrijos";
         String password = "password";
-
+        
+        Date date = new Date(1991/10/10);
+        
+        Usuario user = new Usuario(5000,0,null,null,null,null,date);
+        DBManager.insertarUsuarios(user);
+        DBManager.insertarTablaUserPassword(5000, username, password);
+        
         LoginObjeto logobj = new LoginObjeto(10, "ok");
         try {
             assertEquals(logobj.getPass(), log.comprobarUserPassword(username, password).getPass());
