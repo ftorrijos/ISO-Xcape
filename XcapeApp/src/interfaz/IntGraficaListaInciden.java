@@ -256,11 +256,36 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
     public static void listarIncidencias() throws SQLException{
        ArrayList<Incidencia> arr = DBManager.listarIncidenciasUserIDDevuelveArrayList(user.getUsuario_id());
      
+       String matriz[][] = new String[arr.size()][4];
+       
+       for(int i=0; i<arr.size(); i++){
+           
+           int a = arr.get(i).getGrupo_id();
+           matriz[i][0] = Integer.toString(a);
+           int b = arr.get(i).getUsuario_id();
+           matriz[i][1] = Integer.toString(b);
+           int c = arr.get(i).getGrupo_id();
+           matriz[i][2] = Integer.toString(c);
+           matriz[i][3] = arr.get(i).getMensaje();
+
+           
+       }
+       
+       
+       jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                matriz,
+            },
+            new String [] {
+                "id incidencia", "Id Usuario", "Id grupo", "mensaje"
+            }
+        ));
+       
 
    /*        for(int i=0; i<arr.size();i++){
                   Incidencia inci = arr.get(i);
                  
-          }*/
+          }
    
             jTextArea1.setText(arr.toString());
 
@@ -270,7 +295,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
 
                }
            } 
-
+*/
         
         
     }
