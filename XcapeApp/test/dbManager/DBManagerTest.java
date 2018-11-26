@@ -35,11 +35,11 @@ public class DBManagerTest {
 //----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
     Date date = new Date(1991 / 10 / 10);
     Usuario mockUser = new Usuario(5000, 0, null, null, null, null, date);
-    Incidencia mockIncidencia = new Incidencia(5000, 5000, 0, "Esto es un test");
+    Incidencia mockIncidencia = new Incidencia(0, 0, 0, "Esto es un test");
     Evento mockEvento = new Evento("evento mock", "una dirección", "ciudad", "27/08/1960", 14632);
-    Responsable mockResponsable = new Responsable(5000, "responsablenombre", "responsableapellido", 655549786);
-    Grupo mockGrupo = new Grupo(5000, 5000, 5000, "Viaje-01");
-    Viaje mockViaje = new Viaje(5000, "ViajeHotel", "DireccionHotel", "RegimenCompletoTieso", "EstacionTodas", 15000);
+    Responsable mockResponsable = new Responsable(0, "responsablenombre", "responsableapellido", 655549786);
+    Grupo mockGrupo = new Grupo(0, 0, 0, "Viaje-01");
+    Viaje mockViaje = new Viaje(0, "ViajeHotel", "DireccionHotel", "RegimenCompletoTieso", "EstacionTodas", 15000);
 
     //primer test de prueba
     @Test
@@ -109,10 +109,15 @@ public class DBManagerTest {
         c.setAutoCommit(false);
 
         db.insertarResponsable(mockResponsable);
-        System.out.println(mockResponsable);
+        mockResponsable.setResponsable_id(db.selectResponsableYContactoPorNombre(mockResponsable.getNombre()).getResponsable_id());
+        mockGrupo.setResponsable_id(mockResponsable.getResponsable_id());
+        db.insertarViajes(mockViaje);
+        mockViaje.setViaje_id(db.selectViajePorNombre(mockViaje.getHotel()).getViaje_id());
+        mockGrupo.setViaje_id(mockViaje.getViaje_id());
 
-        db.insertarGrupo(mockGrupo);
+        mockIncidencia.setGrupo_id(mockGrupo.getGrupo_id());
         db.insertarIncidencia(mockIncidencia);
+        db.insertarGrupo(mockGrupo);
         Incidencia inciAlmacenada = DBManager.listarIncidenciasUserIDDevuelveIncidencia(5000);
 
         DBManager.insertarUsuarios(mockUser);

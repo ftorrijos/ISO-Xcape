@@ -599,6 +599,25 @@ public class DBManager {
         }
 
     }
+ public Responsable selectResponsableYContactoPorNombre(String nombre) throws SQLException {
+
+        String sql = "SELECT * FROM responsables WHERE nombre=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int responsable_id = rs.getInt("responsable_id");
+            String apellido = rs.getString("apellido");
+            int movil = rs.getInt("movil");
+            Responsable respon = new Responsable(responsable_id,nombre, apellido, movil);
+            return respon;
+        }
+
+        rs.close();
+        prep.close();
+
+        return null;
+    }
 
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
 
@@ -618,7 +637,6 @@ public class DBManager {
         prep.close();
 
         return null;
-
     }
 
     public void insertarResponsable(Responsable responsable) {
@@ -687,6 +705,27 @@ public class DBManager {
         rs.close();
         prep.close();
 
+    }
+    public static Viaje selectViajePorNombre(String nombre_hotel) throws SQLException {
+
+        String sql = "SELECT * FROM info_viaje WHERE hotel=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre_hotel);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int viaje_id = rs.getInt("viaje_id");
+            String hotel = rs.getString("hotel");
+            String direccion_hotel = rs.getString("direccion_hotel");
+            String regimen = rs.getString("regimen");
+            String estacion_forfait = rs.getString("estacion_forfait");
+            int duracion = rs.getInt("duracion");
+            Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
+            return viaj;
+            }
+
+        rs.close();
+        prep.close();
+        return null;
     }
 
     public static Viaje selectViajePorUserId(int usuario_id) throws SQLException {
