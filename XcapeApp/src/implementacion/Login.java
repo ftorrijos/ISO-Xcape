@@ -20,36 +20,45 @@ import modelo.LoginObjeto;
  */
 public class Login {
 
+    LoginObjeto log = new LoginObjeto();
+
     public LoginObjeto comprobacion() throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException {
 
-        DBManager db = new DBManager();
-        LoginObjeto log = new LoginObjeto();
-     
-            
         System.out.println("Por favor introducir el nombre del usuario");
         Scanner sc = new Scanner(System.in);
         String username = sc.nextLine();
         System.out.println("Por favor introducir el password del usuario:");
         String password = sc.nextLine();
-        String passHash = hash(password);
+
+        return comprobarUserPassword(username, password);
+
+    }
+
+    public LoginObjeto comprobarUserPassword(String username, String password) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        DBManager db = new DBManager();
         String dbPass = db.selectPasswordUsuario(username);
-        // System.out.println(passHash);
-        //System.out.println(dbPass);
+        String passHash = hash(password);
+
         if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
             log.setUsuario_id(db.selectIDUsuario(username));
             log.setPass("okadmin");
             return log;
+        } else if (dbPass == null) {
+            System.out.println("ACCESSS DENIED BITCH*S");
+            log.setUsuario_id(0);
+            log.setPass("nook");
+            comprobacion();
+            return log;
+
         } else if (dbPass.equalsIgnoreCase(passHash)) {
+            //////-----------------ERROR SI NO EXISTE LA BASE DE DATOS DA NULL Y FALLA
             log.setUsuario_id(db.selectIDUsuario(username));
             log.setPass("ok");
             return log;
         } else {
-            System.out.println("ACCESSS DENIED BITCH*S");
-            comprobacion();
-            log.setUsuario_id(0);
-            log.setPass("nook");
-            return log;
+            return null;
         }
+
     }
 
     public static String hash(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException {

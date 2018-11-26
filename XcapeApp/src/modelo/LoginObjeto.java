@@ -18,6 +18,12 @@ public class LoginObjeto {
         this.setUsuario_id(usuario_id);
         this.setPass(pass);
     }
+    
+    public LoginObjeto(int usuario_id, String pass){
+        this.usuario_id= usuario_id;
+        this.pass = pass;
+    }
+    public LoginObjeto(){}
 
     /**
      * @return the usuario_id
