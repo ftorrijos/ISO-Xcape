@@ -6,12 +6,20 @@
 package implementacion;
 
 import dBManager.DBManager;
+import static implementacion.Contacto.c;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Responsable;
+import modelo.Usuario;
 import modelo.Valoracion;
 
 /**
@@ -67,6 +75,29 @@ public class ValoraTuExp {
         } catch (SQLException e) {
         }
 
+    }
+    public static void insertarValoracion(Valoracion valoracion) {
+
+        try {
+            String insertSql = "INSERT INTO valora_experiencia(usuario_id,viaje_id,nota,si_no) VALUES(?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            int usuario_id = valoracion.getUsuario_id();
+            int viaje_id = valoracion.getViaje_id();
+            int nota = valoracion.getNota();
+            String si_no = valoracion.getSi_no();
+            
+
+            ps.setInt(1, usuario_id);
+            ps.setInt(2, viaje_id);
+            ps.setInt(3, nota);
+            ps.setString(4, si_no);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 
