@@ -261,14 +261,14 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
        for(int i=0; i<arr.size(); i++){
            
            int a = arr.get(i).getGrupo_id();
-           matriz[i][0] = Integer.toString(a);
+           matriz[i][0] = String.valueOf(a);
+           System.out.println(a);
            int b = arr.get(i).getUsuario_id();
            matriz[i][1] = Integer.toString(b);
            int c = arr.get(i).getGrupo_id();
            matriz[i][2] = Integer.toString(c);
            matriz[i][3] = arr.get(i).getMensaje();
-
-           
+           System.out.println("hola"+arr.get(i));
        }
        
        
