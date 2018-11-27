@@ -16,6 +16,8 @@ import modelo.*;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import dBManager.DBManager;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -30,6 +32,61 @@ import org.junit.Ignore;
  */
 public class DBManagerTest {
 
+    private void createDatabase() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=root");
+            Statement st = conn.createStatement();
+            int myResult = st.executeUpdate("CREATE DATABASE IF NOT EXISTS mydb2");
+            System.out.println("Database created !");
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+    
+    private void createTables() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=root");
+            Statement st = conn.createStatement();
+            int myResult = st.executeUpdate("CREATE DATABASE IF NOT EXISTS mydb2");
+            System.out.println("Tables created !");
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public static Connection getConnection() {
+
+        String usuario = "root";
+        String clave = "root";
+        String driver = "com.mysql.jdbc.Driver";
+        String URL = "jdbc:mysql://localhost:3306/dbxTesting";
+
+        Connection connection = null;
+
+        try {
+            Class.forName(driver).newInstance();
+            connection = DriverManager.getConnection(URL, usuario, clave);
+            System.out.println("Conexión establecida con éxito\n");
+            return connection;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+        }
+        return null;
+    }
+
+    public void cerrarConexion(Connection conector) {
+        try {
+            conector.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
     DBManager db = new DBManager();
 
 //----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
@@ -107,6 +164,7 @@ public class DBManagerTest {
 
         Connection c = db.getConnection();
         c.setAutoCommit(false);
+// setup (CREATE DATABASE y teardown la BORRAS
 
         db.insertarResponsable(mockResponsable);
         mockResponsable.setResponsable_id(db.selectResponsableYContactoPorNombre(mockResponsable.getNombre()).getResponsable_id());
@@ -134,4 +192,5 @@ public class DBManagerTest {
 //http://tutorials.jenkov.com/java-unit-testing/database-testing-crud.html    
     public DBManagerTest() {
     }
+
 }
