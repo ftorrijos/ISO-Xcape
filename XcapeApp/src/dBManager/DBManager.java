@@ -1,4 +1,4 @@
-    package dBManager;
+package dBManager;
 
 import static implementacion.Contacto.c;
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
 
@@ -97,10 +97,30 @@ public class DBManager {
         prep.close();
 
     }
-    
-      public static ArrayList<Incidencia> listarIncidenciasUserIDDevuelveArrayList(int user_id) throws SQLException {
-          ArrayList<Incidencia> arr = new ArrayList<Incidencia>();
-          
+
+    public static Incidencia listarIncidenciasUserIDDevuelveIncidencia(int user_id) throws SQLException {
+
+        String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int incidencia_id = rs.getInt("incidencia_id");
+            int grupo_id = rs.getInt("grupo_id");
+            String mensaje = rs.getString("mensaje");
+            Incidencia inci = new Incidencia(incidencia_id, user_id, grupo_id, mensaje);
+            return inci;
+        }
+
+        rs.close();
+        prep.close();
+        return null;
+
+    }
+
+    public static ArrayList<Incidencia> listarIncidenciasUserIDDevuelveArrayList(int user_id) throws SQLException {
+        ArrayList<Incidencia> arr = new ArrayList<Incidencia>();
+
         String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -113,7 +133,7 @@ public class DBManager {
             arr.add(inci);
             System.out.println(inci);
         }
-        
+
         rs.close();
         prep.close();
         return arr;
@@ -162,9 +182,8 @@ public class DBManager {
         }
 
     }
-    
-    
-      public static int selectIDUsuarioTablaUsuarios(String username, String apellido, String dni) throws SQLException {
+
+    public static int selectIDUsuarioTablaUsuarios(String username, String apellido, String dni) throws SQLException {
 
         String sql = "SELECT usuario_id FROM usuarios WHERE nombre=? AND apellido=? AND dni=?";
         PreparedStatement prep = c.prepareStatement(sql);
@@ -209,9 +228,8 @@ public class DBManager {
         }
 
     }
-    
-    
-  public static Usuario seleccionar_usuarioPorID(int id) throws SQLException {
+
+    public static Usuario seleccionar_usuarioPorID(int id) throws SQLException {
 
         String selectSql = "SELECT * FROM usuarios WHERE usuario_id=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
@@ -464,8 +482,8 @@ public class DBManager {
         return 0;
     }
 
-    public static int selectIDGrupoPorIDusuario(int usuario_id){
-      try {
+    public static int selectIDGrupoPorIDusuario(int usuario_id) {
+        try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
             prep.setInt(1, usuario_id);
@@ -481,9 +499,9 @@ public class DBManager {
         } catch (SQLException e) {
         }
         return 0;
-    
+
     }
-    
+
     public int IdResponsablePorGrupoID(int grupo_id) throws SQLException {
 
         try {
@@ -551,7 +569,6 @@ public class DBManager {
             Usuario user = selectNombreApellidoUsuarioPorUserID(user_id);
             System.out.println("Nombre= " + user.getNombre() + " , Apellido=" + user.getApellido());
         }
-        
 
         rs.close();
         prep.close();
@@ -582,6 +599,25 @@ public class DBManager {
         }
 
     }
+ public Responsable selectResponsableYContactoPorNombre(String nombre) throws SQLException {
+
+        String sql = "SELECT * FROM responsables WHERE nombre=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int responsable_id = rs.getInt("responsable_id");
+            String apellido = rs.getString("apellido");
+            int movil = rs.getInt("movil");
+            Responsable respon = new Responsable(responsable_id,nombre, apellido, movil);
+            return respon;
+        }
+
+        rs.close();
+        prep.close();
+
+        return null;
+    }
 
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
 
@@ -601,7 +637,6 @@ public class DBManager {
         prep.close();
 
         return null;
-
     }
 
     public void insertarResponsable(Responsable responsable) {
@@ -671,15 +706,33 @@ public class DBManager {
         prep.close();
 
     }
-    
-    
-    
-    public static Viaje selectViajePorUserId(int usuario_id) throws SQLException{
-        
+    public static Viaje selectViajePorNombre(String nombre_hotel) throws SQLException {
+
+        String sql = "SELECT * FROM info_viaje WHERE hotel=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre_hotel);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int viaje_id = rs.getInt("viaje_id");
+            String hotel = rs.getString("hotel");
+            String direccion_hotel = rs.getString("direccion_hotel");
+            String regimen = rs.getString("regimen");
+            String estacion_forfait = rs.getString("estacion_forfait");
+            int duracion = rs.getInt("duracion");
+            Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
+            return viaj;
+            }
+
+        rs.close();
+        prep.close();
+        return null;
+    }
+
+    public static Viaje selectViajePorUserId(int usuario_id) throws SQLException {
+
         int id_grupo = selectIDGrupoPorIDusuario(usuario_id);
         int id_viaje = IdViajePorIdGrupo(id_grupo);
-        
-       
+
         String sql = "SELECT * FROM info_viaje WHERE viaje_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, id_viaje);
@@ -695,12 +748,11 @@ public class DBManager {
 
         }
 
-            rs.close();
+        rs.close();
         prep.close();
 
         return null;
 
-    
     }
 
     public void insertarViajes(Viaje viaje) {
@@ -848,12 +900,12 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void updateAsistentesEvento(int evento_id){
-       try {
+
+    public void updateAsistentesEvento(int evento_id) {
+        try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
-            int newAsistencia = asistenciaEventos(evento_id) +1;
+            int newAsistencia = asistenciaEventos(evento_id) + 1;
             prep.setInt(1, newAsistencia);
             prep.setInt(2, evento_id);
             prep.executeUpdate();
@@ -863,6 +915,5 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    
     }
 }
