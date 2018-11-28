@@ -175,6 +175,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelTiempo1.setIconTextGap(5);
         jLabelTiempo1.setSize(new java.awt.Dimension(45, 25));
         jLabelTiempo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelTiempo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelTiempo1MouseClicked(evt);
+            }
+        });
 
         jLabelSplitwise1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Alert.png"))); // NOI18N
         jLabelSplitwise1.setLabelFor(jLabelSalir);
@@ -398,6 +403,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             // TODO add your handling code here:
 
             Desktop.getDesktop().browse(URI.create("https://youtu.be/FVNpwmPD4zg"));
+
         } catch (IOException ex) {
             Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -408,6 +414,16 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     private void jLabelMediaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMediaMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelMediaMouseEntered
+
+    private void jLabelTiempo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTiempo1MouseClicked
+        try {
+            // TODO add your handling code here:
+            this.setVisible(false);
+            IntGraficaMeteo.main();
+        } catch (IOException ex) {
+            Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabelTiempo1MouseClicked
     
     
     /**
