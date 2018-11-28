@@ -6,6 +6,9 @@
 package interfaz;
 
 import java.awt.Cursor;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,10 +105,19 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMedia.setText("Media");
         jLabelMedia.setToolTipText("");
         jLabelMedia.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelMedia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMedia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelMedia.setIconTextGap(5);
         jLabelMedia.setSize(new java.awt.Dimension(45, 25));
         jLabelMedia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelMedia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMediaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelMediaMouseEntered(evt);
+            }
+        });
 
         jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salir.png"))); // NOI18N
         jLabelSalir.setLabelFor(jLabelSalir);
@@ -380,6 +392,22 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 
         jLabelGestionPerfil.getRootPane().setOpaque(false);
     }//GEN-LAST:event_jLabelSalirMouseEntered
+
+    private void jLabelMediaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMediaMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            Desktop.getDesktop().browse(URI.create("https://youtu.be/FVNpwmPD4zg"));
+        } catch (IOException ex) {
+            Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jLabelMediaMouseClicked
+
+    private void jLabelMediaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMediaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelMediaMouseEntered
     
     
     /**
