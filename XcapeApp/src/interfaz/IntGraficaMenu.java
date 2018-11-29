@@ -149,6 +149,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelChat1.setIconTextGap(5);
         jLabelChat1.setSize(new java.awt.Dimension(45, 25));
         jLabelChat1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelChat1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelChat1MouseClicked(evt);
+            }
+        });
 
         jLabelMapa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Mapas.png"))); // NOI18N
         jLabelMapa1.setLabelFor(jLabelMiViaje);
@@ -414,6 +419,13 @@ public class IntGraficaMenu extends javax.swing.JFrame {
             Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabelTiempo1MouseClicked
+
+    private void jLabelChat1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelChat1MouseClicked
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        chat.main(user);
+    }//GEN-LAST:event_jLabelChat1MouseClicked
     
     
     /**
