@@ -64,7 +64,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMiViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/MiViaje.png"))); // NOI18N
         jLabelMiViaje.setLabelFor(jLabelMiViaje);
         jLabelMiViaje.setText("Mi Viaje");
-        jLabelMiViaje.setToolTipText("");
         jLabelMiViaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMiViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelMiViaje.setIconTextGap(5);
@@ -82,7 +81,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelGestionPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GestionPerfil.png"))); // NOI18N
         jLabelGestionPerfil.setLabelFor(jLabelMiViaje);
         jLabelGestionPerfil.setText("Gestion de Perfil");
-        jLabelGestionPerfil.setToolTipText("");
         jLabelGestionPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGestionPerfil.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelGestionPerfil.setIconTextGap(5);
@@ -103,7 +101,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMedia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Media.png"))); // NOI18N
         jLabelMedia.setLabelFor(jLabelMiViaje);
         jLabelMedia.setText("Media");
-        jLabelMedia.setToolTipText("");
         jLabelMedia.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelMedia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMedia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -122,7 +119,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salir.png"))); // NOI18N
         jLabelSalir.setLabelFor(jLabelSalir);
         jLabelSalir.setText("LOG OUT");
-        jLabelSalir.setToolTipText("");
         jLabelSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -141,7 +137,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelEventos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eventos.png"))); // NOI18N
         jLabelEventos2.setLabelFor(jLabelMiViaje);
         jLabelEventos2.setText("Eventos");
-        jLabelEventos2.setToolTipText("");
         jLabelEventos2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelEventos2.setIconTextGap(5);
         jLabelEventos2.setSize(new java.awt.Dimension(45, 25));
@@ -150,7 +145,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelChat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Chat.png"))); // NOI18N
         jLabelChat1.setLabelFor(jLabelMiViaje);
         jLabelChat1.setText("Chat");
-        jLabelChat1.setToolTipText("");
         jLabelChat1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelChat1.setIconTextGap(5);
         jLabelChat1.setSize(new java.awt.Dimension(45, 25));
@@ -159,7 +153,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMapa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Mapas.png"))); // NOI18N
         jLabelMapa1.setLabelFor(jLabelMiViaje);
         jLabelMapa1.setText("Mapa");
-        jLabelMapa1.setToolTipText("");
         jLabelMapa1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelMapa1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelMapa1.setIconTextGap(5);
@@ -169,7 +162,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelTiempo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Weather.png"))); // NOI18N
         jLabelTiempo1.setLabelFor(jLabelMiViaje);
         jLabelTiempo1.setText("Tiempo");
-        jLabelTiempo1.setToolTipText("");
         jLabelTiempo1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelTiempo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelTiempo1.setIconTextGap(5);
@@ -184,7 +176,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelSplitwise1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Alert.png"))); // NOI18N
         jLabelSplitwise1.setLabelFor(jLabelSalir);
         jLabelSplitwise1.setText("Incidencias");
-        jLabelSplitwise1.setToolTipText("");
         jLabelSplitwise1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelSplitwise1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSplitwise1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -203,7 +194,6 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelValora1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/experiencia.png"))); // NOI18N
         jLabelValora1.setLabelFor(jLabelSalir);
         jLabelValora1.setText("Valora tu Exp.");
-        jLabelValora1.setToolTipText("");
         jLabelValora1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabelValora1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelValora1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
