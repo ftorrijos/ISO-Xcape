@@ -32,7 +32,7 @@ public class DBManager {
         String usuario = "root";
         String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
-        String URL = "jdbc:mysql://localhost:3306/dbx";
+        String URL = "jdbc:mysql://localhost:3306/dbxTesting";
 
         Connection connection = null;
 
@@ -108,6 +108,26 @@ public class DBManager {
             int incidencia_id = rs.getInt("incidencia_id");
             int grupo_id = rs.getInt("grupo_id");
             String mensaje = rs.getString("mensaje");
+            Incidencia inci = new Incidencia(incidencia_id, user_id, grupo_id, mensaje);
+            return inci;
+        }
+
+        rs.close();
+        prep.close();
+        return null;
+
+    }
+    
+     public static Incidencia selectIncidenciaPorUserIdYMensaje(int user_id, String mensaje) throws SQLException {
+
+        String sql = "SELECT * FROM incidencias WHERE usuario_id=? and mensaje=?";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        prep.setString(2, mensaje);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int incidencia_id = rs.getInt("incidencia_id");
+            int grupo_id = rs.getInt("grupo_id");
             Incidencia inci = new Incidencia(incidencia_id, user_id, grupo_id, mensaje);
             return inci;
         }
@@ -558,6 +578,21 @@ public class DBManager {
 
     }
 
+    public Grupo selectGrupoPorNombre(String nombre_grupo) throws SQLException {
+
+        String sql = "SELECT * FROM grupo WHERE nombre=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre_grupo);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Grupo grupo = new Grupo(rs.getInt("grupo_id"), rs.getInt("responsable_id"), rs.getInt("viaje_id"),nombre_grupo);
+            return grupo;
+        }
+        rs.close();
+        prep.close();
+        return null;
+    }
+
     public void listarComponentesGrupoPorID(int id_grupo) throws SQLException {
 
         String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
@@ -599,7 +634,8 @@ public class DBManager {
         }
 
     }
- public Responsable selectResponsableYContactoPorNombre(String nombre) throws SQLException {
+
+    public Responsable selectResponsableYContactoPorNombre(String nombre) throws SQLException {
 
         String sql = "SELECT * FROM responsables WHERE nombre=?;";
         PreparedStatement prep = c.prepareStatement(sql);
@@ -609,7 +645,7 @@ public class DBManager {
             int responsable_id = rs.getInt("responsable_id");
             String apellido = rs.getString("apellido");
             int movil = rs.getInt("movil");
-            Responsable respon = new Responsable(responsable_id,nombre, apellido, movil);
+            Responsable respon = new Responsable(responsable_id, nombre, apellido, movil);
             return respon;
         }
 
@@ -706,6 +742,7 @@ public class DBManager {
         prep.close();
 
     }
+
     public static Viaje selectViajePorNombre(String nombre_hotel) throws SQLException {
 
         String sql = "SELECT * FROM info_viaje WHERE hotel=?;";
@@ -721,7 +758,7 @@ public class DBManager {
             int duracion = rs.getInt("duracion");
             Viaje viaj = new Viaje(viaje_id, hotel, direccion_hotel, regimen, estacion_forfait, duracion);
             return viaj;
-            }
+        }
 
         rs.close();
         prep.close();
@@ -865,6 +902,22 @@ public class DBManager {
         }
     }
 
+    public Evento selectEventoPorNombre(String nombre) throws SQLException {
+
+        String sql = "SELECT * FROM eventos WHERE nombre=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setString(1, nombre);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Evento evento = new Evento(rs.getInt("evento_id"), rs.getString("nombre"), rs.getString("direccion"), rs.getString("ciudad"), rs.getString("fecha"), rs.getInt("listas"));
+            return evento;
+        }
+
+        rs.close();
+        prep.close();
+        return null;
+    }
+
     public int asistenciaEventos(int evento_id) {
         try {
             String insertSql = "SELECT listas from eventos where  evento_id=?";
@@ -916,4 +969,90 @@ public class DBManager {
         }
 
     }
+
+    //------------------------------------VALORA TU EXPERIENCIA ---------------------------------------
+    public String listarValoracionNotaViaje(int viaje_id) throws SQLException{
+
+            String sql = "SELECT nota FROM valora_experiencia WHERE viaje_id=?;";
+            PreparedStatement prep = c.prepareStatement(sql);
+            prep.setInt(1, viaje_id);
+            ResultSet rs = prep.executeQuery();
+            while(rs.next()){
+            String nota = rs.getString("nota");
+            return nota;
+            }
+            
+            rs.close();
+            prep.close();
+
+            return null;
+        
+        }
+    
+    public static void listarValoracion() throws SQLException {
+
+        try {
+            Statement stmt5 = c.createStatement();
+            String sql5 = "SELECT * FROM valoracion;";		
+            ResultSet rs = stmt5.executeQuery(sql5);
+            System.out.println("Lista de Valoracion: ");
+            
+            while (rs.next()) {
+                int valora_id = rs.getInt("valoracion_id");
+                int usuario_id = rs.getInt("usuario_id");
+                int viaje_id = rs.getInt("viaje_id");
+                int nota = rs.getInt("nota");
+                String si_no = rs.getString("si_no");
+               
+                Valoracion valoracion = new Valoracion(valora_id, usuario_id, viaje_id,nota, si_no);
+                System.out.println(valoracion);
+            }
+            rs.close();
+            stmt5.close();
+ 
+        } catch (SQLException e) {
+        }
+
+    }
+    
+    public static void insertarValoracion(Valoracion valoracion) {
+
+        try {
+            String insertSql = "INSERT INTO valora_experiencia(usuario_id,viaje_id,nota,si_no) VALUES(?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+
+            int usuario_id = valoracion.getUsuario_id();
+            int viaje_id = valoracion.getViaje_id();
+            int nota = valoracion.getNota();
+            String si_no = valoracion.getSi_no();
+            
+
+            ps.setInt(1, usuario_id);
+            ps.setInt(2, viaje_id);
+            ps.setInt(3, nota);
+            ps.setString(4, si_no);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Valoracion selectValoracioUserIdViajeId(int user_id, int viaje_id) throws SQLException {
+
+        String sql = "SELECT * FROM valora_experiencia WHERE usuario_id=? and viaje_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, user_id);
+        prep.setInt(2, viaje_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Valoracion valora = new Valoracion(rs.getInt("valora_id"),user_id,viaje_id,rs.getInt("nota"),rs.getString(("si_no")));
+            return valora;
+        }
+        rs.close();
+        prep.close();
+        return null;
+    }
 }
+
