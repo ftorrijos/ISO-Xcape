@@ -140,6 +140,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
         });
 
         jTable1.setBackground(new java.awt.Color(255, 153, 0));
+        jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -148,6 +149,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setOpaque(false);
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -202,6 +204,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     public  static ArrayList<Incidencia> arr;
+    public static DefaultTableModel model;
     public static void listarIncidencias() throws SQLException{
      arr = DBManager.listarIncidenciasUserIDDevuelveArrayList(user.getUsuario_id());
      
@@ -223,7 +226,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
            System.out.println(matriz[i][3]);
        }
        
-       DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
        
        Object[] columnsName = new Object[4];
         
