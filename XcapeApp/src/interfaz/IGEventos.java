@@ -5,6 +5,13 @@
  */
 package interfaz;
 
+//import static dBManager.DBManager.updateAsistentesEvento;
+import dBManager.DBManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Evento;
 import modelo.Usuario;
 
 /**
@@ -16,8 +23,10 @@ public class IGEventos extends javax.swing.JFrame {
     /**
      * Creates new form IGEventos
      */
-    public IGEventos() {
+    public IGEventos() throws SQLException {
         initComponents();
+        this.setLocationRelativeTo(null);
+        cargarCombo();
     }
 
     /**
@@ -38,6 +47,7 @@ public class IGEventos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -56,7 +66,8 @@ public class IGEventos extends javax.swing.JFrame {
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
-        comboEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboEventos.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        comboEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
 
         jLabel2.setText("Seleccione un evento y pinche en ASISTIRE");
 
@@ -74,15 +85,11 @@ public class IGEventos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(179, 179, 179)
                 .addComponent(jLabelLogo)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(comboEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(165, 165, 165))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -92,6 +99,10 @@ public class IGEventos extends javax.swing.JFrame {
                         .addGap(279, 279, 279)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(comboEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +119,8 @@ public class IGEventos extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(comboEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -138,13 +149,26 @@ public class IGEventos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        comboEventos.getSelectedItem();
-        
+        //Evento evento = (Evento) comboEventos.getSelectedItem();
+        Evento evento;
+       // evento = comboEventos.getSelectionModel().getSelectedItem();
+      //  System.out.println(evento);
+        DBManager db  = new DBManager();
+      //   db.updateAsistentesEvento(evento.getEvento_id());
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    private void cargarCombo() throws SQLException{
+        ArrayList<Evento> array= dBManager.DBManager.selectTodosLosEventosArrayList();
+        array.forEach((evento) -> {
+            comboEventos.addItem(evento.getNombre()+evento.getCiudad()+" van: "+evento.getListas());
+        });
+        
+    }
+    
     /**
-     * @param args the command line arguments
+     * @param usuario
      */
     public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
@@ -171,9 +195,11 @@ public class IGEventos extends javax.swing.JFrame {
         //</editor-fold>
         user = usuario;
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
                 new IGEventos().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(IGEventos.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
