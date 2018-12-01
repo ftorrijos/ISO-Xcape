@@ -766,7 +766,7 @@ public class DBManager {
         return null;
     }
 
-    public  Viaje selectViajePorUserId(int usuario_id) throws SQLException {
+    public Viaje selectViajePorUserId(int usuario_id) throws SQLException {
 
         int id_grupo = selectIDGrupoPorIDusuario(usuario_id);
         int id_viaje = IdViajePorIdGrupo(id_grupo);
@@ -891,6 +891,36 @@ public class DBManager {
         rs.close();
         prep.close();
         return null;
+    }
+
+    public void realizarPago1(int user_id) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "UPDATE pagos set primer_pago='ok' where usuario_id=?;";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            ps.setInt(1, user_id);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void realizarPago2(int user_id) {
+        Connection c = DBManager.getConnection();
+
+        try {
+            String insertSql = "UPDATE pagos set primer_pago='ok' where usuario_id=?;";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            ps.setInt(1, user_id);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     //---------------------------------------------- EVENTOS -------------------------------------------------------------
