@@ -7,7 +7,11 @@ import dBManager.DBManager;
 import implementacion.Login;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,17 +28,10 @@ public class App {
      * @param args the command line arguments
      * @throws java.sql.SQLException
      */
-    public static void main(String[] args) throws SQLException {
-
+    public static void main(String[] args) throws SQLException, InterruptedException {
         System.out.println("Cargando App...\n");
-
-       interfaz.InterfazGrafica.run();
-
-      // interfaz.InterfazConsola.run();
-
-       
-       //DBManager.listarIncidenciasUserIDDevuelveArrayList(2);
-        
+        //interfaz.InterfazGrafica.run();
+        interfaz.InterfazConsola.run();
         System.out.println("Cerrando App...");
 
     }
