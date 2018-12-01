@@ -37,6 +37,7 @@ public class Login {
     public LoginObjeto comprobarUserPassword(String username, String password) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         DBManager db = new DBManager();
         String dbPass = db.selectPasswordUsuario(username);
+        System.out.println(dbPass);
         String passHash = hash(password);
 
         if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
