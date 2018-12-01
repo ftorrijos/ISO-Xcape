@@ -5,6 +5,11 @@
  */
 package interfaz;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Pagos;
 import modelo.Usuario;
 
 /**
@@ -17,8 +22,9 @@ public class IGPagos extends javax.swing.JFrame {
     /**
      * Creates new form IGPagos
      */
-    public IGPagos() {
+    public IGPagos() throws SQLException {
         initComponents();
+        this.setLocationRelativeTo(null);
         rellenaInfoPagos();
     }
 
@@ -47,6 +53,7 @@ public class IGPagos extends javax.swing.JFrame {
         BotonSegundoPago = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -112,22 +119,22 @@ public class IGPagos extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(primerPago)))
-                                .addGap(18, 33, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(segundoPago))
-                                    .addComponent(jLabel5)))
+                                .addGap(6, 6, 6)
+                                .addComponent(primerPago)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(segundoPago)
+                                .addGap(83, 83, 83))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BotonPrimerPago)
-                                .addGap(18, 18, 18)
-                                .addComponent(BotonSegundoPago)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(BotonPrimerPago)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BotonSegundoPago)))
+                                .addGap(0, 103, Short.MAX_VALUE)))))
                 .addGap(101, 101, 101)
                 .addComponent(jLabelLogo)
                 .addContainerGap())
@@ -196,18 +203,45 @@ public class IGPagos extends javax.swing.JFrame {
     private void BotonSegundoPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonSegundoPagoMouseClicked
         // TODO add your handling code here:
         
-        //accion de actualizar segundo pago
+
+        dBManager.DBManager.realizarPago2(user.getUsuario_id());
         this.setVisible(false);
         main(user);
         
     }//GEN-LAST:event_BotonSegundoPagoMouseClicked
 
     
-    public void rellenaInfoPagos(){
+    public void rellenaInfoPagos() throws SQLException{
+
         
-        //llama al dbmanager pagar cargar los labels
+      Pagos pago =  dBManager.DBManager.listarPagosPorUserIDDevuelvePago(user.getUsuario_id());
       
-        
+      if(pago == null){
+        JOptionPane.showMessageDialog(rootPane, "Aun no tienes ningun pago pendiente. Habla con tu responsable.");
+        this.setVisible(false);
+        IntGraficaMenu.main(user);
+
+      }
+      
+      
+      String idpago = ""+pago.getPago_id();
+      idTransaccion.setText(idpago);
+      metodoPago.setText(pago.getMetodo_pago());
+      primerPago.setText(pago.getPrimer_pago());
+      segundoPago.setText(pago.getSegundo_pago());
+      
+      if (pago.getPrimer_pago().equals("ok")){
+          BotonPrimerPago.setVisible(false);
+      }
+      
+      if(pago.getSegundo_pago().equals("ok")){
+          BotonSegundoPago.setVisible(false);
+      }
+      
+      if(pago.getPrimer_pago().equals("ok") && pago.getSegundo_pago().equals("ok")){
+          JOptionPane.showMessageDialog(rootPane, "Buenas noticias, todo pagado!");
+      }
+      
     }
     
     /**
@@ -242,7 +276,11 @@ public class IGPagos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IGPagos().setVisible(true);
+                try {
+                    new IGPagos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(IGPagos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

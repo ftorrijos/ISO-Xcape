@@ -30,7 +30,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "root";
+        String clave = "rootroot";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
         Connection connection = null;
@@ -856,6 +856,22 @@ public class DBManager {
         prep.close();
 
     }
+    
+      public static Pagos listarPagosPorUserIDDevuelvePago(int usuario_id) throws SQLException {
+
+        String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, usuario_id);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Pagos pago = new Pagos(rs.getInt("pago_id"), rs.getString("metodo_pago"), rs.getString("primer_pago"), rs.getString("segundo_pago"), usuario_id, rs.getString("DNI"));
+            return pago;
+        }
+
+        rs.close();
+        prep.close();
+return null;
+    }
 
     public void insertarPagos(Pagos pagos) {
         Connection c = DBManager.getConnection();
@@ -893,7 +909,7 @@ public class DBManager {
         return null;
     }
 
-    public void realizarPago1(int user_id) {
+    public static void realizarPago1(int user_id) {
         Connection c = DBManager.getConnection();
 
         try {
@@ -908,11 +924,11 @@ public class DBManager {
         }
     }
 
-    public void realizarPago2(int user_id) {
+    public static void realizarPago2(int user_id) {
         Connection c = DBManager.getConnection();
 
         try {
-            String insertSql = "UPDATE pagos set primer_pago='ok' where usuario_id=?;";
+            String insertSql = "UPDATE pagos set segundo_pago='ok' where usuario_id=?;";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
             ps.setInt(1, user_id);
             ps.executeUpdate();
