@@ -8,8 +8,6 @@ package interfaz;
 import modelo.Usuario;
 import dBManager.DBManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import modelo.Incidencia;
 import modelo.Viaje;
 
 /**
@@ -50,6 +48,7 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         jLabelRegimen = new javax.swing.JLabel();
         jLabelDuracion = new javax.swing.JLabel();
         jLabelForfait = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -144,26 +143,40 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         jLabelForfait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/esqui.png"))); // NOI18N
         jLabelForfait.setText("Tiene contratado el forfait para la estacion: "+miViaje.getEstacion_forfait());
 
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jButton2.setText("PAGAR VIAJE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(152, 152, 152)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelForfait)
+                            .addComponent(jLabelDuracion)
+                            .addComponent(jLabelRegimen)
+                            .addComponent(jLabelHotel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(244, 244, 244)))
                 .addComponent(jLabelLogo)
                 .addGap(33, 33, 33))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelForfait)
-                    .addComponent(jLabelDuracion)
-                    .addComponent(jLabelRegimen)
-                    .addComponent(jLabelHotel))
-                .addContainerGap(620, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(304, 304, 304))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,23 +186,27 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel2)))
-                .addGap(30, 30, 30)
-                .addComponent(jLabelHotel)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelRegimen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelDuracion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelForfait)
-                .addContainerGap(76, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel2)))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabelHotel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelRegimen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelDuracion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelForfait)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 590));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,8 +222,16 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         IntGraficaMenu.main(user);
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        IGPagos.main(user);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
-     * @param args the command line arguments
+     * @param usuario
+     * @throws java.sql.SQLException
      */
     public static void main(Usuario usuario) throws SQLException {
         /* Set the Nimbus look and feel */
@@ -272,6 +297,7 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
