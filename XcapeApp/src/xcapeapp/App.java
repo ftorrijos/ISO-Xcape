@@ -29,11 +29,11 @@ public class App {
      * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException, InterruptedException {
-
         System.out.println("Cargando App...\n");
         //interfaz.InterfazGrafica.run();
         interfaz.InterfazConsola.run();
         System.out.println("Cerrando App...");
 
     }
+
 }

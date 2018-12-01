@@ -238,8 +238,8 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         
        user = usuario; 
         
-       
-       miViaje =  DBManager.selectViajePorUserId(user.getUsuario_id());
+       DBManager db = new DBManager();
+       miViaje =  db.selectViajePorUserId(user.getUsuario_id());
   /*     if (miViaje == null){
            JOptionPane.showMessageDialog(null, "No tienes ningun viaje asignado. Contacta con tu vendedor mas cercano");
            IntGraficaMenu.main(user);
