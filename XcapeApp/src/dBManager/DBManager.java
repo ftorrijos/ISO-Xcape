@@ -611,6 +611,24 @@ public class DBManager {
 
     }
 
+    public ArrayList<Usuario> selectComponentesArrayListUsuarioPorUserID(int id_usuario) throws SQLException {
+        int id_grupo = selectIDGrupoPorIDusuario(id_usuario);
+
+        ArrayList<Usuario> arrayUser = new ArrayList<Usuario>();
+        String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        prep.setInt(1, id_grupo);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            int user_id = rs.getInt("user_id");
+            Usuario user = seleccionar_usuarioPorID(user_id);
+            arrayUser.add(user);
+        }
+        rs.close();
+        prep.close();
+        return arrayUser;
+    }
+
 //-------------------------------------------RESPONSABLES-----------------------------------------------
     public void listarResponsables() throws SQLException {
 
@@ -912,7 +930,7 @@ public class DBManager {
         Connection c = DBManager.getConnection();
 
         try {
-            String insertSql = "UPDATE pagos set primer_pago='ok' where usuario_id=?;";
+            String insertSql = "UPDATE pagos set segundo_pago='ok' where usuario_id=?;";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
             ps.setInt(1, user_id);
             ps.executeUpdate();
@@ -963,6 +981,21 @@ public class DBManager {
         rs.close();
         prep.close();
         return null;
+    }
+
+    public ArrayList<Evento> selectTodosLosEventosArrayList() throws SQLException {
+        ArrayList<Evento> arrayEvento = new ArrayList<Evento>();
+        String sql = "SELECT * FROM eventos;";
+        PreparedStatement prep = c.prepareStatement(sql);
+        ResultSet rs = prep.executeQuery();
+        while (rs.next()) {
+            Evento evento = new Evento(rs.getInt("evento_id"), rs.getString("nombre"), rs.getString("direccion"), rs.getString("ciudad"), rs.getString("fecha"), rs.getInt("listas"));
+            arrayEvento.add(evento);
+        }
+
+        rs.close();
+        prep.close();
+        return arrayEvento;
     }
 
     public int asistenciaEventos(int evento_id) {
