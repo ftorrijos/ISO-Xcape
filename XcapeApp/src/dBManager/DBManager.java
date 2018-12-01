@@ -999,9 +999,9 @@ public class DBManager {
         return null;
     }
 
-    public ArrayList<Evento> selectTodosLosEventosArrayList() throws SQLException {
+    public static ArrayList<Evento> selectTodosLosEventosArrayList() throws SQLException {
         ArrayList<Evento> arrayEvento = new ArrayList<Evento>();
-        String sql = "SELECT * FROM eventos;";
+        String sql = "SELECT * FROM eventos";
         PreparedStatement prep = c.prepareStatement(sql);
         ResultSet rs = prep.executeQuery();
         while (rs.next()) {
@@ -1050,7 +1050,7 @@ public class DBManager {
         }
     }
 
-    public void updateAsistentesEvento(int evento_id) {
+    public  void updateAsistentesEvento(int evento_id) {
         try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);

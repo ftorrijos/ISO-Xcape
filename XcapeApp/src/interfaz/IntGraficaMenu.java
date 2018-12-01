@@ -137,10 +137,16 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelEventos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eventos.png"))); // NOI18N
         jLabelEventos2.setLabelFor(jLabelMiViaje);
         jLabelEventos2.setText("Eventos");
+        jLabelEventos2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelEventos2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelEventos2.setIconTextGap(5);
         jLabelEventos2.setSize(new java.awt.Dimension(45, 25));
         jLabelEventos2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelEventos2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEventos2MouseClicked(evt);
+            }
+        });
 
         jLabelChat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Chat.png"))); // NOI18N
         jLabelChat1.setLabelFor(jLabelMiViaje);
@@ -293,7 +299,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelValora1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -304,10 +310,7 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -429,6 +432,13 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         this.setVisible(false);
         chat.main(user);
     }//GEN-LAST:event_jLabelChat1MouseClicked
+
+    private void jLabelEventos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventos2MouseClicked
+
+        this.setVisible(false);
+        IGEventos.main(user);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEventos2MouseClicked
     
     
     /**
