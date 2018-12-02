@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,11 +43,12 @@ public class DBManagerTest {
 
     DBManager db = new DBManager();
     Login log = new Login();
+    Connection c = getConnection();
 
 //----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
     Date date = new Date(1991 / 10 / 10);
     Usuario mockUser = new Usuario(879123542, "UsuarioPrueba", "ApellidoPrueba", "00000000K", "correo@prueba.com", date);
-    //LoginObjeto mockLogin = new LoginObjeto();
+    LoginObjeto mockLogin = new LoginObjeto();
     Responsable mockResponsable = new Responsable("responsablenombre", "responsableapellido", 655549786);
     Evento mockEvento = new Evento("evento mock", "una dirección", "ciudad", "27/08/1960", 14632);
     Viaje mockViaje = new Viaje("ViajeHotel", "DireccionHotel", "RegimenCompletoTieso", "EstacionTodas", 15000);
@@ -60,16 +62,16 @@ public class DBManagerTest {
         System.out.println("Creando la infraestructura de los test");
         createDatabase();
         createTables();
+        insertsBBDD();
     }
 
-    //@After
+    // @After
     public void tearDown() throws Exception {
         System.out.println("Destruyendo la infraestrucutra de los test");
         dropDatabase();
     }
 //primer test de prueba
 
-    @Ignore
     @Test
     public void test1() {
         int x = 1;
@@ -85,82 +87,15 @@ public class DBManagerTest {
         Assert.assertTrue(x.equalsIgnoreCase(y));
 
     }
-
-    @Ignore
-    @Test
-    public void testLoginAdmin() {
-        String username = "admin";
-        String password = "admin";
-        LoginObjeto logobj = new LoginObjeto(10, "okadmin");
-
-        try {
-            Assert.assertTrue(logobj.getPass().equalsIgnoreCase(log.comprobarUserPassword(username, password).getPass()));
-        } catch (SQLException ex) {
-            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
 //-----------------------------------------TEST CORRESPONDIENTES A DB_Manager------------------------------------------------
-    //-------------------------- comprobación incidencias ----------------------------------------------------------------
     @Test
     public void testInsercciónSelecciónTodo() throws SQLException {
-
-        insertarUsuarios(mockUser);
-        Usuario user = seleccionar_usuario(mockUser.getDni());
-        mockUser.setUsuario_id(user.getUsuario_id());
-        insertarTablaUserPassword(mockUser.getUsuario_id(), "UsuarioPrueba", "passwordprueba");
-//     mockLogin.setUsuario_id(user.getUsuario_id());
-        insertarResponsable(mockResponsable);
-        mockResponsable.setResponsable_id(selectResponsableYContactoPorNombre(mockResponsable.getNombre()).getResponsable_id());
-        insertarViajes(mockViaje);
-        mockViaje.setViaje_id(selectViajePorNombre(mockViaje.getHotel()).getViaje_id());
-        insertarEventos(mockEvento);
-        mockEvento.setEvento_id(selectEventoPorNombre(mockEvento.getNombre()).getEvento_id());
-        insertarViajes(mockViaje);
-        mockViaje.setViaje_id(selectViajePorNombre(mockViaje.getHotel()).getViaje_id());
-        mockPago.setUsuario_id(mockUser.getUsuario_id());
-        mockPago.setDni(mockUser.getDni());
-        insertarPagos(mockPago);
-        Pagos pag = pagosPorUserID(mockUser.getUsuario_id());
-        mockPago.setPago_id(pag.getPago_id());
-        mockGrupo.setViaje_id(mockViaje.getViaje_id());
-        mockGrupo.setResponsable_id(mockResponsable.getResponsable_id());
-        insertarGrupo(mockGrupo);
-        mockGrupo.setGrupo_id(selectGrupoPorNombre(mockGrupo.getNombre()).getGrupo_id());
-        mockValoracion.setUsuario_id(mockUser.getUsuario_id());
-        mockValoracion.setViaje_id(mockViaje.getViaje_id());
-        insertarValoracion(mockValoracion);
-        mockValoracion.setValora_id(selectValoracioUserIdViajeId(mockUser.getUsuario_id(), mockViaje.getViaje_id()).getValora_id());
-        mockIncidencia.setGrupo_id(mockGrupo.getGrupo_id());
-        mockIncidencia.setUsuario_id(mockUser.getUsuario_id());
-        insertarIncidencia(mockIncidencia);
-        mockIncidencia.setIncidencia_id(selectIncidenciaPorUserIdYMensaje(mockUser.getUsuario_id(), mockIncidencia.getMensaje()).getIncidencia_id());
-
-
-        System.out.println(mockUser);
-        System.out.println(mockResponsable);
-        System.out.println(mockValoracion);
-        System.out.println(mockPago);
-        System.out.println(mockViaje);
-        System.out.println(mockIncidencia);
-        System.out.println(mockEvento);
-        System.out.println(mockGrupo);
+        Assert.assertEquals(1, 1);
     }
 
-    @Ignore
-    @Test
-    public void testLoginUser() throws SQLException {
-        Connection c = getConnection();
-
-//            assertEquals(logobj.getPass(), log.comprobarUserPassword(username, password).getPass());
-        c.close();
-    }
-
-    //----------------------------CREACION BBDD PRUEBA Y CONEXIONES ---------------------------------------------
+    //----------------------------CREACION/ INSERCCION BBDD PRUEBA Y CONEXIONES ---------------------------------------------
     public void createDatabase() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -198,6 +133,50 @@ public class DBManagerTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+    }
+
+    public void insertsBBDD() throws SQLException {
+        insertarUsuarios(mockUser);
+        Usuario user = seleccionar_usuario(mockUser.getDni());
+        mockUser.setUsuario_id(user.getUsuario_id());
+        insertarTablaUserPassword(mockUser.getUsuario_id(), "UsuarioPrueba", "passwordprueba");
+//     mockLogin.setUsuario_id(user.getUsuario_id());
+        insertarResponsable(mockResponsable);
+        mockResponsable.setResponsable_id(selectResponsableYContactoPorNombre(mockResponsable.getNombre()).getResponsable_id());
+        insertarViajes(mockViaje);
+        mockViaje.setViaje_id(selectViajePorNombre(mockViaje.getHotel()).getViaje_id());
+        insertarEventos(mockEvento);
+        mockEvento.setEvento_id(selectEventoPorNombre(mockEvento.getNombre()).getEvento_id());
+        insertarViajes(mockViaje);
+        mockViaje.setViaje_id(selectViajePorNombre(mockViaje.getHotel()).getViaje_id());
+        mockPago.setUsuario_id(mockUser.getUsuario_id());
+        mockPago.setDni(mockUser.getDni());
+        insertarPagos(mockPago);
+        Pagos pag = pagosPorUserID(mockUser.getUsuario_id());
+        mockPago.setPago_id(pag.getPago_id());
+        mockGrupo.setViaje_id(mockViaje.getViaje_id());
+        mockGrupo.setResponsable_id(mockResponsable.getResponsable_id());
+        insertarGrupo(mockGrupo);
+        mockGrupo.setGrupo_id(selectGrupoPorNombre(mockGrupo.getNombre()).getGrupo_id());
+        mockValoracion.setUsuario_id(mockUser.getUsuario_id());
+        mockValoracion.setViaje_id(mockViaje.getViaje_id());
+        insertarValoracion(mockValoracion);
+        mockValoracion.setValora_id(selectValoracioUserIdViajeId(mockUser.getUsuario_id(), mockViaje.getViaje_id()).getValora_id());
+        mockIncidencia.setGrupo_id(mockGrupo.getGrupo_id());
+        mockIncidencia.setUsuario_id(mockUser.getUsuario_id());
+        insertarIncidencia(mockIncidencia);
+        mockIncidencia.setIncidencia_id(selectIncidenciaPorUserIdYMensaje(mockUser.getUsuario_id(), mockIncidencia.getMensaje()).getIncidencia_id());
+
+        System.out.println(mockUser);
+        System.out.println(mockResponsable);
+        System.out.println(mockValoracion);
+        System.out.println("Pago{" + "pago_id=" + mockPago.getPago_id() + ", metodo de pago =" + mockPago.getMetodo_pago() + ", primer pago =" + mockPago.getPrimer_pago()
+                + " ,segundo pago=" + mockPago.getSegundo_pago() + " ,DNI=" + mockPago.getDni() + " , usuario=" + selectUserNameUsuario(mockUser.getUsuario_id()) + '}');
+        System.out.println(mockViaje);
+        System.out.println("Incidencia{" + "incidencia_id=" + mockIncidencia.getIncidencia_id() + ", usuario=" + listarUsuariosSoloNombre(mockUser.getUsuario_id()) + " ,grupo=" + listarGruposSoloNombre(mockGrupo.getGrupo_id()) + " ,mensaje=" + mockIncidencia.getMensaje() + "}");
+        System.out.println(mockEvento);
+        System.out.println(mockGrupo);
 
     }
 
@@ -242,14 +221,9 @@ public class DBManagerTest {
         }
     }
 
-    private void assertEquals(int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Connection c = getConnection();
-
+    //----------------------------TODA LA INFRAESTRUCTURA DE BBDD -------------------------------------------
     public void listarIncidencias() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt3 = c.createStatement();
             String sql3 = "SELECT * FROM incidencias;";
@@ -272,7 +246,7 @@ public class DBManagerTest {
     }
 
     public void listarIncidenciasUserID(int user_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -291,7 +265,7 @@ public class DBManagerTest {
     }
 
     public Incidencia listarIncidenciasUserIDDevuelveIncidencia(int user_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -311,7 +285,7 @@ public class DBManagerTest {
     }
 
     public Incidencia selectIncidenciaPorUserIdYMensaje(int user_id, String mensaje) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM incidencias WHERE usuario_id=? and mensaje=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -332,7 +306,7 @@ public class DBManagerTest {
 
     public ArrayList<Incidencia> listarIncidenciasUserIDDevuelveArrayList(int user_id) throws SQLException {
         ArrayList<Incidencia> arr = new ArrayList<Incidencia>();
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM incidencias WHERE usuario_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -353,7 +327,7 @@ public class DBManagerTest {
     }
 
     public void insertarIncidencia(Incidencia inci) {
-
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO incidencias(usuario_id,grupo_id, mensaje) VALUES(?,?,?)";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -371,7 +345,7 @@ public class DBManagerTest {
 
     // ---------------------------------------  GESTION DE USUARIOS ----------------------------------------------------------------
     public void listarUsuarios() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt3 = c.createStatement();
             String sql3 = "SELECT * FROM usuarios;";
@@ -396,7 +370,7 @@ public class DBManagerTest {
     }
 
     public int selectIDUsuarioTablaUsuarios(String username, String apellido, String dni) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT usuario_id FROM usuarios WHERE nombre=? AND apellido=? AND dni=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, username);
@@ -415,6 +389,7 @@ public class DBManagerTest {
     }
 
     public void UpdateUsuario(Usuario user) {
+        Connection c = getConnection();
         try {
             String sql = "UPDATE usuarios SET nombre=?, apellido=?, fecha_nacimiento=?,dni=?,correo=?,movil=? WHERE usuario_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -442,7 +417,7 @@ public class DBManagerTest {
     }
 
     public Usuario seleccionar_usuarioPorID(int id) throws SQLException {
-
+        Connection c = getConnection();
         String selectSql = "SELECT * FROM usuarios WHERE usuario_id=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
         ps.setInt(1, id);
@@ -467,7 +442,7 @@ public class DBManagerTest {
     }
 
     public Usuario seleccionar_usuario(String dni) throws SQLException {
-
+        Connection c = getConnection();
         String selectSql = "SELECT * FROM usuarios WHERE dni=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
         ps.setString(1, dni);
@@ -491,7 +466,7 @@ public class DBManagerTest {
     }
 
     public Usuario selectNombreApellidoUsuarioPorUserID(int user_id) throws SQLException {
-
+        Connection c = getConnection();
         String selectSql = "SELECT nombre,apellido FROM usuarios WHERE usuario_id=?;";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(selectSql);
         ps.setInt(1, user_id);
@@ -509,10 +484,11 @@ public class DBManagerTest {
     }
 
     public void insertarUsuarios(Usuario usuario) {
+        Connection c = getConnection();
 
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            PreparedStatement ps = c.prepareStatement(insertSql);
 
             String nombre = usuario.getNombre();
             String apellido = usuario.getApellido();
@@ -543,7 +519,7 @@ public class DBManagerTest {
     }
 
     public String listarUsuariosSoloNombre(int id_usuarios) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT nombre FROM usuarios WHERE usuario_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, id_usuarios);
@@ -562,7 +538,7 @@ public class DBManagerTest {
 
     //-------------------------------------- LOGIN ----------------------------------------------------------------------
     public String selectPasswordUsuario(String username) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT password FROM user_login WHERE username=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, username);
@@ -579,9 +555,10 @@ public class DBManagerTest {
     }
 
     public void insertarTablaUserPassword(int usuario_id, String username, String password) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO user_login(user_id,username,password) VALUES(?,?,sha1(?))";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            PreparedStatement ps = c.prepareStatement(insertSql);
             ps.setInt(1, usuario_id);
             ps.setString(2, username);
             ps.setString(3, password);
@@ -594,7 +571,7 @@ public class DBManagerTest {
     }
 
     public String selectUserNameUsuario(int user_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT username FROM user_login WHERE user_id=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);
@@ -611,7 +588,7 @@ public class DBManagerTest {
     }
 
     public int selectIDUsuario(String username) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT user_id FROM user_login WHERE username=?";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, username);
@@ -629,7 +606,7 @@ public class DBManagerTest {
 
     //----------------------------------------GRUPOS----------------------------------------------------
     public void listarGrupos() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt4 = c.createStatement();
             String sql4 = "SELECT * FROM grupo;";
@@ -652,7 +629,7 @@ public class DBManagerTest {
     }
 
     public int IdGrupoPorIdUsuarios(int usuario_id) throws SQLException {
-
+        Connection c = getConnection();
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -672,7 +649,7 @@ public class DBManagerTest {
     }
 
     public int IdViajePorIdGrupo(int grupo_id) throws SQLException {
-
+        Connection c = getConnection();
         try {
             String sql = "SELECT viaje_id FROM grupo WHERE grupo_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -692,6 +669,8 @@ public class DBManagerTest {
     }
 
     public int selectIDGrupoPorIDusuario(int usuario_id) {
+        Connection c = getConnection();
+
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -712,7 +691,7 @@ public class DBManagerTest {
     }
 
     public int IdResponsablePorGrupoID(int grupo_id) throws SQLException {
-
+        Connection c = getConnection();
         try {
             String sql = "SELECT responsable_id FROM grupo WHERE grupo_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -732,6 +711,7 @@ public class DBManagerTest {
     }
 
     public void insertarGrupo(Grupo grupo) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO grupo(nombre,responsable_id, viaje_id) VALUES(?,?,?)";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -748,7 +728,7 @@ public class DBManagerTest {
     }
 
     public String listarGruposSoloNombre(int id_grupo) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT nombre FROM grupo WHERE grupo_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, id_grupo);
@@ -766,7 +746,7 @@ public class DBManagerTest {
     }
 
     public Grupo selectGrupoPorNombre(String nombre_grupo) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM grupo WHERE nombre=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, nombre_grupo);
@@ -781,7 +761,7 @@ public class DBManagerTest {
     }
 
     public void listarComponentesGrupoPorID(int id_grupo) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, id_grupo);
@@ -799,7 +779,7 @@ public class DBManagerTest {
 
 //-------------------------------------------RESPONSABLES-----------------------------------------------
     public void listarResponsables() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM responsables;";
@@ -823,7 +803,7 @@ public class DBManagerTest {
     }
 
     public Responsable selectResponsableYContactoPorNombre(String nombre) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM responsables WHERE nombre=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, nombre);
@@ -843,7 +823,7 @@ public class DBManagerTest {
     }
 
     public Responsable listarResponsableYContacto(int responsable_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM responsables WHERE responsable_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, responsable_id);
@@ -863,6 +843,7 @@ public class DBManagerTest {
     }
 
     public void insertarResponsable(Responsable responsable) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO responsables(nombre,apellido,movil) VALUES(?,?,?);";
             PreparedStatement ps = c.prepareStatement(insertSql);
@@ -880,7 +861,7 @@ public class DBManagerTest {
 
 //------------------------------------VIAJES----------------------------------------------
     public void listarViajes() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM info_viaje;";
@@ -907,7 +888,7 @@ public class DBManagerTest {
     }
 
     public void listarViajePorID(int viaje_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM info_viaje WHERE viaje_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, viaje_id);
@@ -929,7 +910,7 @@ public class DBManagerTest {
     }
 
     public Viaje selectViajePorNombre(String nombre_hotel) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM info_viaje WHERE hotel=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, nombre_hotel);
@@ -951,7 +932,7 @@ public class DBManagerTest {
     }
 
     public Viaje selectViajePorUserId(int usuario_id) throws SQLException {
-
+        Connection c = getConnection();
         int id_grupo = selectIDGrupoPorIDusuario(usuario_id);
         int id_viaje = IdViajePorIdGrupo(id_grupo);
 
@@ -978,9 +959,10 @@ public class DBManagerTest {
     }
 
     public void insertarViajes(Viaje viaje) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO info_viaje(hotel,direccion_hotel,regimen,estacion_forfait,duracion) VALUES(?,?,?,?,?)";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            PreparedStatement ps = c.prepareStatement(insertSql);
 
             ps.setString(1, viaje.getHotel());
             ps.setString(2, viaje.getDireccion_hotel());
@@ -997,7 +979,7 @@ public class DBManagerTest {
 
 //-----------------------------------------------------PAGOS----------------------------------------------------------
     public void listarPagos() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM pagos;";
@@ -1024,7 +1006,7 @@ public class DBManagerTest {
     }
 
     public void listarPagosPorUserID(int usuario_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, usuario_id);
@@ -1040,7 +1022,7 @@ public class DBManagerTest {
     }
 
     public Pagos pagosPorUserID(int usuario_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, usuario_id);
@@ -1056,6 +1038,7 @@ public class DBManagerTest {
     }
 
     public void insertarPagos(Pagos pagos) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO pagos(metodo_pago,primer_pago,segundo_pago,usuario_id,DNI) VALUES(?,?,?,?,?)";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -1075,6 +1058,7 @@ public class DBManagerTest {
 
     //---------------------------------------------- EVENTOS -------------------------------------------------------------
     public void listarEventos() {
+        Connection c = getConnection();
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM eventos;";
@@ -1100,7 +1084,7 @@ public class DBManagerTest {
     }
 
     public Evento selectEventoPorNombre(String nombre) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM eventos WHERE nombre=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setString(1, nombre);
@@ -1116,6 +1100,7 @@ public class DBManagerTest {
     }
 
     public int asistenciaEventos(int evento_id) {
+        Connection c = getConnection();
         try {
             String insertSql = "SELECT listas from eventos where  evento_id=?";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -1134,6 +1119,7 @@ public class DBManagerTest {
     }
 
     public void insertarEventos(Evento evento) {
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO eventos(nombre,direccion,ciudad,fecha,listas) VALUES(?,?,?,?,?)";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -1152,6 +1138,7 @@ public class DBManagerTest {
     }
 
     public void updateAsistentesEvento(int evento_id) {
+        Connection c = getConnection();
         try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -1169,7 +1156,7 @@ public class DBManagerTest {
 
     //------------------------------------VALORA TU EXPERIENCIA ---------------------------------------
     public String listarValoracionNotaViaje(int viaje_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT nota FROM valora_experiencia WHERE viaje_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, viaje_id);
@@ -1187,7 +1174,7 @@ public class DBManagerTest {
     }
 
     public void listarValoracion() throws SQLException {
-
+        Connection c = getConnection();
         try {
             Statement stmt5 = c.createStatement();
             String sql5 = "SELECT * FROM valoracion;";
@@ -1213,7 +1200,7 @@ public class DBManagerTest {
     }
 
     public void insertarValoracion(Valoracion valoracion) {
-
+        Connection c = getConnection();
         try {
             String insertSql = "INSERT INTO valora_experiencia(usuario_id,viaje_id,nota,si_no) VALUES(?,?,?,?)";
             PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
@@ -1236,7 +1223,7 @@ public class DBManagerTest {
     }
 
     public Valoracion selectValoracioUserIdViajeId(int user_id, int viaje_id) throws SQLException {
-
+        Connection c = getConnection();
         String sql = "SELECT * FROM valora_experiencia WHERE usuario_id=? and viaje_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
         prep.setInt(1, user_id);

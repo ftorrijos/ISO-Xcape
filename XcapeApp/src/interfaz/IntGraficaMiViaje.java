@@ -15,6 +15,7 @@ import modelo.Viaje;
  * @author javiersancerninozaleda
  */
 public class IntGraficaMiViaje extends javax.swing.JFrame {
+
     public static Usuario user;
     public static Viaje miViaje;
 
@@ -25,7 +26,7 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
- 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,7 +227,7 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         IGPagos.main(user);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -256,32 +257,28 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(IntGraficaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
-        
-       user = usuario; 
-        
-       DBManager db = new DBManager();
-       miViaje =  db.selectViajePorUserId(user.getUsuario_id());
-  /*     if (miViaje == null){
+        user = usuario;
+
+        DBManager db = new DBManager();
+        miViaje = db.selectViajePorUserId(user.getUsuario_id());
+        /*     if (miViaje == null){
            JOptionPane.showMessageDialog(null, "No tienes ningun viaje asignado. Contacta con tu vendedor mas cercano");
            IntGraficaMenu.main(user);
        }
-    */   
-       
-    //   cargarDatosViaje();
-       
+         */
+
+        //   cargarDatosViaje();
         java.awt.EventQueue.invokeLater(() -> {
             new IntGraficaMiViaje().setVisible(true);
         });
-        
-        
-        
+
     }
-    
-   /*
+
+    /*
   public static void cargarDatosViaje(){
       
       jLabelHotel.setText("Su alojamiento es: "+miViaje.getHotel()+". Se encuentra en la direccion: "+miViaje.getDireccion_hotel());
@@ -292,7 +289,6 @@ public class IntGraficaMiViaje extends javax.swing.JFrame {
       
       
   }*/
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;

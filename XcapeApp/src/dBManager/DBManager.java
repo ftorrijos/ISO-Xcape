@@ -30,7 +30,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
         Connection connection = null;
@@ -317,14 +317,14 @@ public class DBManager {
     }
 
     public static void insertarUsuarios(Usuario usuario) {
-
+        Connection c = getConnection();
+        System.out.println("HELLO");
+        System.out.println(usuario);
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
-
+            PreparedStatement ps = c.prepareStatement(insertSql);
             String nombre = usuario.getNombre();
             String apellido = usuario.getApellido();
-
             Instant instant = (usuario.getFecha_nacimiento()).toInstant();
             ZoneId zoneId = ZoneId.of("Europe/Paris");
             ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
@@ -874,8 +874,8 @@ public class DBManager {
         prep.close();
 
     }
-    
-      public static Pagos listarPagosPorUserIDDevuelvePago(int usuario_id) throws SQLException {
+
+    public static Pagos listarPagosPorUserIDDevuelvePago(int usuario_id) throws SQLException {
 
         String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
@@ -888,7 +888,7 @@ public class DBManager {
 
         rs.close();
         prep.close();
-return null;
+        return null;
     }
 
     public void insertarPagos(Pagos pagos) {
