@@ -166,15 +166,22 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         jLabelMapa1.setLabelFor(jLabelMiViaje);
         jLabelMapa1.setText("Mapa");
         jLabelMapa1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelMapa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMapa1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelMapa1.setIconTextGap(5);
         jLabelMapa1.setSize(new java.awt.Dimension(45, 25));
         jLabelMapa1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabelMapa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMapa1MouseClicked(evt);
+            }
+        });
 
         jLabelTiempo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Weather.png"))); // NOI18N
         jLabelTiempo1.setLabelFor(jLabelMiViaje);
         jLabelTiempo1.setText("Tiempo");
         jLabelTiempo1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabelTiempo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelTiempo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelTiempo1.setIconTextGap(5);
         jLabelTiempo1.setSize(new java.awt.Dimension(45, 25));
@@ -445,12 +452,11 @@ public class IntGraficaMenu extends javax.swing.JFrame {
 
     private void jLabelTiempo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTiempo1MouseClicked
         try {
-            // TODO add your handling code here:
-            this.setVisible(false);
-            IntGraficaMeteo.main();
+            Desktop.getDesktop().browse(URI.create("https://www.tiempo.com/pas-de-la-casa.htm"));
         } catch (IOException ex) {
             Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jLabelTiempo1MouseClicked
 
     private void jLabelChat1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelChat1MouseClicked
@@ -473,6 +479,18 @@ public class IntGraficaMenu extends javax.swing.JFrame {
         this.setVisible(false);
         IntGraficaMiGrupo.main(user);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabelMapa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMapa1MouseClicked
+        // TODO add your handling code here:
+        try {
+            Desktop.getDesktop().browse(URI.create("https://www.google.es/maps/place/AD200+El+Pas+de+la+Casa,+Andorra/@42.542449,1.7303751,17z/data=!3m1!4b1!4m5!3m4!1s0x12af7d8c885e2719:0xa00947091997250!8m2!3d42.5421978!4d1.732591"));
+        } catch (IOException ex) {
+            Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        
+    }//GEN-LAST:event_jLabelMapa1MouseClicked
     
     
     /**
