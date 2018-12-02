@@ -9,29 +9,24 @@ import java.util.Date;
 import modelo.Usuario;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author javiersancerninozaleda
  */
 public class IntGraficaGestionPerfil extends javax.swing.JFrame {
+
     public static Usuario user;
 
-  /*  static void main(Usuario user) {
+    /*  static void main(Usuario user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-*/
-
+     */
     /**
      * Creates new form IntGraficaGestionPerfil
      */
     public IntGraficaGestionPerfil() {
         initComponents();
-                this.setLocationRelativeTo(null);
-
-                
-         
-        
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -212,21 +207,19 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
 
     private void jButtonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActualizarMouseClicked
         Usuario fake = user;
-        
+
         fake = actualizarDatos(fake);
 
-        
-       int respuesta =  JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n"+fake);
-        
-        if (respuesta == JOptionPane.YES_OPTION){
+        int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea actualizarel usuario?\nEsta sera su nueva informacion: \n" + fake);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
             dBManager.DBManager.UpdateUsuario(fake);
-                    this.setVisible(false);
-        
+            this.setVisible(false);
+
             IntGraficaMenu.main(fake);
         }
-        
 
-        
+
     }//GEN-LAST:event_jButtonActualizarMouseClicked
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
@@ -235,10 +228,10 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
 
     private void jButtonVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVolverMouseClicked
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
         IntGraficaMenu.main(user);
-        
+
     }//GEN-LAST:event_jButtonVolverMouseClicked
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
@@ -273,47 +266,55 @@ public class IntGraficaGestionPerfil extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
         user = usuario;
-        
-        
- java.awt.EventQueue.invokeLater(() -> {
-     new IntGraficaGestionPerfil().setVisible(true);
-     cargarDatos();
+
+        java.awt.EventQueue.invokeLater(() -> {
+            new IntGraficaGestionPerfil().setVisible(true);
+            cargarDatos();
         });
- 
- 
 
     }
-    
-    public static void cargarDatos(){
-    //    System.out.println(user);
-    
+
+    public static void cargarDatos() {
+        //    System.out.println(user);
+
         jTextFieldNombre.setText(user.getNombre());
         jTextFieldApellidos.setText(user.getApellido());
         jTextFieldMovil.setText(Integer.toString(user.getMovil()));
         jTextFieldDNI.setText(user.getDni());
         jTextFieldCorreo.setText(user.getCorreo());
-       jTextFieldFNacimientoDia.setText(Integer.toString(user.getFecha_nacimiento().getDay()));
-        jTextFieldFNacimientoMes.setText(Integer.toString(user.getFecha_nacimiento().getMonth()));
-        jTextFieldFNacimientoAno.setText(Integer.toString(user.getFecha_nacimiento().getYear()));
 
-  
+        String string = String.valueOf(user.getFecha_nacimiento());
+        String[] parts = string.split("-");
+        String anno = parts[0]; // 004
+        String mes = parts[1]; // 034556
+        String dia = parts[2];
+        jTextFieldFNacimientoDia.setText(dia);
+        jTextFieldFNacimientoMes.setText(mes);
+        jTextFieldFNacimientoAno.setText(anno);
 
     }
-    
-    public static Usuario actualizarDatos(Usuario fake){
-        
+
+    public static Usuario actualizarDatos(Usuario fake) {
+
         fake.setNombre(jTextFieldNombre.getText());
         fake.setApellido(jTextFieldApellidos.getText());
         fake.setMovil(Integer.parseInt(jTextFieldMovil.getText()));
         fake.setDni(jTextFieldDNI.getText());
         fake.setCorreo(jTextFieldCorreo.getText());
-        int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
+
+        String f_ano = jTextFieldFNacimientoAno.getText();
+        String f_mes = jTextFieldFNacimientoMes.getText();
+        String f_dia = jTextFieldFNacimientoDia.getText();
+        String f_nac = f_ano + "/" + f_mes + "/" + f_dia;
+        System.out.println(f_nac);
+        Date fecha = new Date(f_nac);
+        fake.setFecha_nacimiento(fecha);
+        /*int dia = Integer.parseInt(jTextFieldFNacimientoDia.getText());
         int mes = Integer.parseInt(jTextFieldFNacimientoMes.getText());
         int ano = Integer.parseInt(jTextFieldFNacimientoAno.getText());
-        Date fecha = new Date (ano, mes, dia);
-        fake.setFecha_nacimiento(fecha);
+        Date fecha = new Date(ano, mes, dia);
+        fake.setFecha_nacimiento(fecha);*/
         return fake;
     }
 

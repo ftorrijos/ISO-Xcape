@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Scanner;
 import modelo.*;
 
@@ -74,6 +75,7 @@ public class MenuAdmin {
                 Menuadmin(usuario_id);
                 break;
             case 10:
+                insertar_usuario();
                 Menuadmin(usuario_id);
                 break;
             case 11:
@@ -94,8 +96,15 @@ public class MenuAdmin {
                 db.insertarEventos(evento);
                 Menuadmin(usuario_id);
                 break;
+            case 15:
+                asignarGrupo();
+                Menuadmin(usuario_id);
+                break;
+            case 16:
+                break;
             default:
-                System.out.println("\nVolviendo al menu principal...");
+                System.out.println("Opcion no valida");
+                Menuadmin(usuario_id);
                 break;
         }
 
@@ -112,15 +121,17 @@ public class MenuAdmin {
         System.out.println("7.Mostrar responsables");
         System.out.println("8.Insertar responsables");
         System.out.println("9.Mostar Usuarios");
-        System.out.println("10.Insertar usuarios(CURRENTLY UNAVAILABLE)");
+        System.out.println("10.Insertar usuarios");
         System.out.println("11.Mostrar viajes");
         System.out.println("12.Insertar viajes");
         System.out.println("13.Listar Eventos");
         System.out.println("14.Insertar Eventos");
-        System.out.println("15.SALIR");
+        System.out.println("15.Asignar Grupo");
+        System.out.println("16.SALIR");
 
     }
-     private static void mostrartMenuGrupos() {
+
+    private static void mostrartMenuGrupos() {
         System.out.println("\t" + "MENU GRUPOS");
         System.out.println("1.Mostrar");
         System.out.println("2.Insertar");
@@ -234,7 +245,7 @@ public class MenuAdmin {
         Viaje viaje = new Viaje(hotel, direccion_hotel, regimen, estacion_forfait, duracion);
         return viaje;
     }
-    
+
     private Evento insertarEvento() throws SQLException {
 
         Scanner scViaje = new Scanner(System.in);
@@ -246,10 +257,55 @@ public class MenuAdmin {
         String ciudad = scViaje.nextLine();
         System.out.println("Por favor introducir la fecha(xx/xx/xxxx):");
         String fecha = scViaje.nextLine().toLowerCase();
-        
-        
-        Evento evento = new Evento(nombre,direccion,ciudad,fecha,0);
-        
+
+        Evento evento = new Evento(nombre, direccion, ciudad, fecha, 0);
+
         return evento;
+    }
+
+    public void insertar_usuario() {
+        System.out.println("\tREGISTRO:");
+        System.out.println("Por favor, introduzca los siguientes datos:");
+        try {
+            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Nombre: ");
+            String nombre = consola.readLine();
+            System.out.println("Apellido:");
+            String apellido = consola.readLine();
+            System.out.println("Fecha de nacimiento en formato AAAA/MM/DD");
+            Date fecha_nacimiento = new Date(consola.readLine());
+            System.out.println("DNI:");
+            String dni = consola.readLine();
+            System.out.println("Correo electrónico:");
+            String correo = consola.readLine();
+            System.out.println("Movil: ");
+            int movil = Integer.parseInt(consola.readLine());
+            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            DBManager.insertarUsuarios(usuario);
+            //System.out.println(usuario.getNombre() + " bienvenido a la eXperiencia Xcape");
+        } catch (IOException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+    public void asignarGrupo() throws SQLException{
+        System.out.println("\n\n");
+        DBManager.listarGrupos();
+        System.out.println("\n-------------\n");
+        DBManager.listarUsuarios();
+        System.out.println("\n-------------\n");
+        
+        try{
+            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in)); 
+            System.out.println("Introduzca dni del usuario");
+            String dni = consola.readLine();
+            Usuario user = db.seleccionar_usuario(dni);
+            System.out.println("Introduzca nombre del grupo");
+            String nombre = consola.readLine();
+            Grupo grupo = db.selectGrupoPorNombre(nombre);
+            DBManager.insertarUsuario_Grupo(user, grupo); 
+        }catch(IOException ex){
+            System.out.println("Se ha producido un error: " + ex);
+        }
+               
     }
 }

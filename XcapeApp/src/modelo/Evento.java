@@ -122,8 +122,7 @@ public class Evento {
     @Override
     public String toString() {
 
-        return "Evento{" + "Id=" + getEvento_id() + ", nombre=" + getNombre() + " ,dirección=" + getDireccion() + " ,ciudad=" + getCiudad() + " , fecha=" + getFecha() + " ,asistentes= " + getListas() + '}';
-
+        //return "Evento{" + "Id=" + getEvento_id() + ", nombre=" + getNombre() + " ,dirección=" + getDireccion() + " ,ciudad=" + getCiudad() + " , fecha=" + getFecha() + " ,asistentes= " + getListas() + '}';
+        return "Evento " + getEvento_id() + " " + getNombre() + " (" + getDireccion() + ")" + "\nFecha: " + getFecha() + "\nNumero px: " + getListas();
     }
-
 }

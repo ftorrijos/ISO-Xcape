@@ -7,36 +7,28 @@ package interfaz;
 
 import modelo.Usuario;
 import dBManager.DBManager;
-import java.awt.Component;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import modelo.Incidencia;
 
 /**
  *
  * @author javiersancerninozaleda
  */
-
-public class IntGraficaListaInciden extends javax.swing.JFrame {
+public class IntGraficaMiGrupo extends javax.swing.JFrame {
     public static Usuario user;
   //  public static JList list;
 
     /**
      * Creates new form IntGrafica
+     * @throws java.sql.SQLException
      */
-    public IntGraficaListaInciden() throws SQLException {
+    public IntGraficaMiGrupo() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
-               listarIncidencias();
+               listarGrupo();
 
     }
  
@@ -128,7 +120,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel2.setText("INCIDENCIAS");
+        jLabel2.setText("Mi Grupo");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 5)); // NOI18N
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/9895.png"))); // NOI18N
@@ -160,7 +152,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(184, 184, 184)
                 .addComponent(jLabelLogo)
@@ -204,49 +196,47 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
         IntGraficaMenu.main(user);
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    public  static ArrayList<Incidencia> arr;
+    public  static ArrayList<Usuario> arr;
     public static DefaultTableModel model;
-    public static void listarIncidencias() throws SQLException{
-     arr = DBManager.listarIncidenciasUserIDDevuelveArrayList(user.getUsuario_id());
+    public static void listarGrupo() throws SQLException{
+     arr = DBManager.selectComponentesArrayListUsuarioPorUserID(user.getUsuario_id());
      
-       String matriz[][] = new String[arr.size()][4];
+       String matriz[][] = new String[arr.size()][3];
        
        for(int i=0; i<arr.size(); i++){
            
-           int a = arr.get(i).getIncidencia_id();
-           matriz[i][0] = String.valueOf(a);
-           System.out.println(matriz[i][0]);
-           int b = arr.get(i).getUsuario_id();
-           matriz[i][1] = Integer.toString(b);
-           System.out.println(matriz[i][1]);
-           int c = arr.get(i).getGrupo_id();
-           matriz[i][2] = Integer.toString(c);
-           System.out.println(matriz[i][2]);
-           matriz[i][3] = arr.get(i).getMensaje();
+            matriz[i][0]= arr.get(i).getNombre();
+           
+           matriz[i][1] = arr.get(i).getApellido();
+           
+          matriz[i][2] = Integer.toString(arr.get(i).getMovil());
+           
+           //System.out.println(matriz[i][2]);
+         
+          /* matriz[i][3] = arr.get(i).getMensaje();
            System.out.println("hola"+arr.get(i).getMensaje());
-           System.out.println(matriz[i][3]);
+           System.out.println(matriz[i][3]);*/
        }
        
         model = new DefaultTableModel();
        
-       Object[] columnsName = new Object[4];
+       Object[] columnsName = new Object[3];
         
-        columnsName[0] = "Id incidencia";
-        columnsName[1] = "Id usuario";
-        columnsName[2] = "Id grupo";
-        columnsName[3] = "Mensaje";
+        columnsName[0] = "Nombre";
+        columnsName[1] = "Apellido";
+        columnsName[2] = "Numero";
+
         
         model.setColumnIdentifiers(columnsName);
         
        
-        Object[] rowData = new Object[4];
+        Object[] rowData = new Object[3];
         
         for(int i = 0; i < arr.size(); i++){
             
-            rowData[0] = arr.get(i).getIncidencia_id();
-            rowData[1] = arr.get(i).getUsuario_id();
-            rowData[2] = arr.get(i).getGrupo_id();
-            rowData[3] = arr.get(i).getMensaje();
+            rowData[0] = arr.get(i).getNombre();
+            rowData[1] = arr.get(i).getApellido();
+            rowData[2] = arr.get(i).getMovil();
                
                model.addRow(rowData);
         }
@@ -259,7 +249,7 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
     
     
     /**
-     * @param args the command line arguments
+     * @param usuario
      */
     public static void main(Usuario usuario) {
         /* Set the Nimbus look and feel */
@@ -294,9 +284,9 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new IntGraficaListaInciden().setVisible(true);
+                new IntGraficaMiGrupo().setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(IntGraficaListaInciden.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(IntGraficaMiGrupo.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         

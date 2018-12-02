@@ -23,6 +23,23 @@ import modelo.*;
  */
 public class DBManager {
 
+    public static void insertarUsuario_Grupo(Usuario user, Grupo grupo) {
+        Connection c = getConnection();
+        try {
+            String insertSql = "INSERT INTO usuario_grupo (user_id,grupo_id) VALUES(?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            System.out.println(user);
+            System.out.println(grupo);
+            ps.setInt(1, user.getUsuario_id());
+            ps.setInt(2, grupo.getGrupo_id());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public DBManager() {
 
     }
@@ -188,9 +205,9 @@ public class DBManager {
             while (rs.next()) {
                 int id = rs.getInt("usuario_id");
                 String nombre = rs.getString("nombre");
-                String apellido = rs.getString("nombre");
-                String dni = rs.getString("nombre");
-                String correo = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String dni = rs.getString("dni");
+                String correo = rs.getString("correo");
                 int movil = rs.getInt("movil");
                 Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, null);
                 System.out.println(usuario);
@@ -282,14 +299,14 @@ public class DBManager {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
             String correo = rs.getString(6);
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
-            System.out.println(usuario);
+            Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, fecha_nacimiento);
 
             rs.close();
             ps.close();
@@ -503,7 +520,7 @@ public class DBManager {
         return 0;
     }
 
-    public int selectIDGrupoPorIDusuario(int usuario_id) {
+    public static int selectIDGrupoPorIDusuario(int usuario_id) {
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -611,21 +628,21 @@ public class DBManager {
 
     }
 
-    public ArrayList<Usuario> selectComponentesArrayListUsuarioPorUserID(int id_usuario) throws SQLException {
+    public static ArrayList<Usuario> selectComponentesArrayListUsuarioPorUserID(int id_usuario) throws SQLException {
         int id_grupo = selectIDGrupoPorIDusuario(id_usuario);
 
-        ArrayList<Usuario> arrayUser = new ArrayList<Usuario>();
+        ArrayList<Usuario> arrayUser = new ArrayList<>();
         String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
-        PreparedStatement prep = c.prepareStatement(sql);
-        prep.setInt(1, id_grupo);
-        ResultSet rs = prep.executeQuery();
-        while (rs.next()) {
-            int user_id = rs.getInt("user_id");
-            Usuario user = seleccionar_usuarioPorID(user_id);
-            arrayUser.add(user);
+        try (PreparedStatement prep = c.prepareStatement(sql)) {
+            prep.setInt(1, id_grupo);
+            try (ResultSet rs = prep.executeQuery()) {
+                while (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    Usuario user = seleccionar_usuarioPorID(user_id);
+                    arrayUser.add(user);
+                }
+            }
         }
-        rs.close();
-        prep.close();
         return arrayUser;
     }
 
@@ -1050,7 +1067,7 @@ public class DBManager {
         }
     }
 
-    public  void updateAsistentesEvento(int evento_id) {
+    public void updateAsistentesEvento(int evento_id) {
         try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);

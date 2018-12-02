@@ -248,36 +248,40 @@ public class IntGraficaRegister extends javax.swing.JFrame {
 
     private void jBotonRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBotonRegistroMouseClicked
         // Comprobacion de que todos los campos estan rellenos y creacion de un usuario
-       String vacio = "";
-       if(jTextFieldNombre.getText().equals(vacio)|| jTextFieldApellidos.getText().equals(vacio) || jTextFieldDNI.getText().equals(vacio) 
-               ||jTextFieldMail.getText().equals(vacio) || jTextFieldFNacimientoAno.getText().equals(vacio) || jTextFieldFNacimientoMes.getText().equals(vacio)
-               || jTextFieldFNacimientoDia.getText().equals(vacio) || jTextFieldUsuario.getText().equals(vacio) || jPasswordField.getPassword().equals(vacio)){
-           
-        jTextFieldApellidos.setText("introduce algo mamon!");
-    
-       }
-               else{
+        String vacio = "";
+        if (jTextFieldNombre.getText().equals(vacio) || jTextFieldApellidos.getText().equals(vacio) || jTextFieldDNI.getText().equals(vacio)
+                || jTextFieldMail.getText().equals(vacio) || jTextFieldFNacimientoAno.getText().equals(vacio) || jTextFieldFNacimientoMes.getText().equals(vacio)
+                || jTextFieldFNacimientoDia.getText().equals(vacio) || jTextFieldUsuario.getText().equals(vacio) || jPasswordField.getPassword().equals(vacio)) {
 
-                     this.setVisible(false);
-                       }
-       
+            jTextFieldApellidos.setText("introduce algo mamon!");
+
+        } else {
+
+            this.setVisible(false);
+        }
+
     }//GEN-LAST:event_jBotonRegistroMouseClicked
 
     private void jBotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonRegistroActionPerformed
         // TODO add your handling code here:
-        
+
         String nombre = jTextFieldNombre.getText();
         String apellido = jTextFieldApellidos.getText();
         String dni = jTextFieldDNI.getText();
         int movil = Integer.parseInt(jTextFieldMovil.getText());
         String correo = jTextFieldMail.getText();
-        Date fecha = new Date (Integer.parseInt(jTextFieldFNacimientoAno.getText()), Integer.parseInt(jTextFieldFNacimientoMes.getText()), Integer.parseInt(jTextFieldFNacimientoDia.getText()));
-        
+        String f_ano = jTextFieldFNacimientoAno.getText();
+        String f_mes = jTextFieldFNacimientoMes.getText();
+        String f_dia = jTextFieldFNacimientoDia.getText();
+        String f_nac = f_ano + "/" + f_mes + "/" + f_dia;
+        System.out.println(f_nac);
+        Date fecha = new Date(f_nac);
+
         Usuario user = new Usuario(movil, nombre, apellido, dni, correo, fecha);
-        
+
         DBManager.insertarUsuarios(user);
         try {
-            DBManager.insertarTablaUserPassword(DBManager.selectIDUsuarioTablaUsuarios(nombre, apellido, dni),jTextFieldUsuario.getText(), jPasswordField.getText());
+            DBManager.insertarTablaUserPassword(DBManager.selectIDUsuarioTablaUsuarios(nombre, apellido, dni), jTextFieldUsuario.getText(), jPasswordField.getText());
         } catch (SQLException ex) {
             Logger.getLogger(IntGraficaRegister.class.getName()).log(Level.SEVERE, null, ex);
         }

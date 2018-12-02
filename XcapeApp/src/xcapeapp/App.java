@@ -3,17 +3,7 @@ Aplicación
  */
 package xcapeapp;
 
-import dBManager.DBManager;
-import implementacion.Login;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,17 +12,16 @@ import java.util.logging.Logger;
 public class App {
 
     /**
-     * En esta clase se arranca la App Cargamos la interfaz correspondiente y
-     * pasamos un objeto modificable
      *
      * @param args the command line arguments
      * @throws java.sql.SQLException
+     * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws SQLException, InterruptedException {
         System.out.println("Cargando App...\n");
-        interfaz.InterfazGrafica.run();
-       // interfaz.InterfazConsola.run();
-        System.out.println("Cerrando App...");
+        //interfaz.InterfazGrafica.run();
+        interfaz.InterfazConsola.run();
+        //System.out.println("Cerrando App...");
 
     }
 

@@ -5,7 +5,6 @@
  */
 package interfaz;
 import java.awt.*;
-import modelo.Usuario;
 import java.sql.SQLException;
 
 /**

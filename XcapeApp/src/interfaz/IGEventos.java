@@ -7,10 +7,15 @@ package interfaz;
 
 //import static dBManager.DBManager.updateAsistentesEvento;
 import dBManager.DBManager;
+import static interfaz.IntGraficaGestionPerfil.user;
+import java.awt.Dimension;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 import modelo.Evento;
 import modelo.Usuario;
 
@@ -19,9 +24,13 @@ import modelo.Usuario;
  * @author javiersancerninozaleda
  */
 public class IGEventos extends javax.swing.JFrame {
+
     static Usuario user;
+
     /**
      * Creates new form IGEventos
+     *
+     * @throws java.sql.SQLException
      */
     public IGEventos() throws SQLException {
         initComponents();
@@ -67,7 +76,7 @@ public class IGEventos extends javax.swing.JFrame {
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
         comboEventos.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        comboEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        comboEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String []{ }));
 
         jLabel2.setText("Seleccione un evento y pinche en ASISTIRE");
 
@@ -148,25 +157,37 @@ public class IGEventos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        //Evento evento = (Evento) comboEventos.getSelectedItem();
-        Evento evento;
-       // evento = comboEventos.getSelectionModel().getSelectedItem();
-      //  System.out.println(evento);
-        DBManager db  = new DBManager();
-      //   db.updateAsistentesEvento(evento.getEvento_id());
-        
+
+        //     ItemListener[] evento = comboEventos.getItemListeners();
+        Object evento = comboEventos.getSelectedItem();
+        String string = String.valueOf(evento);
+        String[] parts = string.split("\n");
+        String anno = parts[0]; // 004
+        String mes = parts[1]; // 034556
+        String dia = parts[2];
+        System.out.println(evento);
+
+        String[] parts2 = anno.split(" ");
+        String s1 = parts2[1];
+        //System.out.println(s1);
+        DBManager db = new DBManager();
+        db.updateAsistentesEvento(Integer.parseInt(s1));
+        this.setVisible(false);
+        IntGraficaMenu.main(user);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    private void cargarCombo() throws SQLException{
-        ArrayList<Evento> array= dBManager.DBManager.selectTodosLosEventosArrayList();
+    private void cargarCombo() throws SQLException {
+
+        //  JComboBox<Evento> combo = new JComboBox<>();
+        ArrayList<Evento> array = dBManager.DBManager.selectTodosLosEventosArrayList();
+
         array.forEach((evento) -> {
-            comboEventos.addItem(evento.getNombre()+evento.getCiudad()+" van: "+evento.getListas());
+            comboEventos.addItem(evento.toString());
         });
-        
+
     }
-    
+
     /**
      * @param usuario
      */
@@ -205,12 +226,12 @@ public class IGEventos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboEventos;
+    public static javax.swing.JComboBox<String> comboEventos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
