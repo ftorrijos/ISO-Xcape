@@ -30,9 +30,9 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "rootroot";
+        String clave = "root";
         String driver = "com.mysql.jdbc.Driver";
-        String URL = "jdbc:mysql://localhost:3306/dbxtesting";
+        String URL = "jdbc:mysql://localhost:3306/dbx";
         Connection connection = null;
         try {
             Class.forName(driver).newInstance();

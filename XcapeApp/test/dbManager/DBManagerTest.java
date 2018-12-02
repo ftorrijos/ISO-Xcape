@@ -45,8 +45,8 @@ public class DBManagerTest {
     Login log = new Login();
     Connection c = getConnection();
 
-//----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
-    Date date = new Date(1991 / 10 / 10);
+//--------- objetos utilizados en la base de datos Ficticia
+    Date date = new Date(1991/10/10);
     Usuario mockUser = new Usuario(879123542, "UsuarioPrueba", "ApellidoPrueba", "00000000K", "correo@prueba.com", date);
     LoginObjeto mockLogin = new LoginObjeto();
     Responsable mockResponsable = new Responsable("responsablenombre", "responsableapellido", 655549786);
@@ -88,11 +88,18 @@ public class DBManagerTest {
 
     }
     
-
-//-----------------------------------------TEST CORRESPONDIENTES A DB_Manager------------------------------------------------
-    @Test
-    public void testInsercciónSelecciónTodo() throws SQLException {
-        Assert.assertEquals(1, 1);
+   @Test
+    public void testSelectUsuario() throws SQLException{
+        Usuario usuarioBBDD = seleccionar_usuarioPorID(mockUser.getUsuario_id());
+        System.out.println("Aaaaaaaaaaaaaaaaaaaa"+usuarioBBDD);
+        assertEquals(mockUser.getUsuario_id(), usuarioBBDD.getUsuario_id());
+        assertEquals(mockUser.getNombre(),usuarioBBDD.getNombre());
+        assertEquals(mockUser.getApellido(),usuarioBBDD.getApellido());
+        assertEquals(mockUser.getFecha_nacimiento(),usuarioBBDD.getFecha_nacimiento());
+        assertEquals(mockUser.getDni(),usuarioBBDD.getDni());
+        assertEquals(mockUser.getCorreo(),usuarioBBDD.getCorreo());
+        assertEquals(mockUser.getMovil(),usuarioBBDD.getMovil());
+             
     }
 
     //----------------------------CREACION/ INSERCCION BBDD PRUEBA Y CONEXIONES ---------------------------------------------
@@ -168,15 +175,15 @@ public class DBManagerTest {
         insertarIncidencia(mockIncidencia);
         mockIncidencia.setIncidencia_id(selectIncidenciaPorUserIdYMensaje(mockUser.getUsuario_id(), mockIncidencia.getMensaje()).getIncidencia_id());
 
-        System.out.println(mockUser);
-        System.out.println(mockResponsable);
-        System.out.println(mockValoracion);
-        System.out.println("Pago{" + "pago_id=" + mockPago.getPago_id() + ", metodo de pago =" + mockPago.getMetodo_pago() + ", primer pago =" + mockPago.getPrimer_pago()
-                + " ,segundo pago=" + mockPago.getSegundo_pago() + " ,DNI=" + mockPago.getDni() + " , usuario=" + selectUserNameUsuario(mockUser.getUsuario_id()) + '}');
-        System.out.println(mockViaje);
-        System.out.println("Incidencia{" + "incidencia_id=" + mockIncidencia.getIncidencia_id() + ", usuario=" + listarUsuariosSoloNombre(mockUser.getUsuario_id()) + " ,grupo=" + listarGruposSoloNombre(mockGrupo.getGrupo_id()) + " ,mensaje=" + mockIncidencia.getMensaje() + "}");
-        System.out.println(mockEvento);
-        System.out.println(mockGrupo);
+//        System.out.println(mockUser);
+//        System.out.println(mockResponsable);
+//        System.out.println(mockValoracion);
+//        System.out.println("Pago{" + "pago_id=" + mockPago.getPago_id() + ", metodo de pago =" + mockPago.getMetodo_pago() + ", primer pago =" + mockPago.getPrimer_pago()
+//                + " ,segundo pago=" + mockPago.getSegundo_pago() + " ,DNI=" + mockPago.getDni() + " , usuario=" + selectUserNameUsuario(mockUser.getUsuario_id()) + '}');
+//        System.out.println(mockViaje);
+//        System.out.println("Incidencia{" + "incidencia_id=" + mockIncidencia.getIncidencia_id() + ", usuario=" + listarUsuariosSoloNombre(mockUser.getUsuario_id()) + " ,grupo=" + listarGruposSoloNombre(mockGrupo.getGrupo_id()) + " ,mensaje=" + mockIncidencia.getMensaje() + "}");
+//        System.out.println(mockEvento);
+//        System.out.println(mockGrupo);
 
     }
 
@@ -424,6 +431,7 @@ public class DBManagerTest {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int user_id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
@@ -431,7 +439,7 @@ public class DBManagerTest {
             String dni = rs.getString("dni");
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            Usuario usuario = new Usuario(user_id,movil, nombre, apellido, dni, correo, fecha_nacimiento);
             System.out.println(usuario);
 
             rs.close();
