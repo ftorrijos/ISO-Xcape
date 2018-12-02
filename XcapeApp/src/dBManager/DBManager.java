@@ -503,7 +503,7 @@ public class DBManager {
         return 0;
     }
 
-    public int selectIDGrupoPorIDusuario(int usuario_id) {
+    public static int selectIDGrupoPorIDusuario(int usuario_id) {
         try {
             String sql = "SELECT grupo_id FROM usuario_grupo WHERE user_id=?;";
             PreparedStatement prep = c.prepareStatement(sql);
@@ -611,21 +611,21 @@ public class DBManager {
 
     }
 
-    public ArrayList<Usuario> selectComponentesArrayListUsuarioPorUserID(int id_usuario) throws SQLException {
+    public static ArrayList<Usuario> selectComponentesArrayListUsuarioPorUserID(int id_usuario) throws SQLException {
         int id_grupo = selectIDGrupoPorIDusuario(id_usuario);
 
-        ArrayList<Usuario> arrayUser = new ArrayList<Usuario>();
+        ArrayList<Usuario> arrayUser = new ArrayList<>();
         String sql = "SELECT user_id FROM usuario_grupo WHERE grupo_id=?;";
-        PreparedStatement prep = c.prepareStatement(sql);
-        prep.setInt(1, id_grupo);
-        ResultSet rs = prep.executeQuery();
-        while (rs.next()) {
-            int user_id = rs.getInt("user_id");
-            Usuario user = seleccionar_usuarioPorID(user_id);
-            arrayUser.add(user);
+        try (PreparedStatement prep = c.prepareStatement(sql)) {
+            prep.setInt(1, id_grupo);
+            try (ResultSet rs = prep.executeQuery()) {
+                while (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    Usuario user = seleccionar_usuarioPorID(user_id);
+                    arrayUser.add(user);
+                }
+            }
         }
-        rs.close();
-        prep.close();
         return arrayUser;
     }
 

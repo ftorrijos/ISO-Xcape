@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import modelo.Evento;
 import modelo.Usuario;
 
@@ -159,7 +160,10 @@ public class IGEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
+    
     private void cargarCombo() throws SQLException{
+        JComboBox<Evento> combo = new JComboBox<Evento>();
+        
         ArrayList<Evento> array= dBManager.DBManager.selectTodosLosEventosArrayList();
         array.forEach((evento) -> {
             comboEventos.addItem(evento.getNombre()+evento.getCiudad()+" van: "+evento.getListas());
