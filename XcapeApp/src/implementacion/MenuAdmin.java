@@ -96,6 +96,11 @@ public class MenuAdmin {
                 db.insertarEventos(evento);
                 Menuadmin(usuario_id);
                 break;
+            case 15:
+                asignarGrupo();
+                Menuadmin(usuario_id);
+                break;
+                
             default:
                 System.out.println("\nVolviendo al menu principal...");
                 break;
@@ -119,7 +124,8 @@ public class MenuAdmin {
         System.out.println("12.Insertar viajes");
         System.out.println("13.Listar Eventos");
         System.out.println("14.Insertar Eventos");
-        System.out.println("15.SALIR");
+        System.out.println("15.Asignar Grupo");
+        System.out.println("16.SALIR");
 
     }
 
@@ -278,5 +284,26 @@ public class MenuAdmin {
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
+    }
+    public void asignarGrupo() throws SQLException{
+        System.out.println("\n\n");
+        DBManager.listarGrupos();
+        System.out.println("\n-------------\n");
+        DBManager.listarUsuarios();
+        System.out.println("\n-------------\n");
+        
+        try{
+            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in)); 
+            System.out.println("Introduzca dni del usuario");
+            String dni = consola.readLine();
+            Usuario user = db.seleccionar_usuario(dni);
+            System.out.println("Introduzca nombre del grupo");
+            String nombre = consola.readLine();
+            Grupo grupo = db.selectGrupoPorNombre(nombre);
+            DBManager.insertarUsuario_Grupo(user, grupo); 
+        }catch(IOException ex){
+            System.out.println("Se ha producido un error: " + ex);
+        }
+               
     }
 }
