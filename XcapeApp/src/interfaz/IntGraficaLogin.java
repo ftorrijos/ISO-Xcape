@@ -5,16 +5,9 @@
  */
 package interfaz;
 
-import java.awt.Image;
-import static java.lang.System.exit;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import java.awt.*;
-
 import dBManager.*;
 import java.sql.SQLException;
-import static java.util.Objects.hash;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.LoginObjeto;
@@ -29,7 +22,6 @@ import modelo.Usuario;
  */
 public class IntGraficaLogin extends javax.swing.JFrame {
 
-
     /**
      * Creates new form IntGrafica
      */
@@ -37,7 +29,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
- 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -215,36 +207,33 @@ public class IntGraficaLogin extends javax.swing.JFrame {
 
     private void BotonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAccederActionPerformed
         // TODO add your handling code here:
-       //ESTO ES UNA PRUEBA DE QUE FUNCIONA
-       
-       String TextoVacio = "";
+        //ESTO ES UNA PRUEBA DE QUE FUNCIONA
 
-       Usuario user = null;
+        String TextoVacio = "";
 
-      
-      if(jUsuario.getText().equals(TextoVacio) || jContrasena.getText().equals(TextoVacio)){
-           
-      JOptionPane.showMessageDialog(null, "Introduzca usuario y contrasena");
-      
-    
-       } 
-      else{
-           try {
-               user = haceLogin();
-           } catch (SQLException ex) {
-               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
-           } catch (NoSuchAlgorithmException ex) {
-               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
-           } catch (UnsupportedEncodingException ex) {
-               Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
-           this.setVisible(false);
+        Usuario user = null;
+
+        if (jUsuario.getText().equals(TextoVacio) || jContrasena.getText().equals(TextoVacio)) {
+
+            JOptionPane.showMessageDialog(null, "Introduzca usuario y contrasena");
+
+        } else {
+            try {
+                user = haceLogin();
+            } catch (SQLException ex) {
+                Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(IntGraficaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.setVisible(false);
             IntGraficaMenu.main(user);
-           
-      } 
-         
-       
+
+        }
+
+
     }//GEN-LAST:event_BotonAccederActionPerformed
 
     private void jUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUsuarioActionPerformed
@@ -272,7 +261,6 @@ public class IntGraficaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelUser1ComponentAdded
 
     /**
-     * @param args the command line arguments
      */
     public static void main() {
         /* Set the Nimbus look and feel */
@@ -300,57 +288,49 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new IntGraficaLogin().setVisible(true);
         });
-        
-        
+
     }
-    
-   
-    public Usuario haceLogin() throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
-        
+
+    public Usuario haceLogin() throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
         DBManager db = new DBManager();
         LoginObjeto log = new LoginObjeto();
 
-     
-           
-          String username = jUsuario.getText();
-          String password = jContrasena.getText();
-          String passHash = Login.hash(password);
-         
+        String username = jUsuario.getText();
+        String password = jContrasena.getText();
+        String passHash = Login.hash(password);
 
-          String dbPass = db.selectPasswordUsuario(username);
+        String dbPass = db.selectPasswordUsuario(username);
 
-         
-          if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
+        if (username.equals("admin") && dbPass.equalsIgnoreCase(passHash)) {
             log.setUsuario_id(db.selectIDUsuario(username));
             log.setPass("okadmin");
-    //        return log;
+            //        return log;
         } else if (dbPass.equalsIgnoreCase(passHash)) {
             log.setUsuario_id(db.selectIDUsuario(username));
             log.setPass("ok");
-   //         return log;
+            //         return log;
         } else {
             JOptionPane.showMessageDialog(null, "Introduzca usuario y contrasena validos");
 
             log.setUsuario_id(0);
             log.setPass("nook");
-    //        return log;
+            //        return log;
         }
-          
-       Usuario user  = DBManager.seleccionar_usuarioPorID(log.getUsuario_id());
-         user.setUsuario_id(log.getUsuario_id());
-          return user;
-       
-        
+
+        Usuario user = DBManager.seleccionar_usuarioPorID(log.getUsuario_id());
+        user.setUsuario_id(log.getUsuario_id());
+        return user;
+
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;

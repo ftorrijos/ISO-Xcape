@@ -16,7 +16,7 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
      */
     public IntGraficaPrincipal() {
         initComponents();
-                this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -45,16 +45,12 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
-        
         java.awt.EventQueue.invokeLater(() -> {
             new IntGraficaPrincipal().setVisible(true);
         });
-        
-        
+
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,18 +120,18 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
-        
-    /*    this.setVisible(false);
+
+        /*    this.setVisible(false);
         interfaz.IntGraficaLogin.main();
-        */
+         */
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseClicked
         // TODO add your handling code here:
-       
+
         this.setVisible(false);
         interfaz.IntGraficaLogin.main();
-        
+
     }//GEN-LAST:event_jButtonLoginMouseClicked
 
     private void BotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCerrarMouseClicked
@@ -151,7 +147,6 @@ public class IntGraficaPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BotonCerrar;

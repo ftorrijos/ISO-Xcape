@@ -32,7 +32,7 @@ public class GestionPerfil {
             System.out.println("Movil: ");
             int movil = Integer.parseInt(consola.readLine());
             Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
-            db.insertarUsuarios(usuario);
+            DBManager.insertarUsuarios(usuario);
             System.out.println(usuario.getNombre() + " bienvenido a la eXperiencia Xcape");
         } catch (IOException e) {
             System.out.println("Error: " + e);
