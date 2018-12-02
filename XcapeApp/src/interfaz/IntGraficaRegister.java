@@ -276,7 +276,6 @@ public class IntGraficaRegister extends javax.swing.JFrame {
         String f_nac = f_ano + "/" + f_mes + "/" + f_dia;
         System.out.println(f_nac);
         Date fecha = new Date(f_nac);
-        //Date fecha = new Date(Integer.parseInt(jTextFieldFNacimientoAno.getText()), Integer.parseInt(jTextFieldFNacimientoMes.getText()), Integer.parseInt(jTextFieldFNacimientoDia.getText()));
 
         Usuario user = new Usuario(movil, nombre, apellido, dni, correo, fecha);
 
