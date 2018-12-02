@@ -114,7 +114,7 @@ public class MenuAdmin {
         System.out.println("7.Mostrar responsables");
         System.out.println("8.Insertar responsables");
         System.out.println("9.Mostar Usuarios");
-        System.out.println("10.Insertar usuarios(CURRENTLY UNAVAILABLE)");
+        System.out.println("10.Insertar usuarios");
         System.out.println("11.Mostrar viajes");
         System.out.println("12.Insertar viajes");
         System.out.println("13.Listar Eventos");
@@ -122,7 +122,8 @@ public class MenuAdmin {
         System.out.println("15.SALIR");
 
     }
-     private static void mostrartMenuGrupos() {
+
+    private static void mostrartMenuGrupos() {
         System.out.println("\t" + "MENU GRUPOS");
         System.out.println("1.Mostrar");
         System.out.println("2.Insertar");
@@ -236,7 +237,7 @@ public class MenuAdmin {
         Viaje viaje = new Viaje(hotel, direccion_hotel, regimen, estacion_forfait, duracion);
         return viaje;
     }
-    
+
     private Evento insertarEvento() throws SQLException {
 
         Scanner scViaje = new Scanner(System.in);
@@ -248,12 +249,13 @@ public class MenuAdmin {
         String ciudad = scViaje.nextLine();
         System.out.println("Por favor introducir la fecha(xx/xx/xxxx):");
         String fecha = scViaje.nextLine().toLowerCase();
-        
-        
-        Evento evento = new Evento(nombre,direccion,ciudad,fecha,0);
-        
+
+        Evento evento = new Evento(nombre, direccion, ciudad, fecha, 0);
+
         return evento;
-    }public void insertar_usuario() {
+    }
+
+    public void insertar_usuario() {
         System.out.println("\tREGISTRO:");
         System.out.println("Por favor, introduzca los siguientes datos:");
         try {
@@ -272,7 +274,7 @@ public class MenuAdmin {
             int movil = Integer.parseInt(consola.readLine());
             Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
             DBManager.insertarUsuarios(usuario);
-           //System.out.println(usuario.getNombre() + " bienvenido a la eXperiencia Xcape");
+            //System.out.println(usuario.getNombre() + " bienvenido a la eXperiencia Xcape");
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
