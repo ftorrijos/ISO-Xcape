@@ -25,6 +25,7 @@ import modelo.Incidencia;
  *
  * @author javiersancerninozaleda
  */
+
 public class IntGraficaListaInciden extends javax.swing.JFrame {
     public static Usuario user;
   //  public static JList list;
