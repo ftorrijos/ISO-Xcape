@@ -123,6 +123,6 @@ public class Evento {
     public String toString() {
 
         //return "Evento{" + "Id=" + getEvento_id() + ", nombre=" + getNombre() + " ,dirección=" + getDireccion() + " ,ciudad=" + getCiudad() + " , fecha=" + getFecha() + " ,asistentes= " + getListas() + '}';
-        return "Evento" + getEvento_id() + ": " + getNombre() + " (" + getDireccion() + ")" + "\nFecha: " + getFecha() + "\nNumero px: " + getListas();
+        return "Evento " + getEvento_id() + " " + getNombre() + " (" + getDireccion() + ")" + "\nFecha: " + getFecha() + "\nNumero px: " + getListas();
     }
 }

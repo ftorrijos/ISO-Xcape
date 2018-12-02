@@ -7,6 +7,7 @@ package interfaz;
 
 //import static dBManager.DBManager.updateAsistentesEvento;
 import dBManager.DBManager;
+import static interfaz.IntGraficaGestionPerfil.user;
 import java.awt.Dimension;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
@@ -23,9 +24,12 @@ import modelo.Usuario;
  * @author javiersancerninozaleda
  */
 public class IGEventos extends javax.swing.JFrame {
+
     static Usuario user;
+
     /**
      * Creates new form IGEventos
+     *
      * @throws java.sql.SQLException
      */
     public IGEventos() throws SQLException {
@@ -153,31 +157,37 @@ public class IGEventos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-   //     ItemListener[] evento = comboEventos.getItemListeners();
-        
-          Object evento = comboEventos.getSelectedItem();
-          System.out.println(evento);
-          
 
+        //     ItemListener[] evento = comboEventos.getItemListeners();
+        Object evento = comboEventos.getSelectedItem();
+        String string = String.valueOf(evento);
+        String[] parts = string.split("\n");
+        String anno = parts[0]; // 004
+        String mes = parts[1]; // 034556
+        String dia = parts[2];
+        System.out.println(evento);
+
+        String[] parts2 = anno.split(" ");
+        String s1 = parts2[1];
+        //System.out.println(s1);
+        DBManager db = new DBManager();
+        db.updateAsistentesEvento(Integer.parseInt(s1));
+        this.setVisible(false);
+        IntGraficaMenu.main(user);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
-    private void cargarCombo() throws SQLException{
-       
-      //  JComboBox<Evento> combo = new JComboBox<>();
-       
-       
-        ArrayList<Evento> array= dBManager.DBManager.selectTodosLosEventosArrayList();
-        
+    private void cargarCombo() throws SQLException {
+
+        //  JComboBox<Evento> combo = new JComboBox<>();
+        ArrayList<Evento> array = dBManager.DBManager.selectTodosLosEventosArrayList();
+
         array.forEach((evento) -> {
             comboEventos.addItem(evento.toString());
-        }); 
+        });
 
     }
-    
+
     /**
      * @param usuario
      */

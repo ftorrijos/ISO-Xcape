@@ -23,6 +23,23 @@ import modelo.*;
  */
 public class DBManager {
 
+    public static void insertarUsuario_Grupo(Usuario user, Grupo grupo) {
+        Connection c = getConnection();
+        try {
+            String insertSql = "INSERT INTO usuario_grupo (user_id,grupo_id) VALUES(?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            System.out.println(user);
+            System.out.println(grupo);
+            ps.setInt(1, user.getUsuario_id());
+            ps.setInt(2, grupo.getGrupo_id());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public DBManager() {
 
     }
@@ -188,9 +205,9 @@ public class DBManager {
             while (rs.next()) {
                 int id = rs.getInt("usuario_id");
                 String nombre = rs.getString("nombre");
-                String apellido = rs.getString("nombre");
-                String dni = rs.getString("nombre");
-                String correo = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String dni = rs.getString("dni");
+                String correo = rs.getString("correo");
                 int movil = rs.getInt("movil");
                 Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, null);
                 System.out.println(usuario);
@@ -282,14 +299,14 @@ public class DBManager {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
             String correo = rs.getString(6);
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
-            System.out.println(usuario);
+            Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, fecha_nacimiento);
 
             rs.close();
             ps.close();
@@ -1050,7 +1067,7 @@ public class DBManager {
         }
     }
 
-    public  void updateAsistentesEvento(int evento_id) {
+    public void updateAsistentesEvento(int evento_id) {
         try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
