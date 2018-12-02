@@ -30,7 +30,7 @@ public class DBManager {
     public static Connection getConnection() {
 
         String usuario = "root";
-        String clave = "root";
+        String clave = "rootroot";
         String driver = "com.mysql.jdbc.Driver";
         String URL = "jdbc:mysql://localhost:3306/dbx";
         Connection connection = null;
@@ -1134,7 +1134,7 @@ public class DBManager {
         }
     }
 
-    public Valoracion selectValoracioUserIdViajeId(int user_id, int viaje_id) throws SQLException {
+    public static Valoracion selectValoracioUserIdViajeId(int user_id, int viaje_id) throws SQLException {
 
         String sql = "SELECT * FROM valora_experiencia WHERE usuario_id=? and viaje_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);

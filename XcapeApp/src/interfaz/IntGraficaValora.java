@@ -5,6 +5,9 @@
  */
 package interfaz;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
@@ -13,6 +16,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+import modelo.Valoracion;
 
 /**
  *
@@ -28,6 +34,11 @@ public class IntGraficaValora extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
+        try {
+            cargarRespuestas();
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaValora.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  
     /**
@@ -50,7 +61,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
-        BotonAcceder = new javax.swing.JButton();
+        BotonEnviar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
@@ -159,10 +170,10 @@ public class IntGraficaValora extends javax.swing.JFrame {
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcape pequeno.jpg"))); // NOI18N
 
-        BotonAcceder.setText("ENVIAR");
-        BotonAcceder.addActionListener(new java.awt.event.ActionListener() {
+        BotonEnviar.setText("ENVIAR");
+        BotonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonAccederActionPerformed(evt);
+                BotonEnviarActionPerformed(evt);
             }
         });
 
@@ -219,7 +230,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(217, 217, 217)
-                        .addComponent(BotonAcceder)))
+                        .addComponent(BotonEnviar)))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,7 +260,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jLabel3)
                         .addGap(43, 43, 43)))
-                .addComponent(BotonAcceder)
+                .addComponent(BotonEnviar)
                 .addGap(43, 43, 43))
         );
 
@@ -274,10 +285,40 @@ public class IntGraficaValora extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jUsuario1ActionPerformed
 
-    private void BotonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAccederActionPerformed
+    private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         // TODO add your handling code here:
         //ESTO ES UNA PRUEBA DE QUE FUNCIONA
-    }//GEN-LAST:event_BotonAccederActionPerformed
+        
+        
+        int idGrupo = 0;
+        try {
+            idGrupo = dBManager.DBManager.IdGrupoPorIdUsuarios(user.getUsuario_id());
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaValora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int idViaje = 0;
+        try {
+            idViaje = dBManager.DBManager.IdViajePorIdGrupo(idGrupo);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaValora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String siNo = null;
+        if (jCheckSI.isSelected()){
+            siNo = "si";
+        }
+        if(jCheckNO.isSelected()){
+            siNo = "no";
+        }
+       
+        
+        
+        Valoracion val = new Valoracion(user.getUsuario_id(), idViaje, jSlider1.getValue(), siNo);
+        
+        dBManager.DBManager.insertarValoracion(val);
+        
+        this.setVisible(false);
+        IntGraficaMenu.main(user);
+    }//GEN-LAST:event_BotonEnviarActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
@@ -285,6 +326,46 @@ public class IntGraficaValora extends javax.swing.JFrame {
         IntGraficaMenu.main(user);
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void cargarRespuestas() throws SQLException{
+        
+        int idGrupo = 0;
+        try {
+            idGrupo = dBManager.DBManager.IdGrupoPorIdUsuarios(user.getUsuario_id());
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaValora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int idViaje = 0;
+        try {
+            idViaje = dBManager.DBManager.IdViajePorIdGrupo(idGrupo);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntGraficaValora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Valoracion val = dBManager.DBManager.selectValoracioUserIdViajeId(user.getUsuario_id(), idViaje);
+        
+        if(val==null){
+          JOptionPane.showMessageDialog(rootPane, "Aun no has valorado tu experiencia... HAZLO!");
+
+        }
+        else{
+        
+        if(val.getSi_no().equals("si")){
+            jCheckSI.setSelected(true);
+        }
+        if(val.getSi_no().equals("no")){
+            jCheckNO.setSelected(true);
+        }
+        
+        jSlider1.setValue(val.getNota());
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -354,7 +435,7 @@ public class IntGraficaValora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertImage;
-    private javax.swing.JButton BotonAcceder;
+    private javax.swing.JButton BotonEnviar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     public static javax.swing.JRadioButton jCheckNO;

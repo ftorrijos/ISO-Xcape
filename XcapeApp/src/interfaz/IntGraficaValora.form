@@ -215,7 +215,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
-                          <Component id="BotonAcceder" min="-2" max="-2" attributes="0"/>
+                          <Component id="BotonEnviar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="66" max="32767" attributes="0"/>
@@ -256,7 +256,7 @@
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="BotonAcceder" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonEnviar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -280,12 +280,12 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BotonAcceder">
+        <Component class="javax.swing.JButton" name="BotonEnviar">
           <Properties>
             <Property name="text" type="java.lang.String" value="ENVIAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonAccederActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonEnviarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
