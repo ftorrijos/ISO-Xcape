@@ -20,7 +20,7 @@ public class App {
      */
     public static void main(String[] args) throws SQLException, InterruptedException, Exception {
         System.out.println("Cargando App...\n");
-        //interfaz.InterfazGrafica.run();
+        interfaz.InterfazGrafica.run();
         //interfaz.InterfazConsola.run();
         //System.out.println("Cerrando App...");
         Tiempo tiempo = new Tiempo();
