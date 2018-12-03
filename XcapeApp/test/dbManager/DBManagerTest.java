@@ -44,11 +44,10 @@ public class DBManagerTest {
     DBManager db = new DBManager();
     Login log = new Login();
     Connection c = getConnection();
-
-//----------Usuario de prueba, es el usuario mock que no llega a almacenarse en la BBDD
-    Date date = new Date(1991 / 10 / 10);
+//--------- objetos utilizados en la base de datos Ficticia
+    Date date = new Date();
     Usuario mockUser = new Usuario(879123542, "UsuarioPrueba", "ApellidoPrueba", "00000000K", "correo@prueba.com", date);
-    LoginObjeto mockLogin = new LoginObjeto();
+    LoginObjeto mockLogin = new LoginObjeto(0, "mockpassword");
     Responsable mockResponsable = new Responsable("responsablenombre", "responsableapellido", 655549786);
     Evento mockEvento = new Evento("evento mock", "una dirección", "ciudad", "27/08/1960", 14632);
     Viaje mockViaje = new Viaje("ViajeHotel", "DireccionHotel", "RegimenCompletoTieso", "EstacionTodas", 15000);
@@ -87,15 +86,184 @@ public class DBManagerTest {
         Assert.assertTrue(x.equalsIgnoreCase(y));
 
     }
-    
 
-//-----------------------------------------TEST CORRESPONDIENTES A DB_Manager------------------------------------------------
     @Test
-    public void testInsercciónSelecciónTodo() throws SQLException {
-        Assert.assertEquals(1, 1);
+    public void testSelectUsuarioPorID() throws SQLException {
+        Usuario usuarioBBDD = seleccionar_usuarioPorID(mockUser.getUsuario_id());
+
+        assertEquals(mockUser.getUsuario_id(), usuarioBBDD.getUsuario_id());
+        assertEquals(mockUser.getNombre(), usuarioBBDD.getNombre());
+        assertEquals(mockUser.getApellido(), usuarioBBDD.getApellido());
+        //assertEquals(mockUser.getFecha_nacimiento(), usuarioBBDD.getFecha_nacimiento());
+        assertEquals(mockUser.getDni(), usuarioBBDD.getDni());
+        assertEquals(mockUser.getCorreo(), usuarioBBDD.getCorreo());
+        assertEquals(mockUser.getMovil(), usuarioBBDD.getMovil());
+
     }
 
-    //----------------------------CREACION/ INSERCCION BBDD PRUEBA Y CONEXIONES ---------------------------------------------
+    @Test
+    public void testseleccionar_usuarioPorDNI() throws SQLException {
+        Usuario usuarioBBDD = seleccionar_usuario(mockUser.getDni());
+
+        assertEquals(mockUser.getUsuario_id(), usuarioBBDD.getUsuario_id());
+        assertEquals(mockUser.getNombre(), usuarioBBDD.getNombre());
+        assertEquals(mockUser.getApellido(), usuarioBBDD.getApellido());
+        //assertEquals(mockUser.getFecha_nacimiento(), usuarioBBDD.getFecha_nacimiento());
+        assertEquals(mockUser.getDni(), usuarioBBDD.getDni());
+        assertEquals(mockUser.getCorreo(), usuarioBBDD.getCorreo());
+        assertEquals(mockUser.getMovil(), usuarioBBDD.getMovil());
+    }
+
+    @Test
+    public void testselectNombreApellidoUsuarioPorUserID() throws SQLException {
+        Usuario usuarioBBDD = selectNombreApellidoUsuarioPorUserID(mockUser.getUsuario_id());
+
+        assertEquals(mockUser.getNombre(), usuarioBBDD.getNombre());
+        assertEquals(mockUser.getApellido(), usuarioBBDD.getApellido());
+
+    }
+
+    @Test
+    public void TestselectUserNameUsuario() throws SQLException {
+        String x = selectUserNameUsuario(mockUser.getUsuario_id());
+        assertEquals("UsuarioPrueba", x);
+
+    }
+
+    @Test
+    public void testSelectEventos() throws SQLException {
+        Evento eventoBBDD = selectEventoPorNombre(mockEvento.getNombre());
+
+        assertEquals(mockEvento.getEvento_id(), eventoBBDD.getEvento_id());
+        assertEquals(mockEvento.getNombre(), eventoBBDD.getNombre());
+        assertEquals(mockEvento.getDireccion(), eventoBBDD.getDireccion());
+        assertEquals(mockEvento.getCiudad(), eventoBBDD.getCiudad());
+        assertEquals(mockEvento.getFecha(), eventoBBDD.getFecha());
+        assertEquals(mockEvento.getListas(), eventoBBDD.getListas());
+
+    }
+
+    @Test
+    public void testSelectGrupoPorNombre() throws SQLException {
+        Grupo grupoBBDD = selectGrupoPorNombre(mockGrupo.getNombre());
+
+        assertEquals(mockGrupo.getGrupo_id(), grupoBBDD.getGrupo_id());
+        assertEquals(mockGrupo.getNombre(), grupoBBDD.getNombre());
+        assertEquals(mockGrupo.getResponsable_id(), grupoBBDD.getResponsable_id());
+        assertEquals(mockGrupo.getViaje_id(), grupoBBDD.getViaje_id());
+    }
+
+    @Test
+    public void testSelectIncidenciasPorUserIDYMensaje() throws SQLException {
+        Incidencia incidenciaBBDD = selectIncidenciaPorUserIdYMensaje(mockUser.getUsuario_id(), mockIncidencia.getMensaje());
+        assertEquals(mockIncidencia.getIncidencia_id(), incidenciaBBDD.getIncidencia_id());
+        assertEquals(mockIncidencia.getUsuario_id(), incidenciaBBDD.getUsuario_id());
+        assertEquals(mockIncidencia.getGrupo_id(), incidenciaBBDD.getGrupo_id());
+        assertEquals(mockIncidencia.getMensaje(), incidenciaBBDD.getMensaje());
+    }
+
+    @Test
+    public void testSelectViajePorUserId() throws SQLException {
+        Viaje viajeBBDD = selectViajePorUserId(mockUser.getUsuario_id());
+        // System.out.println("\n\n\n\n" + viajeBBDD);
+        assertEquals(mockViaje.getViaje_id(), viajeBBDD.getViaje_id());
+        assertEquals(mockViaje.getHotel(), viajeBBDD.getHotel());
+        assertEquals(mockViaje.getDireccion_hotel(), viajeBBDD.getDireccion_hotel());
+        assertEquals(mockViaje.getRegimen(), viajeBBDD.getRegimen());
+        assertEquals(mockViaje.getEstacion_forfait(), viajeBBDD.getEstacion_forfait());
+        assertEquals(mockViaje.getDuracion(), viajeBBDD.getDuracion());
+
+    }
+
+    @Test
+    public void testSelectViajePorNombre() throws SQLException {
+        Viaje viajeBBDD = selectViajePorNombre(mockViaje.getHotel());
+
+        assertEquals(mockViaje.getViaje_id(), viajeBBDD.getViaje_id());
+        assertEquals(mockViaje.getHotel(), viajeBBDD.getHotel());
+        assertEquals(mockViaje.getDireccion_hotel(), viajeBBDD.getDireccion_hotel());
+        assertEquals(mockViaje.getRegimen(), viajeBBDD.getRegimen());
+        assertEquals(mockViaje.getEstacion_forfait(), viajeBBDD.getEstacion_forfait());
+        assertEquals(mockViaje.getDuracion(), viajeBBDD.getDuracion());
+
+    }
+
+    @Test
+    public void testPagosPorUserID() throws SQLException {
+        Pagos pagoBBDD = pagosPorUserID(mockUser.getUsuario_id());
+
+        assertEquals(mockPago.getPago_id(), pagoBBDD.getPago_id());
+        assertEquals(mockPago.getMetodo_pago(), pagoBBDD.getMetodo_pago());
+        assertEquals(mockPago.getPrimer_pago(), pagoBBDD.getPrimer_pago());
+        assertEquals(mockPago.getSegundo_pago(), pagoBBDD.getSegundo_pago());
+        assertEquals(mockPago.getUsuario_id(), pagoBBDD.getUsuario_id());
+        assertEquals(mockPago.getDni(), pagoBBDD.getDni());
+
+    }
+
+    @Test
+    public void testlistarGruposSoloNombre() throws SQLException {
+        String nombre = listarGruposSoloNombre(mockGrupo.getGrupo_id());
+        assertEquals(mockGrupo.getNombre(), nombre);
+    }
+
+    @Test
+    public void testResponsablesYContactoPorNombre() throws SQLException {
+        Responsable responsableBBDD = selectResponsableYContactoPorNombre(mockResponsable.getNombre());
+        assertEquals(mockResponsable.getResponsable_id(), responsableBBDD.getResponsable_id());
+        assertEquals(mockResponsable.getNombre(), responsableBBDD.getNombre());
+        assertEquals(mockResponsable.getApellido(), responsableBBDD.getApellido());
+        assertEquals(mockResponsable.getMovil(), responsableBBDD.getMovil());
+    }
+
+    @Test
+    public void testasistenciaEventos() throws SQLException {
+        int asistentes = asistenciaEventos(mockEvento.getEvento_id());
+        assertEquals(mockEvento.getListas(), asistentes);
+    }
+    
+   
+
+    @Test
+    public void testlistarResponsableYContacto() throws SQLException {
+        Responsable responsableBBDD = listarResponsableYContacto(mockResponsable.getResponsable_id());
+        assertEquals(mockResponsable.getResponsable_id(), responsableBBDD.getResponsable_id());
+        assertEquals(mockResponsable.getNombre(), responsableBBDD.getNombre());
+        assertEquals(mockResponsable.getApellido(), responsableBBDD.getApellido());
+        assertEquals(mockResponsable.getMovil(), responsableBBDD.getMovil());
+    }
+
+    @Test
+    public void testPasswordPorUsuarioNombre() throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        String passwordBBDD = selectPasswordUsuario(mockUser.getNombre());
+        System.out.println("\n\n\n\n" + mockLogin.getPass());
+        assertEquals(implementacion.Login.hash(mockLogin.getPass()), passwordBBDD.toUpperCase());
+    }
+
+    @Test
+    public void testselectValoracioUserIdViajeId() throws SQLException {
+        Valoracion valoraBBDD = selectValoracioUserIdViajeId(mockUser.getUsuario_id(), mockViaje.getViaje_id());
+        assertEquals(mockValoracion.getValora_id(), valoraBBDD.getValora_id());
+        assertEquals(mockValoracion.getUsuario_id(), valoraBBDD.getUsuario_id());
+        assertEquals(mockValoracion.getViaje_id(), valoraBBDD.getViaje_id());
+        assertEquals(mockValoracion.getNota(), valoraBBDD.getNota());
+        assertEquals(mockValoracion.getSi_no(), valoraBBDD.getSi_no());
+
+    }
+    
+    
+     @Test
+    public void testUpdateasistenciaEventos() throws SQLException {
+        
+        updateAsistentesEvento(mockEvento.getEvento_id());
+        int asistentes = asistenciaEventos(mockEvento.getEvento_id());
+        assertEquals(mockEvento.getListas()+1, asistentes);
+        updateAsistentesEventoMenos1(mockEvento.getEvento_id());
+        
+    }
+
+
+//----------------------------CREACION/ INSERCCION BBDD PRUEBA Y CONEXIONES ---------------------------------------------
     public void createDatabase() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -140,8 +308,9 @@ public class DBManagerTest {
         insertarUsuarios(mockUser);
         Usuario user = seleccionar_usuario(mockUser.getDni());
         mockUser.setUsuario_id(user.getUsuario_id());
-        insertarTablaUserPassword(mockUser.getUsuario_id(), "UsuarioPrueba", "passwordprueba");
-//     mockLogin.setUsuario_id(user.getUsuario_id());
+        insertarTablaUserPassword(mockUser.getUsuario_id(), "UsuarioPrueba", mockLogin.getPass());
+        mockLogin.setUsuario_id(user.getUsuario_id());
+        Login x = new Login();
         insertarResponsable(mockResponsable);
         mockResponsable.setResponsable_id(selectResponsableYContactoPorNombre(mockResponsable.getNombre()).getResponsable_id());
         insertarViajes(mockViaje);
@@ -167,17 +336,16 @@ public class DBManagerTest {
         mockIncidencia.setUsuario_id(mockUser.getUsuario_id());
         insertarIncidencia(mockIncidencia);
         mockIncidencia.setIncidencia_id(selectIncidenciaPorUserIdYMensaje(mockUser.getUsuario_id(), mockIncidencia.getMensaje()).getIncidencia_id());
-
-        System.out.println(mockUser);
-        System.out.println(mockResponsable);
-        System.out.println(mockValoracion);
-        System.out.println("Pago{" + "pago_id=" + mockPago.getPago_id() + ", metodo de pago =" + mockPago.getMetodo_pago() + ", primer pago =" + mockPago.getPrimer_pago()
-                + " ,segundo pago=" + mockPago.getSegundo_pago() + " ,DNI=" + mockPago.getDni() + " , usuario=" + selectUserNameUsuario(mockUser.getUsuario_id()) + '}');
-        System.out.println(mockViaje);
-        System.out.println("Incidencia{" + "incidencia_id=" + mockIncidencia.getIncidencia_id() + ", usuario=" + listarUsuariosSoloNombre(mockUser.getUsuario_id()) + " ,grupo=" + listarGruposSoloNombre(mockGrupo.getGrupo_id()) + " ,mensaje=" + mockIncidencia.getMensaje() + "}");
-        System.out.println(mockEvento);
-        System.out.println(mockGrupo);
-
+        insertarUsuario_Grupo(mockUser, mockGrupo);
+//        System.out.println(mockUser);
+//        System.out.println(mockResponsable);
+//        System.out.println(mockValoracion);
+//        System.out.println("Pago{" + "pago_id=" + mockPago.getPago_id() + ", metodo de pago =" + mockPago.getMetodo_pago() + ", primer pago =" + mockPago.getPrimer_pago()
+//                + " ,segundo pago=" + mockPago.getSegundo_pago() + " ,DNI=" + mockPago.getDni() + " , usuario=" + selectUserNameUsuario(mockUser.getUsuario_id()) + '}');
+//        System.out.println(mockViaje);
+//        System.out.println("Incidencia{" + "incidencia_id=" + mockIncidencia.getIncidencia_id() + ", usuario=" + listarUsuariosSoloNombre(mockUser.getUsuario_id()) + " ,grupo=" + listarGruposSoloNombre(mockGrupo.getGrupo_id()) + " ,mensaje=" + mockIncidencia.getMensaje() + "}");
+//        System.out.println(mockEvento);
+//        System.out.println(mockGrupo);
     }
 
     public static void dropDatabase() {
@@ -353,12 +521,13 @@ public class DBManagerTest {
             System.out.println("Lista de Usuarios: ");
             while (rs.next()) {
                 int id = rs.getInt("usuario_id");
+                Date fecha_nacimiento = rs.getDate("fecha_nacimiento");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("nombre");
                 String dni = rs.getString("nombre");
                 String correo = rs.getString("nombre");
                 int movil = rs.getInt("movil");
-                Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, null);
+                Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, fecha_nacimiento);
                 System.out.println(usuario);
             }
             rs.close();
@@ -424,6 +593,7 @@ public class DBManagerTest {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int user_id = rs.getInt(1);
             String nombre = rs.getString(2);
             String apellido = rs.getString(3);
             Date fecha_nacimiento = rs.getDate(4);
@@ -431,7 +601,7 @@ public class DBManagerTest {
             String dni = rs.getString("dni");
             int movil = rs.getInt(7);
 
-            Usuario usuario = new Usuario(movil, nombre, apellido, dni, correo, fecha_nacimiento);
+            Usuario usuario = new Usuario(user_id, movil, nombre, apellido, dni, correo, fecha_nacimiento);
             System.out.println(usuario);
 
             rs.close();
@@ -483,16 +653,14 @@ public class DBManagerTest {
         return null;
     }
 
-    public void insertarUsuarios(Usuario usuario) {
+    public static void insertarUsuarios(Usuario usuario) {
         Connection c = getConnection();
 
         try {
             String insertSql = "INSERT INTO usuarios(nombre,apellido,fecha_nacimiento,dni,correo, movil) VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = c.prepareStatement(insertSql);
-
             String nombre = usuario.getNombre();
             String apellido = usuario.getApellido();
-
             Instant instant = (usuario.getFecha_nacimiento()).toInstant();
             ZoneId zoneId = ZoneId.of("Europe/Paris");
             ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
@@ -777,6 +945,23 @@ public class DBManagerTest {
 
     }
 
+    public static void insertarUsuario_Grupo(Usuario user, Grupo grupo) {
+        Connection c = getConnection();
+        try {
+            String insertSql = "INSERT INTO usuario_grupo (user_id,grupo_id) VALUES(?,?)";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(insertSql);
+            System.out.println(user);
+            System.out.println(grupo);
+            ps.setInt(1, user.getUsuario_id());
+            ps.setInt(2, grupo.getGrupo_id());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 //-------------------------------------------RESPONSABLES-----------------------------------------------
     public void listarResponsables() throws SQLException {
         Connection c = getConnection();
@@ -829,10 +1014,11 @@ public class DBManagerTest {
         prep.setInt(1, responsable_id);
         ResultSet rs = prep.executeQuery();
         while (rs.next()) {
+            int id = rs.getInt("responsable_id");
             String nombre = rs.getString("nombre");
             String apellido = rs.getString("apellido");
             int movil = rs.getInt("movil");
-            Responsable respon = new Responsable(nombre, apellido, movil);
+            Responsable respon = new Responsable(id,nombre, apellido, movil);
             return respon;
         }
 
@@ -1137,12 +1323,31 @@ public class DBManagerTest {
         }
     }
 
-    public void updateAsistentesEvento(int evento_id) {
+    public void updateAsistentesEvento(int evento_id) throws SQLException {
         Connection c = getConnection();
+      
         try {
             String sql = "UPDATE eventos set listas=? where evento_id=? ";
             PreparedStatement prep = c.prepareStatement(sql);
             int newAsistencia = asistenciaEventos(evento_id) + 1;
+            prep.setInt(1, newAsistencia);
+            prep.setInt(2, evento_id);
+            prep.executeUpdate();
+            prep.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void updateAsistentesEventoMenos1(int evento_id) throws SQLException {
+        Connection c = getConnection();
+      
+        try {
+            String sql = "UPDATE eventos set listas=? where evento_id=? ";
+            PreparedStatement prep = c.prepareStatement(sql);
+            int newAsistencia = asistenciaEventos(evento_id) - 1;
             prep.setInt(1, newAsistencia);
             prep.setInt(2, evento_id);
             prep.executeUpdate();

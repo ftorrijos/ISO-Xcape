@@ -205,11 +205,12 @@ public class DBManager {
             while (rs.next()) {
                 int id = rs.getInt("usuario_id");
                 String nombre = rs.getString("nombre");
+                Date fecha_nacimiento = rs.getDate("fecha_nacimiento");
                 String apellido = rs.getString("apellido");
                 String dni = rs.getString("dni");
                 String correo = rs.getString("correo");
                 int movil = rs.getInt("movil");
-                Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, null);
+                Usuario usuario = new Usuario(id, movil, nombre, apellido, dni, correo, fecha_nacimiento);
                 System.out.println(usuario);
             }
             rs.close();
