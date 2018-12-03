@@ -24,7 +24,7 @@ public class IntGraficaRegister extends javax.swing.JFrame {
     public IntGraficaRegister() {
         initComponents();
         setLocationRelativeTo(null);
-        cargarCombo():
+        cargarCombo();
     }
 
     /**
