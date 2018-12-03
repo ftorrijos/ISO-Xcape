@@ -211,36 +211,39 @@ public class IGPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonSegundoPagoMouseClicked
 
     
-    public void rellenaInfoPagos() throws SQLException{
+    public void rellenaInfoPagos() {
 
         
-      Pagos pago =  dBManager.DBManager.listarPagosPorUserIDDevuelvePago(user.getUsuario_id());
-      
-      if(pago == null){
-        JOptionPane.showMessageDialog(rootPane, "Aun no tienes ningun pago pendiente. Habla con tu responsable.");
-        this.setVisible(false);
-        IntGraficaMenu.main(user);
-
-      }
-      
-      
-      String idpago = ""+pago.getPago_id();
-      idTransaccion.setText(idpago);
-      metodoPago.setText(pago.getMetodo_pago());
-      primerPago.setText(pago.getPrimer_pago());
-      segundoPago.setText(pago.getSegundo_pago());
-      
-      if (pago.getPrimer_pago().equals("ok")){
-          BotonPrimerPago.setVisible(false);
-      }
-      
-      if(pago.getSegundo_pago().equals("ok")){
-          BotonSegundoPago.setVisible(false);
-      }
-      
-      if(pago.getPrimer_pago().equals("ok") && pago.getSegundo_pago().equals("ok")){
-          JOptionPane.showMessageDialog(rootPane, "Buenas noticias, todo pagado!");
-      }
+        try {
+            Pagos pago =  dBManager.DBManager.pagosPorUserID(user.getUsuario_id());
+            
+            if(pago == null){
+                JOptionPane.showMessageDialog(rootPane, "Aun no tienes ningun pago pendiente. Habla con tu responsable.");
+                //   this.setVisible(false);
+                IntGraficaMenu.main(user);
+                
+            }
+            
+            
+            String idpago = ""+pago.getPago_id();
+            idTransaccion.setText(idpago);
+            metodoPago.setText(pago.getMetodo_pago());
+            primerPago.setText(pago.getPrimer_pago());
+            segundoPago.setText(pago.getSegundo_pago());
+            
+            if (pago.getPrimer_pago().equals("ok")){
+                BotonPrimerPago.setVisible(false);
+            }
+            
+            if(pago.getSegundo_pago().equals("ok")){
+                BotonSegundoPago.setVisible(false);
+            }
+            
+            if(pago.getPrimer_pago().equals("ok") && pago.getSegundo_pago().equals("ok")){
+                JOptionPane.showMessageDialog(rootPane, "Buenas noticias, todo pagado!");
+            } } catch (SQLException ex) {
+            Logger.getLogger(IGPagos.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
     }
     

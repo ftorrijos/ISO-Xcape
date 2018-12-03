@@ -451,11 +451,14 @@ public class IntGraficaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelMediaMouseEntered
 
     private void jLabelTiempo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTiempo1MouseClicked
+
         try {
             Desktop.getDesktop().browse(URI.create("https://www.tiempo.com/pas-de-la-casa.htm"));
         } catch (IOException ex) {
             Logger.getLogger(IntGraficaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
 
     }//GEN-LAST:event_jLabelTiempo1MouseClicked
 

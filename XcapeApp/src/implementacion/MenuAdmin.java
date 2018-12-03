@@ -302,7 +302,7 @@ public class MenuAdmin {
             System.out.println("Introduzca nombre del grupo");
             String nombre = consola.readLine();
             Grupo grupo = db.selectGrupoPorNombre(nombre);
-            DBManager.insertarUsuario_Grupo(user, grupo); 
+       //     DBManager.insertarUsuario_Grupo(user, grupo); 
         }catch(IOException ex){
             System.out.println("Se ha producido un error: " + ex);
         }

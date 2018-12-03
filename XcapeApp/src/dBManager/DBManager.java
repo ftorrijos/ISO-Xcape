@@ -929,7 +929,7 @@ public class DBManager {
         }
     }
 
-    public Pagos pagosPorUserID(int usuario_id) throws SQLException {
+    public static Pagos pagosPorUserID(int usuario_id) throws SQLException {
 
         String sql = "SELECT * FROM pagos WHERE usuario_id=?;";
         PreparedStatement prep = c.prepareStatement(sql);
