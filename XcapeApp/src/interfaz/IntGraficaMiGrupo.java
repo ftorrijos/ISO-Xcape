@@ -7,10 +7,12 @@ package interfaz;
 
 import modelo.Usuario;
 import dBManager.DBManager;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +31,8 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
                listarGrupo();
+
+            
 
     }
  
@@ -133,6 +137,7 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
         });
 
         jTable1.setBackground(new java.awt.Color(255, 153, 0));
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,6 +147,7 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setToolTipText("");
         jTable1.setOpaque(false);
         jScrollPane2.setViewportView(jTable1);
 
@@ -175,12 +181,12 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jLabel2)))
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 590));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,6 +206,8 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
     public static DefaultTableModel model;
     public static void listarGrupo() throws SQLException{
      arr = DBManager.selectComponentesArrayListUsuarioPorUserID(user.getUsuario_id());
+
+     
      
        String matriz[][] = new String[arr.size()][3];
        
@@ -210,15 +218,11 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
            matriz[i][1] = arr.get(i).getApellido();
            
           matriz[i][2] = Integer.toString(arr.get(i).getMovil());
-           
-           //System.out.println(matriz[i][2]);
-         
-          /* matriz[i][3] = arr.get(i).getMensaje();
-           System.out.println("hola"+arr.get(i).getMensaje());
-           System.out.println(matriz[i][3]);*/
+
        }
        
         model = new DefaultTableModel();
+       
        
        Object[] columnsName = new Object[3];
         
@@ -242,7 +246,6 @@ public class IntGraficaMiGrupo extends javax.swing.JFrame {
         }
        
         jTable1.setModel(model);
-       
        
         
     }

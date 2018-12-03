@@ -215,16 +215,16 @@ public class IntGraficaListaInciden extends javax.swing.JFrame {
            
            int a = arr.get(i).getIncidencia_id();
            matriz[i][0] = String.valueOf(a);
-           System.out.println(matriz[i][0]);
+         //  System.out.println(matriz[i][0]);
            int b = arr.get(i).getUsuario_id();
            matriz[i][1] = Integer.toString(b);
-           System.out.println(matriz[i][1]);
+         //  System.out.println(matriz[i][1]);
            int c = arr.get(i).getGrupo_id();
            matriz[i][2] = Integer.toString(c);
-           System.out.println(matriz[i][2]);
+         //  System.out.println(matriz[i][2]);
            matriz[i][3] = arr.get(i).getMensaje();
-           System.out.println("hola"+arr.get(i).getMensaje());
-           System.out.println(matriz[i][3]);
+         //  System.out.println("hola"+arr.get(i).getMensaje());
+         //  System.out.println(matriz[i][3]);
        }
        
         model = new DefaultTableModel();

@@ -103,6 +103,7 @@ public class MenuAdmin {
             case 16:
                 break;
             default:
+                System.out.println("\nVolviendo al menu principal...");
                 System.out.println("Opcion no valida");
                 Menuadmin(usuario_id);
                 break;
