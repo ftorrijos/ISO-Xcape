@@ -123,7 +123,7 @@ public class IntGraficaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(BotonAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
 
-        jLabelPassword.setText("Contraseñ");
+        jLabelPassword.setText("Contraseña:");
         getContentPane().add(jLabelPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 360, 90, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
